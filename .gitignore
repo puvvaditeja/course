@@ -1,0 +1,39 @@
+# IDE and Editor Settings
+.claude/
+.vscode/
+.idea/
+*.iml
+*.swp
+*.swo
+*~
+.DS_Store
+
+# Build and Dependencies
+target/
+build/
+dist/
+node_modules/
+*.class
+*.jar
+*.war
+*.ear
+
+# Logs
+*.log
+logs/
+
+# Environment and Credentials
+.env
+.env.local
+*.properties.local
+application-local.yml
+application-local.properties
+
+# OS Generated
+Thumbs.db
+.DS_Store
+
+# Temporary Files
+*.tmp
+*.bak
+*.cache
