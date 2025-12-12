@@ -3,12 +3,21 @@
 ## Objective
 Create a shell script that analyzes a log file and generates a summary report.
 
+## Sample Log File
+
+A sample log file is provided for testing: **[sample-log.txt](./sample-log.txt)**
+
+You can use this file to test your script:
+```bash
+./log-analyzer.sh sample-log.txt
+```
+
 ## Requirements
 
 Create a script called `log-analyzer.sh` that:
 
 1. Takes a log file path as a command-line argument
-2. Creates a sample log file if the specified file doesn't exist (for testing)
+2. Handles the case when the specified file doesn't exist (show error message)
 3. Counts the total number of lines in the log file
 4. Counts how many lines contain "ERROR", "WARNING", and "INFO"
 5. Extracts and displays unique IP addresses (if any) from the log
