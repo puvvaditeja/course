@@ -16,14 +16,34 @@ By the end of this module, you will be able to:
 ## Module Structure
 
 This module is organized into subdirectories:
-- [Basics](./basics/) - Java fundamentals and syntax
-- [OOP](./oop/) - Object-Oriented Programming
-- [Collections](./collections/) - Collections Framework
-- [Streams](./streams/) - Stream API and functional operations
-- [Multithreading](./multithreading/) - Concurrent programming
-- [Functional Programming](./functional-programming/) - Lambdas and functional interfaces
-- [Design Patterns](./design-patterns/) - Common design patterns
+- [Topics](./topics/) - Detailed topic content
 - [Exercises](./exercises/) - Practice problems
+
+## Detailed Topic Files
+
+### 1. [Java Basics](./topics/01-java-basics.md)
+- JVM, JRE, JDK, Primitive types, Control flow, Packages
+
+### 2. [Object-Oriented Programming](./topics/02-object-oriented-programming.md)
+- Classes, Objects, Inheritance, Polymorphism, Abstraction, Interfaces
+
+### 3. [Exception Handling](./topics/03-exception-handling.md)
+- Checked/Unchecked exceptions, try-catch-finally, Custom exceptions
+
+### 4. [Collections Framework](./topics/04-collections-framework.md)
+- List, Set, Queue, Map interfaces and implementations
+
+### 5. [Multithreading](./topics/05-multithreading.md)
+- Thread class, Runnable, Synchronization, Concurrency
+
+### 6. [Functional Programming](./topics/06-functional-programming.md)
+- Lambdas, Functional interfaces, Method references, Optional
+
+### 7. [Stream API](./topics/07-stream-api.md)
+- Stream pipeline, Intermediate/Terminal operations, Collectors
+
+### 8. [Design Patterns](./topics/08-design-patterns.md)
+- SOLID principles, Singleton, Factory, Strategy, Observer
 
 ## Topics Covered
 

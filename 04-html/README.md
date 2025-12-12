@@ -12,14 +12,14 @@ HTML5 is the latest version of HyperText Markup Language, the standard for creat
 
 ## Topics Covered
 
-### HTML Foundation
+### 1. [HTML Foundation](./topics/01-html-foundation.md)
 - Overview of HTML
 - HTML5 Features
 - HTML Tags
 - Elements and Attributes
 - Inline vs Block Elements
 
-### HTML Forms
+### 2. [HTML Forms](./topics/02-html-forms.md)
 - Form Element
 - Form Attributes (action, method)
 - Input Elements
@@ -32,7 +32,7 @@ HTML5 is the latest version of HyperText Markup Language, the standard for creat
 - HTML5 Form Validation
 - GET vs POST
 
-### HTML5 Advanced
+### 3. [HTML5 Advanced Features](./topics/03-html5-advanced.md)
 - Web storage (localStorage, sessionStorage)
 - Geolocation
 - WebSQL Database

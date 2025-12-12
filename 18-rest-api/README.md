@@ -8,30 +8,68 @@ By the end of this module, you will understand and be able to apply the key conc
 
 ## Topics Covered
 
+### 1. [REST Fundamentals](./topics/01-rest-fundamentals.md)
 - Introduction to REST
-- REST Principles
-- HTTP Methods
-- Status Codes
-- Spring Boot 3 Features
-- RESTful Resource Representation with DTOs
-- Data Transfer Objects
-- DTO Pattern
-- ModelMapper, MapStruct
-- RESTful CRUD Operations
-- Create Resources
-- Read Resources
-- Update Resources
-- Delete Resources
-- Testing RESTful APIs
-- MockMvc
-- @WebMvcTest
-- Documenting RESTful APIs
-- SpringDoc
-- API Documentation Best Practices
+- REST Principles (Statelessness, Client-Server, Cacheability, Uniform Interface)
+- HTTP Methods (GET, POST, PUT, PATCH, DELETE)
+- HTTP Status Codes (2xx, 3xx, 4xx, 5xx)
+- RESTful URI Design Best Practices
 
+### 2. [Spring Boot REST](./topics/02-spring-boot-rest.md)
+- Spring Boot 3 Features for REST APIs
+- Creating REST Controllers (@RestController, @RequestMapping)
+- Request Handling (@PathVariable, @RequestParam, @RequestBody)
+- ResponseEntity and Response Handling
+- RESTful Resource Representation with JSON
+- Jackson Serialization and Annotations
+- Exception Handling (@ExceptionHandler, @ControllerAdvice)
+- CORS Configuration
+
+### 3. [DTOs and Mapping](./topics/03-dtos-and-mapping.md)
+- Data Transfer Objects (DTOs)
+- Why Use DTOs (Decoupling, Security, Customization)
+- DTO Pattern (Request DTOs, Response DTOs, Nested DTOs)
+- Java Records for DTOs
+- Manual Mapping vs Automated Mapping
+- ModelMapper Library
+- MapStruct (Compile-time Code Generation)
+- Mapping Best Practices
+
+### 4. [CRUD Operations](./topics/04-crud-operations.md)
+- Complete CRUD Implementation
+- Create Resources (POST)
+- Read Resources (GET)
+- Update Resources (PUT/PATCH)
+- Delete Resources (DELETE)
+- Pagination and Sorting
+- Filtering and Searching
+- Input Validation
+- Error Handling
+
+### 5. [Testing REST APIs](./topics/05-testing-rest-apis.md)
+- Testing Strategy and Testing Pyramid
+- Spring Boot Test Dependencies
+- MockMvc for Controller Testing
+- @WebMvcTest for Unit Tests
+- @SpringBootTest for Integration Tests
+- Testing CRUD Operations
+- Testing with Real Database (H2, TestContainers)
+- Advanced Testing Techniques
+- Testing Best Practices
+
+### 6. [API Documentation](./topics/06-api-documentation.md)
+- Importance of API Documentation
+- OpenAPI Specification
+- SpringDoc OpenAPI Integration
+- Documenting with Annotations (@Operation, @ApiResponse, @Schema)
+- Controller and Schema Documentation
+- Security Documentation
+- Swagger UI Customization
+- Generating Client Code
+- Documentation Best Practices
 
 ## Key Concepts
-Refer to the curriculum and lecture notes for detailed explanations of each topic.
+For detailed explanations, code examples, and best practices, refer to the individual topic files in the [topics](./topics/) directory.
 
 ## Exercises
 See the [exercises](./exercises/) directory for hands-on practice problems and solutions.

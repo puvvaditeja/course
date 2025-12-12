@@ -8,84 +8,141 @@ By the end of this module, you will understand and be able to apply the key conc
 
 ## Topics Covered
 
-- Introduction to Angular
-- Angular Setup and Installation
+### 1. [Angular Introduction](./topics/01-angular-introduction.md)
+- What is Angular?
+- Setup and Installation
 - Angular CLI
-- Creating Angular Application
 - Angular Project Structure
 - Single Page Applications (SPA)
-- Client-side Routing
 - Webpack
-- Angular Templates
 - Node.js and npm
+
+### 2. [Components](./topics/02-components.md)
 - Component Lifecycle
-- @Component
+- @Component Decorator
 - Component Styles
 - Change Detection
 - Dynamic Components
 - Event Emitters
-- Sharing Data Between Child And Parent
-- Angular Modules
+- Sharing Data Between Components
+
+### 3. [Modules](./topics/03-modules.md)
 - NgModule Decorator
 - Root Module
 - Feature Modules
 - Shared Modules
-- Angular Directives
-- Structural Directives
-- Attribute Directives
-- Pipes
+
+### 4. [Directives and Pipes](./topics/04-directives-and-pipes.md)
+- Structural Directives (ngIf, ngFor, ngSwitch)
+- Attribute Directives (ngClass, ngStyle, ngModel)
+- Built-in Pipes
 - Custom Pipes
-- Dependency Injection
+
+### 5. [Dependency Injection](./topics/05-dependency-injection.md)
 - DI in Angular
 - Injector Hierarchy
 - DI Providers
 - Services
-- Creating Services
-- Service Injection
+- Creating and Injecting Services
 - Service Communication
-- Angular Routing
+
+### 6. [Routing](./topics/06-routing.md)
 - Router Module
-- Route Guards
-- Routing And Navigation
-- Signals
-- HTTP Client
-- Making HTTP Requests
+- Route Guards (CanActivate, CanDeactivate, Resolve)
+- Routing and Navigation
+- Lazy Loading
+- Signals (Angular 16+)
+
+### 7. [HTTP Client](./topics/07-http-client.md)
+- Making HTTP Requests (GET, POST, PUT, DELETE)
 - Error Handling
 - HTTP Interceptors
-- Angular HTTP Best Practices
-- Angular Forms
-- Introduction to Forms
-- Template - Drive Forms
+- Best Practices
+
+### 8. [Forms](./topics/08-forms.md)
+- Template-Driven Forms
 - Reactive Forms
 - Form Validation
-- Dynamic forms
-- State Management
-- Application State
-- State Management Patters
-- Service-based State
-- BehaviorSubject pattern
-- Angular Testing
-- Karma
-- Jasmine
-- Testing In Angular With Jasmine And Karma
-- Application Debugging Front End
-- Debugging Angular Applications with Chrome DevTools
-- Debugging with Visual Studio Code
+- Custom Validators
+- Dynamic Forms
 
+### 9. [State Management](./topics/09-state-management.md)
+- Application State
+- State Management Patterns
+- Service-based State
+- BehaviorSubject Pattern
+
+### 10. [Testing and Debugging](./topics/10-testing-and-debugging.md)
+- Jasmine Framework
+- Karma Test Runner
+- Testing Components, Services, and Pipes
+- Debugging with Chrome DevTools
+- Debugging with VS Code
 
 ## Key Concepts
-Refer to the curriculum and lecture notes for detailed explanations of each topic.
+For detailed explanations and comprehensive code examples, see the individual topic files linked above.
 
 ## Exercises
 See the [exercises](./exercises/) directory for hands-on practice problems and solutions.
 
-## Code Examples
-Check the module materials and exercises for practical code examples.
+## Quick Reference
+
+### Essential Commands
+```bash
+# Create new Angular app
+ng new my-app
+
+# Serve application
+ng serve
+
+# Generate component
+ng g c component-name
+
+# Generate service
+ng g s service-name
+
+# Build for production
+ng build --configuration production
+
+# Run tests
+ng test
+
+# Run linting
+ng lint
+```
+
+### Key Concepts Summary
+
+| Concept | Description |
+|---------|-------------|
+| Components | Building blocks with templates, styles, and logic |
+| Modules | Containers for organizing related functionality |
+| Services | Reusable business logic and data management |
+| Routing | Navigation between views |
+| HTTP Client | Communication with backend APIs |
+| Forms | User input handling (Template-driven & Reactive) |
+| Pipes | Data transformation in templates |
+| Directives | DOM manipulation and behavior |
 
 ## Additional Resources
-- Official documentation
-- Online tutorials and courses
-- Community forums and discussions
+
+### Official Documentation
+- [Angular Official Documentation](https://angular.io/docs)
+- [Angular CLI Documentation](https://angular.io/cli)
+- [Angular API Reference](https://angular.io/api)
+- [RxJS Documentation](https://rxjs.dev/)
+- [TypeScript Handbook](https://www.typescriptlang.org/docs/)
+
+### Learning Resources
+- [Angular University](https://angular-university.io/)
+- [Angular Official Tutorial - Tour of Heroes](https://angular.io/tutorial)
+- [Angular Official Style Guide](https://angular.io/guide/styleguide)
+
+### Community
+- [Angular Blog](https://blog.angular.io/)
+- [Stack Overflow - Angular Tag](https://stackoverflow.com/questions/tagged/angular)
+- [Angular Discord Community](https://discord.gg/angular)
+- [Angular GitHub Repository](https://github.com/angular/angular)
 
 ## Assessment
 Make sure you are comfortable with all topics listed above before proceeding to the next module.

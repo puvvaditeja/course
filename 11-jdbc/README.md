@@ -8,14 +8,37 @@ By the end of this module, you will understand and be able to apply the key conc
 
 ## Topics Covered
 
-- Jdbc Architecture And Interfaces
-- Driver Types And Registration
-- Setting Up The Database Driver
-- Setting Up The Utility Class
-- Simple And Prepared Statements
-- Sql Injection
-- Callable Statements
-- Result Set
+### 1. [JDBC Architecture and Interfaces](./topics/01-jdbc-architecture.md)
+- JDBC Architecture (two-tier and three-tier)
+- Core JDBC Interfaces (Driver, Connection, Statement, ResultSet)
+
+### 2. [Driver Types and Registration](./topics/02-driver-types.md)
+- Type 1, 2, 3, 4 Drivers
+- Driver Registration Methods
+
+### 3. [Setting Up the Database Driver](./topics/03-database-driver-setup.md)
+- Maven and Gradle Configuration
+- Connection URL Formats
+
+### 4. [Setting Up the Utility Class](./topics/04-utility-class.md)
+- Connection Management
+- Properties-Based Configuration
+
+### 5. [Simple and Prepared Statements](./topics/05-statements.md)
+- Statement vs PreparedStatement
+- Parameterized Queries
+
+### 6. [SQL Injection](./topics/06-sql-injection.md)
+- SQL Injection Attacks
+- Prevention Techniques
+
+### 7. [Callable Statements](./topics/07-callable-statements.md)
+- Stored Procedures
+- IN, OUT, INOUT Parameters
+
+### 8. [ResultSet](./topics/08-result-set.md)
+- Navigation Methods
+- Data Retrieval
 
 
 ## Key Concepts

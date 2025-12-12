@@ -8,36 +8,51 @@ By the end of this module, you will understand and be able to apply the key conc
 
 ## Topics Covered
 
-- JPA Overview
-- Spring Data JPA Benefits
-- Repository Pattern
-- Setting Up a Spring Boot with JPA
-- Dependencies Configuration
-- DataSource Configuration
-- JPA Properties
-- Entity Mapping
-- @Entity Annotation, @Table, @Column
-- Primary Keys, Relations
-- @OneToMany, @ManyToOne, @ManyToMany, @OneToOne, etc.
-- Embedded Objects
-- CrudRepository
-- JpaRepository
-- PagingAndSortingRepository
-- Custom Repositories
-- CRUD Operations with Spring Data JPA
-- Save and Update
-- Find Methods
-- Delete Operations
-- Query Derivation
-- @Query
-- Named Queries
-- Native Queries
-- Pagination and Sorting
-- Pageable Interface
-- Sort Object
-- Page vs Slice
-- Auditing with Spring Data JPA
-- @CreatedDate, @LastModifiedDate, @CreatedBy, @LastModifiedBy
+### 1. [JPA Overview](./topics/01-jpa-overview.md)
+- What is JPA?
+- JPA architecture and core concepts
+- Spring Data JPA benefits
+- Repository Pattern and design principles
+
+### 2. [Setup and Configuration](./topics/02-setup-configuration.md)
+- Setting up Spring Boot with JPA
+- Maven and Gradle dependencies
+- DataSource configuration (H2, MySQL, PostgreSQL)
+- JPA properties and environment-specific configuration
+
+### 3. [Entity Mapping](./topics/03-entity-mapping.md)
+- @Entity, @Table, @Column annotations
+- Primary keys and generation strategies
+- Relationships: @OneToOne, @OneToMany, @ManyToOne, @ManyToMany
+- Embedded objects with @Embeddable
+- Cascade types and fetch strategies
+
+### 4. [Repositories](./topics/04-repositories.md)
+- CrudRepository interface
+- PagingAndSortingRepository interface
+- JpaRepository interface
+- Custom repository implementations
+- Query by Example and Specifications
+
+### 5. [CRUD Operations](./topics/05-crud-operations.md)
+- Save and update operations
+- Find methods (findById, findAll, derived queries)
+- Delete operations (single, batch, soft delete)
+- Performance considerations
+
+### 6. [Queries](./topics/06-queries.md)
+- Query derivation from method names
+- @Query annotation with JPQL
+- Named queries
+- Native SQL queries
+- DTO projections and query optimization
+
+### 7. [Pagination and Auditing](./topics/07-pagination-auditing.md)
+- Pageable interface and PageRequest
+- Sort object for ordering results
+- Page vs Slice comparison
+- Auditing with @CreatedDate, @LastModifiedDate
+- @CreatedBy, @LastModifiedBy with AuditorAware
 
 
 ## Key Concepts

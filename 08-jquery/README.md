@@ -8,11 +8,46 @@ By the end of this module, you will understand and be able to apply the key conc
 
 ## Topics Covered
 
-- What is jQuery?
-- jQuery Selectors
-- DOM manipulation & events
-- jQuery Effects
-- Basic AJAX with jQuery
+### 1. [What is jQuery?](./topics/01-what-is-jquery.md)
+- Introduction to jQuery library
+- Including jQuery in projects
+- The jQuery object and `$()`
+- Document ready function
+- jQuery vs Vanilla JavaScript
+- When to use jQuery
+
+### 2. [jQuery Selectors](./topics/02-jquery-selectors.md)
+- Basic selectors (ID, class, element)
+- Attribute selectors
+- Filter selectors
+- Form selectors
+- Selector methods and performance
+- Combining and optimizing selectors
+
+### 3. [DOM Manipulation & Events](./topics/03-dom-manipulation-events.md)
+- Getting and setting content (`.text()`, `.html()`, `.val()`)
+- Manipulating attributes and properties
+- CSS manipulation and classes
+- Adding and removing elements
+- Traversing the DOM
+- Event handling with `.on()`
+- Event delegation
+
+### 4. [jQuery Effects](./topics/04-jquery-effects.md)
+- Show/hide effects
+- Fading effects
+- Sliding effects
+- Custom animations with `.animate()`
+- Animation queue and control
+- Practical animation patterns
+
+### 5. [Basic AJAX with jQuery](./topics/05-basic-ajax.md)
+- Introduction to AJAX
+- Making GET and POST requests
+- Working with JSON data
+- The `.ajax()` method
+- Error handling and loading indicators
+- Practical AJAX examples
 
 
 ## Key Concepts

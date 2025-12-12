@@ -8,12 +8,47 @@ By the end of this module, you will understand and be able to apply the key conc
 
 ## Topics Covered
 
-- What is Spring Boot?
-- Spring Boot vs Spring Framework
-- Auto-configuration
-- Starter Dependencies
-- Spring Boot CLI
-- application.properties / .yml
+### 1. [What is Spring Boot?](./topics/01-what-is-spring-boot.md)
+- Introduction to Spring Boot
+- Core features and benefits
+- Spring Boot architecture
+- Your first Spring Boot application
+- Key annotations and concepts
+
+### 2. [Spring Boot vs Spring Framework](./topics/02-spring-boot-vs-spring-framework.md)
+- Understanding the differences
+- Configuration comparison
+- Dependency management
+- Deployment approaches
+- When to use each
+
+### 3. [Auto-configuration](./topics/03-auto-configuration.md)
+- How auto-configuration works
+- Conditional annotations
+- Customizing auto-configuration
+- Creating custom auto-configurations
+- Debugging auto-configuration
+
+### 4. [Starter Dependencies](./topics/04-starter-dependencies.md)
+- Understanding starter dependencies
+- Common starters (web, data, security, etc.)
+- Dependency management with spring-boot-starter-parent
+- Creating custom starters
+- Best practices
+
+### 5. [Spring Boot CLI](./topics/05-spring-boot-cli.md)
+- Installing the CLI
+- Running Groovy scripts
+- Using @Grab for dependencies
+- Project initialization
+- CLI commands and options
+
+### 6. [application.properties / .yml](./topics/06-application-properties-yml.md)
+- Configuration file formats
+- Common configuration properties
+- Profile-specific configuration
+- Custom properties and @ConfigurationProperties
+- Property precedence and externalized configuration
 
 
 ## Key Concepts

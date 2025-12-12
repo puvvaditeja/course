@@ -8,35 +8,60 @@ By the end of this module, you will understand and be able to apply the key conc
 
 ## Topics Covered
 
-- Spring Framework Overview
-- Spring Ecosystem
-- Spring vs Java EE
-- Setting up a Spring Project with Maven
+### 1. [Spring Framework Overview](./topics/01-spring-overview.md)
+- What is Spring Framework?
+- Spring Framework Architecture
+- Spring Ecosystem (Boot, Data, Security, Cloud, MVC, Batch)
+- Spring vs Java EE comparison
+- Why choose Spring?
+
+### 2. [Maven Basics](./topics/02-maven-basics.md)
 - Introduction to Maven
-- Maven Project Structure
-- Maven Build Lifecycle, Maven Commands
-- Inversion of Control Concept
-- Spring IoC Container
-- Types
-- ApplicationContext
-- BeanFactory
-- Spring Bean Configuration
-- XML Configuration
-- Annotation-based Configuration
-- Java-based Configuration
-- Bean Scopes
-- Bean Lifecycle Interceptors
-- Constructor Injection, Setter Injection, Field Injection
-- Qualifier
-- Autowiring
+- Maven installation and setup
+- Maven Project Structure (standard directory layout)
+- Project Object Model (POM)
+- Maven Build Lifecycle and phases
+- Essential Maven Commands
+- Dependency Management
+- Maven Repositories
+
+### 3. [Inversion of Control (IoC)](./topics/03-inversion-of-control.md)
+- IoC Concept and principles
+- Spring IoC Container architecture
+- Container types: BeanFactory vs ApplicationContext
+- ApplicationContext features and implementations
+- Container lifecycle
+- Practical examples
+
+### 4. [Bean Configuration](./topics/04-bean-configuration.md)
+- What is a Spring Bean?
+- XML-based Configuration
+- Annotation-based Configuration (@Component, @Service, @Repository)
+- Java-based Configuration (@Configuration, @Bean)
+- Bean Scopes (singleton, prototype, request, session, application)
+- Bean Lifecycle (initialization and destruction callbacks)
+- Configuration comparison and best practices
+
+### 5. [Dependency Injection](./topics/05-dependency-injection.md)
+- What is Dependency Injection?
+- Constructor Injection (recommended)
+- Setter Injection
+- Field Injection
 - @Autowired Annotation
-- Spring AOP (Aspect-Oriented Programming)
-- AOP Concepts
-- Cross-cutting Concerns
+- @Qualifier for disambiguating dependencies
+- @Primary annotation
+- Autowiring modes
+- Handling circular dependencies
+
+### 6. [Aspect-Oriented Programming (AOP)](./topics/06-aspect-oriented-programming.md)
+- AOP Concepts and terminology
+- Cross-cutting Concerns (logging, security, transactions)
 - Aspect, Advice, Pointcut, Join Point
 - @Aspect Annotation
-- Before, After, Around Advice
-- AOP Proxies
+- Advice types: @Before, @After, @AfterReturning, @AfterThrowing, @Around
+- Pointcut expressions
+- AOP Proxies (JDK Dynamic Proxy vs CGLIB)
+- Practical AOP examples
 
 
 ## Key Concepts

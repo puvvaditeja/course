@@ -8,35 +8,48 @@ By the end of this module, you will understand and be able to apply the key conc
 
 ## Topics Covered
 
+### [1. Database Fundamentals](./topics/01-database-fundamentals.md)
 - What Is A Database
 - What Is SQL
-- Consistency
+- Consistency and ACID Properties
 - Introduction To RDBMS
 - Schema
 - Table Structure
 - SQL Data Types
-- Normalization
-- Multiplicity
+
+### [2. Database Design](./topics/02-database-design.md)
+- Normalization (1NF, 2NF, 3NF, BCNF)
+- Multiplicity (1:1, 1:N, M:N relationships)
 - Data Modeling And ERD
-- DDL (CREATE, DROP, TRUNCATE)
-- DML (INSERT, UPDATE, DELETE)
-- DQL (SELECT)
-- DCL (GRANT, REVOKE)
-- TCL (COMMIT, ROLLBACK, SAVEPOINT)
+
+### [3. DDL and Constraints](./topics/03-ddl-and-constraints.md)
+- DDL (CREATE, ALTER, DROP, TRUNCATE)
 - Constraints (PRIMARY KEY, FOREIGN KEY, UNIQUE, NOT NULL, CHECK, DEFAULT)
 - Auto Incrementing
-- CHECK
-- DEFAULT
-- CASCADE
-- Joins (INNER, LEFT, RIGHT, OUTER, CROSS, SELF, EQUI AND THETA)
-- Subquery
-- Clauses (WHERE, GROUP BY, HAVING, ORDER BY)
+- CASCADE (ON DELETE, ON UPDATE)
+
+### [4. DML and DQL](./topics/04-dml-and-dql.md)
+- DML (INSERT, UPDATE, DELETE)
+- DQL (SELECT)
+- Clauses (WHERE, GROUP BY, HAVING, ORDER BY, LIMIT)
 - Aggregate Functions (COUNT, SUM, AVG, MIN, MAX)
-- Queries (Complex SQL queries)
+
+### [5. DCL and TCL](./topics/05-dcl-and-tcl.md)
+- DCL (GRANT, REVOKE)
+- User Management
+- TCL (START TRANSACTION, COMMIT, ROLLBACK, SAVEPOINT)
+- Transaction Isolation Levels
+
+### [6. Joins and Subqueries](./topics/06-joins-and-subqueries.md)
+- Joins (INNER, LEFT, RIGHT, FULL OUTER, CROSS, SELF)
+- Equi and Theta Joins
+- Subqueries (Scalar, Column, Row, Table, Correlated)
+- EXISTS and NOT EXISTS
+- Complex SQL Queries
 
 
 ## Key Concepts
-Refer to the curriculum and lecture notes for detailed explanations of each topic.
+Each topic has detailed content in the [topics](./topics/) directory with explanations, code examples, tables, diagrams, and best practices.
 
 ## Exercises
 See the [exercises](./exercises/) directory for hands-on practice problems and solutions.

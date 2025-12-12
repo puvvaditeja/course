@@ -13,25 +13,25 @@ By the end of this module, you will be able to:
 
 ## Topics Covered
 
-### 1. Git - Source Control Management
+### 1. [Git - Source Control Management](./topics/01-git-source-control-management.md)
 - What is version control?
 - Centralized vs Distributed VCS
 - Git architecture and concepts
 - Git workflow overview
 
-### 2. VCS, CVCS, DVCS
+### 2. [VCS, CVCS, DVCS](./topics/02-vcs-cvcs-dvcs.md)
 - **VCS** (Version Control System): Basic concepts
 - **CVCS** (Centralized Version Control System): SVN, Perforce
 - **DVCS** (Distributed Version Control System): Git, Mercurial
 
-### 3. Git Fundamentals
+### 3. [Git Fundamentals](./topics/03-git-fundamentals.md)
 - Repository initialization
 - Staging area concept
 - Committing changes
 - Viewing history
 - Working directory states
 
-### 4. Git Installation and Configuration
+### 4. [Git Installation and Configuration](./topics/04-git-installation-configuration.md)
 - Installing Git on different platforms
 - Initial configuration
   - Setting username and email
@@ -39,7 +39,7 @@ By the end of this module, you will be able to:
   - Setting up SSH keys
 - Verifying installation
 
-### 5. Basic Git Commands
+### 5. [Basic Git Commands](./topics/05-basic-git-commands.md)
 - `git init` - Initialize repository
 - `git add` - Stage changes
 - `git commit` - Save changes
@@ -47,7 +47,7 @@ By the end of this module, you will be able to:
 - `git log` - View commit history
 - `git diff` - View changes
 
-### 6. Git Branching and Merging
+### 6. [Git Branching and Merging](./topics/06-git-branching-merging.md)
 - Understanding branches
 - Creating and switching branches
 - Branch strategies (feature branches, release branches)
@@ -55,7 +55,7 @@ By the end of this module, you will be able to:
 - Resolving merge conflicts
 - Deleting branches
 
-### 7. Remote Repositories
+### 7. [Remote Repositories](./topics/07-remote-repositories.md)
 - Understanding remote repositories
 - GitHub, GitLab, Bitbucket overview
 - Cloning repositories
@@ -63,14 +63,14 @@ By the end of this module, you will be able to:
 - Fetching changes
 - Remote branch management
 
-### 8. Pull Requests
+### 8. [Pull Requests](./topics/08-pull-requests.md)
 - What are pull requests?
 - Creating pull requests
 - Code review process
 - Merging pull requests
 - Pull request best practices
 
-### 9. .gitignore
+### 9. [.gitignore](./topics/09-gitignore.md)
 - Purpose of .gitignore
 - Syntax and patterns
 - Common files to ignore

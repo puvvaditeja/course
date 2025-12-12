@@ -13,26 +13,26 @@ By the end of this module, you will be able to:
 
 ## Topics Covered
 
-### 1. Introduction to Agile
+### 1. [Introduction to Agile](./topics/01-introduction-to-agile.md)
 - What is Agile?
 - Agile Manifesto and principles
 - Agile vs Waterfall
 - Benefits of Agile methodology
 - When to use Agile
 
-### 2. Agile Process
+### 2. [Agile Process](./topics/02-agile-process.md)
 - Iterative and incremental development
 - Sprint cycle
 - Continuous improvement
 - Adaptive planning
 - Customer collaboration
 
-### 3. Scrum Framework
+### 3. [Scrum Framework](./topics/03-scrum-framework.md)
 - Scrum overview and benefits
 - Scrum theory (transparency, inspection, adaptation)
 - Empirical process control
 
-### 4. Scrum Roles, Artifacts, Ceremonies
+### 4. [Scrum Roles, Artifacts, Ceremonies](./topics/04-scrum-roles-artifacts-ceremonies.md)
 **Roles:**
 - Product Owner
 - Scrum Master
@@ -51,14 +51,14 @@ By the end of this module, you will be able to:
 - Sprint Retrospective
 - Backlog Refinement
 
-### 5. Agile User Stories
+### 5. [Agile User Stories](./topics/05-agile-user-stories.md)
 - What are user stories?
 - User story format: "As a..., I want..., So that..."
 - Acceptance criteria
 - INVEST criteria (Independent, Negotiable, Valuable, Estimable, Small, Testable)
 - Story splitting techniques
 
-### 6. Agile Estimation and Planning
+### 6. [Agile Estimation and Planning](./topics/06-agile-estimation-planning.md)
 - Story points vs hours
 - Planning Poker
 - T-shirt sizing
@@ -66,28 +66,28 @@ By the end of this module, you will be able to:
 - Velocity tracking
 - Release planning
 
-### 7. Sprint Points, Planning Poker, Velocity
+### 7. [Sprint Points, Planning Poker, Velocity](./topics/07-sprint-points-poker-velocity.md)
 - Understanding story points
 - Planning Poker process
 - Calculating team velocity
 - Using velocity for planning
 - Commitment vs forecast
 
-### 8. Burndown and Burnup Charts
+### 8. [Burndown and Burnup Charts](./topics/08-burndown-burnup-charts.md)
 - Purpose of burndown charts
 - Reading and interpreting burndown charts
 - Burnup charts
 - Tracking progress
 - Identifying issues early
 
-### 9. Project Boards
+### 9. [Project Boards](./topics/09-project-boards.md)
 - Kanban boards
 - Sprint boards
 - Workflow columns
 - Work-in-progress (WIP) limits
 - Visual management
 
-### 10. Agile Tools
+### 10. [Agile Tools](./topics/10-agile-tools.md)
 - Jira
 - Trello
 - Azure DevOps

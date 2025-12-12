@@ -12,32 +12,51 @@ Cascading Style Sheets (CSS3) is used to style and layout web pages. This module
 
 ## Topics Covered
 
-### Introduction to CSS3
+### 1. [Introduction to CSS3](./topics/01-introduction-to-css3.md)
 - CSS Syntax
 - Ways to apply CSS (inline, internal, external)
-- CSS Selectors
+- CSS Selectors (basic, combinator, pseudo-class, pseudo-element)
 - Styling Text and Fonts
+- Selector Specificity
 
-### Layout with CSS
-- Layout with CSS
-- Display, Position, Float
+### 2. [Layout with CSS](./topics/02-layout-with-css.md)
+- Display Property (block, inline, inline-block, flex, grid)
+- Position Property (static, relative, absolute, fixed, sticky)
+- Float and Clear
 - Flexbox Layout
-- Flexdirection, justify-content
+  - flex-direction, justify-content, align-items
+  - flex-wrap, align-content
+  - flex-grow, flex-shrink, flex-basis
 - CSS Grid Layout
-- grid-template-columns/rows
+  - grid-template-columns/rows
+  - grid-gap, grid-template-areas
+  - Grid item placement and alignment
 
-### Responsive Web Design
-- Media Queries
-- Breakpoints
-- Mobile-first design
+### 3. [Responsive Web Design](./topics/03-responsive-web-design.md)
+- Media Queries and Media Features
+- Breakpoints and Breakpoint Systems
+- Mobile-first Design Approach
+- Responsive Units (rem, em, %, vw/vh, clamp)
+- Flexible Images and Picture Element
 
-### Advanced Features
+### 4. [Advanced Features](./topics/04-advanced-features.md)
 - Colors and Backgrounds
+  - Color formats (Hex, RGB, HSL, CSS Variables)
+  - Gradients (linear, radial, conic)
 - Borders and Effects
-- Content, Padding, Border, Margin
-- Box Model Basics
+  - Border styles and radius
+  - Box shadows and text shadows
+  - Filters and backdrop filters
+- Box Model
+  - Content, Padding, Border, Margin
+  - Box-sizing property
 - Font Properties
-- Transitions, Animations
+  - Web fonts and @font-face
+  - Font weight, size, line-height
+- Transitions and Animations
+  - Transition properties and timing functions
+  - Keyframe animations
+  - Transform property (2D and 3D)
 
 ## Key Concepts
 

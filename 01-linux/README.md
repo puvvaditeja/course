@@ -13,27 +13,27 @@ By the end of this module, you will be able to:
 
 ## Topics Covered
 
-### 1. Introduction to Linux OS
+### 1. [Introduction to Linux OS](./topics/01-intro-to-linux.md)
 - What is Linux?
 - Linux distributions
 - Linux architecture
 - Why Linux for developers?
 
-### 2. Basic Linux Commands
+### 2. [Basic Linux Commands](./topics/02-basic-commands.md)
 - File system navigation (`cd`, `pwd`, `ls`)
 - File operations (`cp`, `mv`, `rm`, `touch`)
 - Directory operations (`mkdir`, `rmdir`)
 - Viewing file contents (`cat`, `less`, `more`, `head`, `tail`)
 - File permissions and ownership
 
-### 3. Shell Scripting Fundamentals
+### 3. [Shell Scripting Fundamentals](./topics/03-shell-scripting.md)
 - Introduction to Bash shell
 - Creating and executing shell scripts
 - Variables and data types
 - Basic control structures
 - Input/output operations
 
-### 4. Fullstack the Big Picture
+### 4. [Fullstack the Big Picture](./topics/04-fullstack-big-picture.md)
 - Understanding the complete application stack
 - Role of Linux in the development ecosystem
 - Server-side considerations
