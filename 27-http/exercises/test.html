@@ -1,0 +1,307 @@
+<!-- test.html -->
+<!DOCTYPE html>
+<html>
+<head>
+    <title>HTTP Server Test</title>
+    <style>
+        body { font-family: Arial, sans-serif; padding: 20px; max-width: 900px; margin: 0 auto; }
+        h1 { color: #333; }
+        h2 { color: #555; margin-bottom: 15px; }
+        button { padding: 10px 20px; cursor: pointer; background: #007bff; color: white; border: none; border-radius: 4px; }
+        button:hover { background: #0056b3; }
+        button.danger { background: #dc3545; }
+        button.danger:hover { background: #c82333; }
+        button.success { background: #28a745; }
+        button.success:hover { background: #218838; }
+        button.warning { background: #ffc107; color: #333; }
+        button.warning:hover { background: #e0a800; }
+        pre { background: #f4f4f4; padding: 15px; border-radius: 4px; overflow-x: auto; }
+        .section { margin: 20px 0; padding: 20px; border: 1px solid #ddd; border-radius: 8px; }
+        .form-group { margin-bottom: 15px; }
+        .form-group label { display: block; margin-bottom: 5px; font-weight: bold; }
+        .form-group input { padding: 8px 12px; width: 200px; border: 1px solid #ccc; border-radius: 4px; }
+        .form-row { display: flex; gap: 15px; align-items: flex-end; flex-wrap: wrap; }
+        .method-badge {
+            display: inline-block;
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 12px;
+            font-weight: bold;
+            margin-right: 10px;
+        }
+        .get { background: #61affe; color: white; }
+        .post { background: #49cc90; color: white; }
+        .put { background: #fca130; color: white; }
+        .patch { background: #50e3c2; color: white; }
+        .delete { background: #f93e3e; color: white; }
+        .response-section { position: sticky; top: 20px; }
+        .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+        @media (max-width: 768px) { .grid { grid-template-columns: 1fr; } }
+    </style>
+</head>
+<body>
+    <h1>HTTP Server Test Client</h1>
+    <p>Server: <code>http://localhost:3000</code> - Make sure the server is running!</p>
+
+    <div class="grid">
+        <div>
+            <!-- GET Users -->
+            <div class="section">
+                <h2><span class="method-badge get">GET</span> List Users</h2>
+                <button onclick="getUsers()">Get All Users</button>
+            </div>
+
+            <!-- GET User by ID -->
+            <div class="section">
+                <h2><span class="method-badge get">GET</span> Get User by ID</h2>
+                <form onsubmit="getUserById(event)">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="get-id">User ID</label>
+                            <input type="number" id="get-id" name="id" required placeholder="e.g., 1">
+                        </div>
+                        <button type="submit">Get User</button>
+                    </div>
+                </form>
+            </div>
+
+            <!-- POST Create User -->
+            <div class="section">
+                <h2><span class="method-badge post">POST</span> Create User</h2>
+                <form onsubmit="createUser(event)">
+                    <div class="form-group">
+                        <label for="post-name">Name</label>
+                        <input type="text" id="post-name" name="name" required placeholder="John Doe">
+                    </div>
+                    <div class="form-group">
+                        <label for="post-email">Email</label>
+                        <input type="email" id="post-email" name="email" required placeholder="john@example.com">
+                    </div>
+                    <button type="submit" class="success">Create User</button>
+                </form>
+            </div>
+
+            <!-- PUT Replace User -->
+            <div class="section">
+                <h2><span class="method-badge put">PUT</span> Replace User</h2>
+                <form onsubmit="updateUser(event)">
+                    <div class="form-group">
+                        <label for="put-id">User ID</label>
+                        <input type="number" id="put-id" name="id" required placeholder="e.g., 1">
+                    </div>
+                    <div class="form-group">
+                        <label for="put-name">Name</label>
+                        <input type="text" id="put-name" name="name" required placeholder="New Name">
+                    </div>
+                    <div class="form-group">
+                        <label for="put-email">Email</label>
+                        <input type="email" id="put-email" name="email" required placeholder="new@example.com">
+                    </div>
+                    <button type="submit" class="warning">Replace User</button>
+                </form>
+            </div>
+
+            <!-- PATCH Update User -->
+            <div class="section">
+                <h2><span class="method-badge patch">PATCH</span> Partial Update</h2>
+                <form onsubmit="patchUser(event)">
+                    <div class="form-group">
+                        <label for="patch-id">User ID</label>
+                        <input type="number" id="patch-id" name="id" required placeholder="e.g., 1">
+                    </div>
+                    <div class="form-group">
+                        <label for="patch-name">Name (optional)</label>
+                        <input type="text" id="patch-name" name="name" placeholder="Updated Name">
+                    </div>
+                    <div class="form-group">
+                        <label for="patch-email">Email (optional)</label>
+                        <input type="email" id="patch-email" name="email" placeholder="updated@example.com">
+                    </div>
+                    <button type="submit" class="warning">Update User</button>
+                </form>
+            </div>
+
+            <!-- DELETE User -->
+            <div class="section">
+                <h2><span class="method-badge delete">DELETE</span> Delete User</h2>
+                <form onsubmit="deleteUser(event)">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="delete-id">User ID</label>
+                            <input type="number" id="delete-id" name="id" required placeholder="e.g., 1">
+                        </div>
+                        <button type="submit" class="danger">Delete User</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <div>
+            <!-- Session Management -->
+            <div class="section">
+                <h2>Session Management</h2>
+                <p><small>Login: username=<code>admin</code>, password=<code>password</code></small></p>
+                <form onsubmit="login(event)" style="margin-bottom: 15px;">
+                    <div class="form-group">
+                        <label for="login-username">Username</label>
+                        <input type="text" id="login-username" name="username" value="admin">
+                    </div>
+                    <div class="form-group">
+                        <label for="login-password">Password</label>
+                        <input type="password" id="login-password" name="password" value="password">
+                    </div>
+                    <button type="submit" class="success">Login</button>
+                </form>
+                <div style="display: flex; gap: 10px; flex-wrap: wrap;">
+                    <button onclick="checkSession()">Check Session</button>
+                    <button onclick="getProfile()">Get Profile</button>
+                    <button onclick="logout()" class="danger">Logout</button>
+                </div>
+            </div>
+
+            <!-- Headers Demo -->
+            <div class="section">
+                <h2>Headers Demo</h2>
+                <div style="display: flex; gap: 10px; flex-wrap: wrap;">
+                    <button onclick="getHeaders()">Echo Headers</button>
+                    <button onclick="getProtected()">Protected (No Auth)</button>
+                    <button onclick="getProtectedWithAuth()">Protected (With Auth)</button>
+                </div>
+            </div>
+
+            <!-- Response -->
+            <div class="section response-section">
+                <h2>Response</h2>
+                <pre id="response">Response will appear here...
+
+Click any button or submit a form to see the result.</pre>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const API = 'http://localhost:3000';
+
+        async function apiCall(method, path, body = null) {
+            const startTime = Date.now();
+            try {
+                const options = {
+                    method,
+                    headers: { 'Content-Type': 'application/json' },
+                    credentials: 'include'
+                };
+                if (body) options.body = JSON.stringify(body);
+
+                const res = await fetch(API + path, options);
+                const duration = Date.now() - startTime;
+
+                let data;
+                const contentType = res.headers.get('content-type');
+                if (contentType && contentType.includes('application/json')) {
+                    data = await res.json();
+                } else {
+                    data = await res.text() || '(empty response)';
+                }
+
+                document.getElementById('response').textContent =
+                    `${method} ${path}\n` +
+                    `Status: ${res.status} ${res.statusText}\n` +
+                    `Time: ${duration}ms\n` +
+                    `─────────────────────────────\n\n` +
+                    (typeof data === 'object' ? JSON.stringify(data, null, 2) : data);
+            } catch (err) {
+                document.getElementById('response').textContent =
+                    `${method} ${path}\n` +
+                    `─────────────────────────────\n\n` +
+                    `Error: ${err.message}\n\n` +
+                    `Make sure the server is running:\n` +
+                    `  node server.js`;
+            }
+        }
+
+        // GET Users
+        function getUsers() {
+            apiCall('GET', '/users');
+        }
+
+        // GET User by ID
+        function getUserById(e) {
+            e.preventDefault();
+            const id = document.getElementById('get-id').value;
+            apiCall('GET', `/users/${id}`);
+        }
+
+        // POST Create User
+        function createUser(e) {
+            e.preventDefault();
+            const name = document.getElementById('post-name').value;
+            const email = document.getElementById('post-email').value;
+            apiCall('POST', '/users', { name, email });
+        }
+
+        // PUT Update User
+        function updateUser(e) {
+            e.preventDefault();
+            const id = document.getElementById('put-id').value;
+            const name = document.getElementById('put-name').value;
+            const email = document.getElementById('put-email').value;
+            apiCall('PUT', `/users/${id}`, { name, email });
+        }
+
+        // PATCH User
+        function patchUser(e) {
+            e.preventDefault();
+            const id = document.getElementById('patch-id').value;
+            const body = {};
+            const name = document.getElementById('patch-name').value;
+            const email = document.getElementById('patch-email').value;
+            if (name) body.name = name;
+            if (email) body.email = email;
+            apiCall('PATCH', `/users/${id}`, body);
+        }
+
+        // DELETE User
+        function deleteUser(e) {
+            e.preventDefault();
+            const id = document.getElementById('delete-id').value;
+            apiCall('DELETE', `/users/${id}`);
+        }
+
+        // Session
+        function login(e) {
+            e.preventDefault();
+            const username = document.getElementById('login-username').value;
+            const password = document.getElementById('login-password').value;
+            apiCall('POST', '/login', { username, password });
+        }
+        function checkSession() { apiCall('GET', '/session'); }
+        function getProfile() { apiCall('GET', '/profile'); }
+        function logout() { apiCall('POST', '/logout'); }
+
+        // Headers
+        function getHeaders() { apiCall('GET', '/headers'); }
+        function getProtected() { apiCall('GET', '/protected'); }
+        async function getProtectedWithAuth() {
+            const startTime = Date.now();
+            try {
+                const res = await fetch(API + '/protected', {
+                    headers: {
+                        'Authorization': 'Bearer valid-token-123',
+                        'Content-Type': 'application/json'
+                    }
+                });
+                const duration = Date.now() - startTime;
+                const data = await res.json();
+                document.getElementById('response').textContent =
+                    `GET /protected (with Bearer token)\n` +
+                    `Status: ${res.status} ${res.statusText}\n` +
+                    `Time: ${duration}ms\n` +
+                    `─────────────────────────────\n\n` +
+                    JSON.stringify(data, null, 2);
+            } catch (err) {
+                document.getElementById('response').textContent = 'Error: ' + err.message;
+            }
+        }
+    </script>
+</body>
+</html>

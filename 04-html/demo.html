@@ -1,0 +1,1097 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="HTML5 Features Demo - A comprehensive demonstration of HTML5 elements and APIs">
+    <meta name="keywords" content="HTML5, demo, tutorial, web development">
+    <meta name="author" content="Revature Training">
+    <title>HTML5 Features Demo</title>
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📄</text></svg>">
+
+    <style>
+        /* Basic styling for demo visibility */
+        * { box-sizing: border-box; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+            color: #333;
+        }
+        header, nav, main, footer, section, article, aside {
+            padding: 20px;
+            margin: 10px;
+            border: 2px dashed #ccc;
+            border-radius: 8px;
+        }
+        header { background: #e3f2fd; border-color: #2196f3; }
+        nav { background: #fff3e0; border-color: #ff9800; }
+        main { background: #f5f5f5; border-color: #9e9e9e; }
+        section { background: #e8f5e9; border-color: #4caf50; }
+        article { background: #fce4ec; border-color: #e91e63; }
+        aside { background: #f3e5f5; border-color: #9c27b0; }
+        footer { background: #eceff1; border-color: #607d8b; }
+
+        h1, h2, h3 { color: #1a237e; }
+        .demo-label {
+            background: #333;
+            color: white;
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-size: 12px;
+            margin-right: 10px;
+        }
+        code {
+            background: #f5f5f5;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-family: 'Courier New', monospace;
+        }
+        pre {
+            background: #263238;
+            color: #aed581;
+            padding: 15px;
+            border-radius: 8px;
+            overflow-x: auto;
+        }
+        table { border-collapse: collapse; width: 100%; margin: 10px 0; }
+        th, td { border: 1px solid #ddd; padding: 12px; text-align: left; }
+        th { background: #1a237e; color: white; }
+        tr:nth-child(even) { background: #f5f5f5; }
+
+        .form-group { margin-bottom: 15px; }
+        .form-group label { display: block; margin-bottom: 5px; font-weight: bold; }
+        .form-group input, .form-group select, .form-group textarea {
+            padding: 10px;
+            width: 100%;
+            max-width: 400px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        button, input[type="submit"], input[type="reset"] {
+            padding: 10px 20px;
+            background: #1a237e;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            margin: 5px;
+        }
+        button:hover { background: #3949ab; }
+
+        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; }
+        .card { background: white; padding: 20px; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
+
+        .output {
+            background: #fff9c4;
+            padding: 10px;
+            border-radius: 4px;
+            margin: 10px 0;
+            min-height: 40px;
+        }
+
+        /* Canvas styling */
+        canvas { border: 2px solid #333; border-radius: 8px; }
+
+        /* Drag and drop styling */
+        .drag-item {
+            padding: 10px 20px;
+            background: #2196f3;
+            color: white;
+            border-radius: 4px;
+            cursor: move;
+            display: inline-block;
+            margin: 5px;
+        }
+        .drop-zone {
+            min-height: 100px;
+            border: 3px dashed #ccc;
+            border-radius: 8px;
+            padding: 20px;
+            text-align: center;
+            transition: all 0.3s;
+        }
+        .drop-zone.drag-over {
+            border-color: #4caf50;
+            background: #e8f5e9;
+        }
+
+        /* Details/Summary styling */
+        details {
+            background: white;
+            padding: 10px;
+            border-radius: 8px;
+            margin: 10px 0;
+            border: 1px solid #ddd;
+        }
+        summary {
+            cursor: pointer;
+            font-weight: bold;
+            padding: 10px;
+        }
+        summary:hover { background: #f5f5f5; }
+
+        /* Progress and Meter */
+        progress, meter { width: 100%; height: 25px; }
+
+        /* Dialog */
+        dialog {
+            border: none;
+            border-radius: 8px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+            padding: 30px;
+        }
+        dialog::backdrop {
+            background: rgba(0,0,0,0.5);
+        }
+
+        /* Mark highlight */
+        mark { background: #ffeb3b; padding: 2px 4px; }
+
+        /* Navigation */
+        nav ul { list-style: none; padding: 0; display: flex; flex-wrap: wrap; gap: 10px; }
+        nav a {
+            text-decoration: none;
+            padding: 8px 16px;
+            background: #ff9800;
+            color: white;
+            border-radius: 4px;
+        }
+        nav a:hover { background: #f57c00; }
+    </style>
+</head>
+<body>
+
+    <!-- ==================== HEADER ==================== -->
+    <header>
+        <span class="demo-label">&lt;header&gt;</span>
+        <h1>HTML5 Features Demo</h1>
+        <p>A comprehensive demonstration of HTML5 elements, forms, and APIs</p>
+    </header>
+
+    <!-- ==================== NAVIGATION ==================== -->
+    <nav>
+        <span class="demo-label">&lt;nav&gt;</span>
+        <ul>
+            <li><a href="#semantic">Semantic Elements</a></li>
+            <li><a href="#text">Text Elements</a></li>
+            <li><a href="#lists">Lists</a></li>
+            <li><a href="#tables">Tables</a></li>
+            <li><a href="#forms">Forms</a></li>
+            <li><a href="#media">Media</a></li>
+            <li><a href="#apis">HTML5 APIs</a></li>
+        </ul>
+    </nav>
+
+    <!-- ==================== MAIN CONTENT ==================== -->
+    <main>
+        <span class="demo-label">&lt;main&gt;</span>
+
+        <!-- SECTION: Semantic Elements -->
+        <section id="semantic">
+            <span class="demo-label">&lt;section&gt;</span>
+            <h2>1. Semantic HTML5 Elements</h2>
+            <p>HTML5 introduced semantic elements that clearly describe their meaning:</p>
+
+            <div class="grid">
+                <div class="card">
+                    <h3>Structural Elements</h3>
+                    <ul>
+                        <li><code>&lt;header&gt;</code> - Page or section header</li>
+                        <li><code>&lt;nav&gt;</code> - Navigation links</li>
+                        <li><code>&lt;main&gt;</code> - Main content</li>
+                        <li><code>&lt;section&gt;</code> - Thematic grouping</li>
+                        <li><code>&lt;article&gt;</code> - Self-contained content</li>
+                        <li><code>&lt;aside&gt;</code> - Sidebar content</li>
+                        <li><code>&lt;footer&gt;</code> - Page or section footer</li>
+                    </ul>
+                </div>
+                <div class="card">
+                    <h3>Content Elements</h3>
+                    <ul>
+                        <li><code>&lt;figure&gt;</code> - Self-contained media</li>
+                        <li><code>&lt;figcaption&gt;</code> - Figure caption</li>
+                        <li><code>&lt;details&gt;</code> - Disclosure widget</li>
+                        <li><code>&lt;summary&gt;</code> - Details summary</li>
+                        <li><code>&lt;mark&gt;</code> - Highlighted text</li>
+                        <li><code>&lt;time&gt;</code> - Date/time</li>
+                        <li><code>&lt;progress&gt;</code> - Progress indicator</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Article Example -->
+            <article>
+                <span class="demo-label">&lt;article&gt;</span>
+                <h3>Sample Article</h3>
+                <p>Published: <time datetime="2024-10-21">October 21, 2024</time></p>
+                <p>This is a self-contained article that could be distributed independently.</p>
+            </article>
+
+            <!-- Aside Example -->
+            <aside>
+                <span class="demo-label">&lt;aside&gt;</span>
+                <h4>Related Information</h4>
+                <p>This aside contains supplementary content related to the main content.</p>
+            </aside>
+        </section>
+
+        <!-- SECTION: Text Elements -->
+        <section id="text">
+            <h2>2. Text Formatting Elements</h2>
+
+            <div class="grid">
+                <div class="card">
+                    <h3>Headings</h3>
+                    <h1>Heading 1 (h1)</h1>
+                    <h2>Heading 2 (h2)</h2>
+                    <h3>Heading 3 (h3)</h3>
+                    <h4>Heading 4 (h4)</h4>
+                    <h5>Heading 5 (h5)</h5>
+                    <h6>Heading 6 (h6)</h6>
+                </div>
+
+                <div class="card">
+                    <h3>Text Formatting</h3>
+                    <p><strong>Bold text</strong> using &lt;strong&gt;</p>
+                    <p><b>Bold text</b> using &lt;b&gt;</p>
+                    <p><em>Italic text</em> using &lt;em&gt;</p>
+                    <p><i>Italic text</i> using &lt;i&gt;</p>
+                    <p><u>Underlined text</u> using &lt;u&gt;</p>
+                    <p><s>Strikethrough text</s> using &lt;s&gt;</p>
+                    <p><mark>Highlighted text</mark> using &lt;mark&gt;</p>
+                    <p><small>Small text</small> using &lt;small&gt;</p>
+                    <p>Subscript: H<sub>2</sub>O using &lt;sub&gt;</p>
+                    <p>Superscript: E=mc<sup>2</sup> using &lt;sup&gt;</p>
+                    <p><code>Inline code</code> using &lt;code&gt;</p>
+                    <p><kbd>Ctrl</kbd> + <kbd>C</kbd> using &lt;kbd&gt;</p>
+                    <p><abbr title="HyperText Markup Language">HTML</abbr> using &lt;abbr&gt;</p>
+                </div>
+
+                <div class="card">
+                    <h3>Quotations</h3>
+                    <blockquote>
+                        "This is a blockquote. It represents a section quoted from another source."
+                        <cite>- Famous Person</cite>
+                    </blockquote>
+                    <p>Inline quote: <q>This is an inline quote</q> using &lt;q&gt;</p>
+                </div>
+
+                <div class="card">
+                    <h3>Preformatted Text</h3>
+                    <pre>
+function greet(name) {
+    return `Hello, ${name}!`;
+}
+                    </pre>
+                </div>
+            </div>
+
+            <!-- Horizontal Rule -->
+            <hr>
+            <p>The line above is a horizontal rule <code>&lt;hr&gt;</code></p>
+        </section>
+
+        <!-- SECTION: Lists -->
+        <section id="lists">
+            <h2>3. Lists</h2>
+
+            <div class="grid">
+                <div class="card">
+                    <h3>Unordered List</h3>
+                    <ul>
+                        <li>First item</li>
+                        <li>Second item
+                            <ul>
+                                <li>Nested item 1</li>
+                                <li>Nested item 2</li>
+                            </ul>
+                        </li>
+                        <li>Third item</li>
+                    </ul>
+                </div>
+
+                <div class="card">
+                    <h3>Ordered List</h3>
+                    <ol>
+                        <li>First step</li>
+                        <li>Second step
+                            <ol type="a">
+                                <li>Sub-step a</li>
+                                <li>Sub-step b</li>
+                            </ol>
+                        </li>
+                        <li>Third step</li>
+                    </ol>
+
+                    <h4>Different Types</h4>
+                    <ol type="I" start="1">
+                        <li>Roman numeral I</li>
+                        <li>Roman numeral II</li>
+                    </ol>
+                </div>
+
+                <div class="card">
+                    <h3>Description List</h3>
+                    <dl>
+                        <dt>HTML</dt>
+                        <dd>HyperText Markup Language - Structure</dd>
+
+                        <dt>CSS</dt>
+                        <dd>Cascading Style Sheets - Presentation</dd>
+
+                        <dt>JavaScript</dt>
+                        <dd>Programming Language - Behavior</dd>
+                    </dl>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION: Tables -->
+        <section id="tables">
+            <h2>4. Tables</h2>
+
+            <table>
+                <caption>Employee Information Table</caption>
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Name</th>
+                        <th>Department</th>
+                        <th>Email</th>
+                        <th>Salary</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>1</td>
+                        <td>John Doe</td>
+                        <td>Engineering</td>
+                        <td>john@example.com</td>
+                        <td>$85,000</td>
+                    </tr>
+                    <tr>
+                        <td>2</td>
+                        <td>Jane Smith</td>
+                        <td>Marketing</td>
+                        <td>jane@example.com</td>
+                        <td>$75,000</td>
+                    </tr>
+                    <tr>
+                        <td>3</td>
+                        <td>Bob Wilson</td>
+                        <td>Engineering</td>
+                        <td>bob@example.com</td>
+                        <td>$90,000</td>
+                    </tr>
+                </tbody>
+                <tfoot>
+                    <tr>
+                        <td colspan="4"><strong>Total Employees: 3</strong></td>
+                        <td><strong>Avg: $83,333</strong></td>
+                    </tr>
+                </tfoot>
+            </table>
+
+            <h3>Table with Colspan and Rowspan</h3>
+            <table>
+                <tr>
+                    <th colspan="2">Name</th>
+                    <th>Age</th>
+                </tr>
+                <tr>
+                    <td>First</td>
+                    <td>Last</td>
+                    <td rowspan="2">30</td>
+                </tr>
+                <tr>
+                    <td>John</td>
+                    <td>Doe</td>
+                </tr>
+            </table>
+        </section>
+
+        <!-- SECTION: Forms -->
+        <section id="forms">
+            <h2>5. HTML5 Forms</h2>
+
+            <form id="demo-form" onsubmit="handleFormSubmit(event)">
+
+                <!-- Basic Input Types -->
+                <fieldset>
+                    <legend>Basic Input Types</legend>
+
+                    <div class="grid">
+                        <div class="form-group">
+                            <label for="text-input">Text Input</label>
+                            <input type="text" id="text-input" name="text" placeholder="Enter text" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="password-input">Password</label>
+                            <input type="password" id="password-input" name="password" placeholder="Enter password" minlength="8">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="email-input">Email</label>
+                            <input type="email" id="email-input" name="email" placeholder="user@example.com" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="url-input">URL</label>
+                            <input type="url" id="url-input" name="url" placeholder="https://example.com">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="tel-input">Telephone</label>
+                            <input type="tel" id="tel-input" name="tel" placeholder="123-456-7890" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="search-input">Search</label>
+                            <input type="search" id="search-input" name="search" placeholder="Search...">
+                        </div>
+                    </div>
+                </fieldset>
+
+                <!-- Number Input Types -->
+                <fieldset>
+                    <legend>Number Input Types</legend>
+
+                    <div class="grid">
+                        <div class="form-group">
+                            <label for="number-input">Number (1-100)</label>
+                            <input type="number" id="number-input" name="number" min="1" max="100" step="1" value="50">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="range-input">Range: <span id="range-value">50</span></label>
+                            <input type="range" id="range-input" name="range" min="0" max="100" value="50"
+                                   oninput="document.getElementById('range-value').textContent = this.value">
+                        </div>
+                    </div>
+                </fieldset>
+
+                <!-- Date/Time Input Types -->
+                <fieldset>
+                    <legend>Date and Time Inputs</legend>
+
+                    <div class="grid">
+                        <div class="form-group">
+                            <label for="date-input">Date</label>
+                            <input type="date" id="date-input" name="date">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="time-input">Time</label>
+                            <input type="time" id="time-input" name="time">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="datetime-input">DateTime Local</label>
+                            <input type="datetime-local" id="datetime-input" name="datetime">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="month-input">Month</label>
+                            <input type="month" id="month-input" name="month">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="week-input">Week</label>
+                            <input type="week" id="week-input" name="week">
+                        </div>
+                    </div>
+                </fieldset>
+
+                <!-- Other Input Types -->
+                <fieldset>
+                    <legend>Other Input Types</legend>
+
+                    <div class="grid">
+                        <div class="form-group">
+                            <label for="color-input">Color Picker</label>
+                            <input type="color" id="color-input" name="color" value="#1a237e">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="file-input">File Upload</label>
+                            <input type="file" id="file-input" name="file" accept="image/*,.pdf">
+                        </div>
+
+                        <div class="form-group">
+                            <label>Checkbox</label>
+                            <label><input type="checkbox" name="agree" value="yes" required> I agree to the terms</label>
+                            <label><input type="checkbox" name="subscribe" value="yes"> Subscribe to newsletter</label>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Radio Buttons</label>
+                            <label><input type="radio" name="gender" value="male"> Male</label>
+                            <label><input type="radio" name="gender" value="female"> Female</label>
+                            <label><input type="radio" name="gender" value="other"> Other</label>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Hidden Input</label>
+                            <input type="hidden" name="hidden-field" value="secret-value">
+                            <small>Hidden input (value: "secret-value")</small>
+                        </div>
+                    </div>
+                </fieldset>
+
+                <!-- Select and Textarea -->
+                <fieldset>
+                    <legend>Select, Datalist, and Textarea</legend>
+
+                    <div class="grid">
+                        <div class="form-group">
+                            <label for="select-input">Select (Dropdown)</label>
+                            <select id="select-input" name="select">
+                                <option value="">-- Select an option --</option>
+                                <optgroup label="Frontend">
+                                    <option value="html">HTML</option>
+                                    <option value="css">CSS</option>
+                                    <option value="javascript">JavaScript</option>
+                                </optgroup>
+                                <optgroup label="Backend">
+                                    <option value="java">Java</option>
+                                    <option value="python">Python</option>
+                                    <option value="nodejs">Node.js</option>
+                                </optgroup>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="multi-select">Multi-Select</label>
+                            <select id="multi-select" name="multiselect" multiple size="4">
+                                <option value="html">HTML</option>
+                                <option value="css">CSS</option>
+                                <option value="javascript">JavaScript</option>
+                                <option value="java">Java</option>
+                            </select>
+                            <small>Hold Ctrl/Cmd to select multiple</small>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="datalist-input">Datalist (Autocomplete)</label>
+                            <input list="browsers" id="datalist-input" name="browser" placeholder="Type to search...">
+                            <datalist id="browsers">
+                                <option value="Chrome">
+                                <option value="Firefox">
+                                <option value="Safari">
+                                <option value="Edge">
+                                <option value="Opera">
+                            </datalist>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="textarea-input">Textarea</label>
+                            <textarea id="textarea-input" name="message" rows="4" cols="50"
+                                      placeholder="Enter your message..." maxlength="500"></textarea>
+                            <small>Max 500 characters</small>
+                        </div>
+                    </div>
+                </fieldset>
+
+                <!-- Form Validation Attributes -->
+                <fieldset>
+                    <legend>Validation Attributes Demo</legend>
+
+                    <div class="grid">
+                        <div class="form-group">
+                            <label for="required-input">Required Field *</label>
+                            <input type="text" id="required-input" name="required" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="pattern-input">Pattern (only letters)</label>
+                            <input type="text" id="pattern-input" name="pattern" pattern="[A-Za-z]+"
+                                   title="Only letters allowed">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="minmax-input">Min/Max Length (3-10 chars)</label>
+                            <input type="text" id="minmax-input" name="minmax" minlength="3" maxlength="10">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="readonly-input">Readonly</label>
+                            <input type="text" id="readonly-input" name="readonly" value="Cannot edit this" readonly>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="disabled-input">Disabled</label>
+                            <input type="text" id="disabled-input" name="disabled" value="This is disabled" disabled>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="autofocus-input">Autofocus (scroll to see)</label>
+                            <input type="text" id="autofocus-input" name="autofocus" placeholder="This would have autofocus">
+                        </div>
+                    </div>
+                </fieldset>
+
+                <!-- Form Buttons -->
+                <div style="margin-top: 20px;">
+                    <input type="submit" value="Submit Form">
+                    <input type="reset" value="Reset Form">
+                    <button type="button" onclick="alert('Button clicked!')">Regular Button</button>
+                </div>
+
+                <div id="form-output" class="output" style="margin-top: 20px;">
+                    Form output will appear here when submitted...
+                </div>
+            </form>
+        </section>
+
+        <!-- SECTION: Media Elements -->
+        <section id="media">
+            <h2>6. Media Elements</h2>
+
+            <div class="grid">
+                <div class="card">
+                    <h3>Image</h3>
+                    <img src="https://via.placeholder.com/300x200/1a237e/ffffff?text=HTML5+Image"
+                         alt="Sample Image" width="300" height="200" loading="lazy">
+                    <p><code>&lt;img&gt;</code> with lazy loading</p>
+                </div>
+
+                <div class="card">
+                    <h3>Figure with Caption</h3>
+                    <figure>
+                        <img src="https://via.placeholder.com/250x150/4caf50/ffffff?text=Figure+Image"
+                             alt="Figure Image" width="250" height="150">
+                        <figcaption>This is a figure caption using &lt;figcaption&gt;</figcaption>
+                    </figure>
+                </div>
+
+                <div class="card">
+                    <h3>Picture Element (Responsive)</h3>
+                    <picture>
+                        <source media="(min-width: 800px)"
+                                srcset="https://via.placeholder.com/400x200/e91e63/ffffff?text=Large+Screen">
+                        <source media="(min-width: 400px)"
+                                srcset="https://via.placeholder.com/300x150/9c27b0/ffffff?text=Medium+Screen">
+                        <img src="https://via.placeholder.com/200x100/ff9800/ffffff?text=Small+Screen"
+                             alt="Responsive Image" style="max-width: 100%;">
+                    </picture>
+                    <p><code>&lt;picture&gt;</code> for responsive images</p>
+                </div>
+
+                <div class="card">
+                    <h3>Audio</h3>
+                    <audio controls>
+                        <source src="audio.mp3" type="audio/mpeg">
+                        <source src="audio.ogg" type="audio/ogg">
+                        Your browser does not support the audio element.
+                    </audio>
+                    <p><code>&lt;audio&gt;</code> element with controls</p>
+                </div>
+
+                <div class="card">
+                    <h3>Video</h3>
+                    <video controls width="300" poster="https://via.placeholder.com/300x200/333/fff?text=Video+Poster">
+                        <source src="video.mp4" type="video/mp4">
+                        <source src="video.webm" type="video/webm">
+                        <track kind="subtitles" src="subtitles.vtt" srclang="en" label="English">
+                        Your browser does not support the video element.
+                    </video>
+                    <p><code>&lt;video&gt;</code> with poster and subtitles track</p>
+                </div>
+
+                <div class="card">
+                    <h3>Embed & iFrame</h3>
+                    <p><code>&lt;iframe&gt;</code> example:</p>
+                    <iframe src="about:blank" width="100%" height="100"
+                            style="border: 1px solid #ccc; border-radius: 4px;"
+                            title="Sample iframe">
+                    </iframe>
+                    <small>iframes can embed external content</small>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION: HTML5 Interactive Elements -->
+        <section id="interactive">
+            <h2>7. Interactive HTML5 Elements</h2>
+
+            <div class="grid">
+                <div class="card">
+                    <h3>Details & Summary</h3>
+                    <details>
+                        <summary>Click to expand - What is HTML5?</summary>
+                        <p>HTML5 is the fifth and current major version of HTML. It was published in October 2014 by the World Wide Web Consortium (W3C).</p>
+                        <p>Key features include:</p>
+                        <ul>
+                            <li>Semantic elements</li>
+                            <li>New form input types</li>
+                            <li>Audio and video support</li>
+                            <li>Canvas and SVG</li>
+                            <li>Local storage</li>
+                        </ul>
+                    </details>
+
+                    <details open>
+                        <summary>This one is open by default</summary>
+                        <p>Using the <code>open</code> attribute makes details expanded by default.</p>
+                    </details>
+                </div>
+
+                <div class="card">
+                    <h3>Progress Bar</h3>
+                    <label for="progress1">Download Progress:</label>
+                    <progress id="progress1" value="70" max="100">70%</progress>
+                    <p>Value: 70/100</p>
+
+                    <label for="progress2">Indeterminate:</label>
+                    <progress id="progress2">Loading...</progress>
+                    <p>No value = indeterminate state</p>
+                </div>
+
+                <div class="card">
+                    <h3>Meter Element</h3>
+                    <label for="meter1">Disk Usage (60%):</label>
+                    <meter id="meter1" value="0.6" min="0" max="1" low="0.3" high="0.7" optimum="0.5">60%</meter>
+
+                    <label for="meter2">Battery Level (20% - Low):</label>
+                    <meter id="meter2" value="0.2" min="0" max="1" low="0.25" high="0.75" optimum="1">20%</meter>
+
+                    <label for="meter3">Performance (90% - High):</label>
+                    <meter id="meter3" value="0.9" min="0" max="1" low="0.25" high="0.75" optimum="1">90%</meter>
+                </div>
+
+                <div class="card">
+                    <h3>Dialog Element</h3>
+                    <button onclick="document.getElementById('myDialog').showModal()">Open Modal Dialog</button>
+                    <button onclick="document.getElementById('myDialog').show()">Open Non-Modal</button>
+
+                    <dialog id="myDialog">
+                        <h3>This is a Dialog!</h3>
+                        <p>The <code>&lt;dialog&gt;</code> element represents a dialog box or interactive component.</p>
+                        <form method="dialog">
+                            <button>Close Dialog</button>
+                        </form>
+                    </dialog>
+                </div>
+
+                <div class="card">
+                    <h3>Output Element</h3>
+                    <form oninput="result.value = parseInt(a.value) + parseInt(b.value)">
+                        <input type="number" id="a" value="10" style="width: 60px;"> +
+                        <input type="number" id="b" value="20" style="width: 60px;"> =
+                        <output name="result" for="a b">30</output>
+                    </form>
+                    <p><code>&lt;output&gt;</code> displays calculation results</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION: HTML5 APIs -->
+        <section id="apis">
+            <h2>8. HTML5 APIs (JavaScript)</h2>
+
+            <div class="grid">
+                <!-- Local Storage -->
+                <div class="card">
+                    <h3>Local Storage</h3>
+                    <p>Stores data with no expiration date</p>
+                    <div class="form-group">
+                        <input type="text" id="storage-key" placeholder="Key" style="width: 45%;">
+                        <input type="text" id="storage-value" placeholder="Value" style="width: 45%;">
+                    </div>
+                    <button onclick="saveToLocalStorage()">Save</button>
+                    <button onclick="loadFromLocalStorage()">Load</button>
+                    <button onclick="clearLocalStorage()">Clear</button>
+                    <div id="storage-output" class="output">Storage output...</div>
+                </div>
+
+                <!-- Session Storage -->
+                <div class="card">
+                    <h3>Session Storage</h3>
+                    <p>Stores data for one session (cleared when tab closes)</p>
+                    <div class="form-group">
+                        <input type="text" id="session-key" placeholder="Key" style="width: 45%;">
+                        <input type="text" id="session-value" placeholder="Value" style="width: 45%;">
+                    </div>
+                    <button onclick="saveToSessionStorage()">Save</button>
+                    <button onclick="loadFromSessionStorage()">Load</button>
+                    <button onclick="clearSessionStorage()">Clear</button>
+                    <div id="session-output" class="output">Session output...</div>
+                </div>
+
+                <!-- Geolocation -->
+                <div class="card">
+                    <h3>Geolocation API</h3>
+                    <p>Get user's geographic location</p>
+                    <button onclick="getLocation()">Get My Location</button>
+                    <div id="geo-output" class="output">Location will appear here...</div>
+                </div>
+
+                <!-- Canvas -->
+                <div class="card">
+                    <h3>Canvas API</h3>
+                    <canvas id="myCanvas" width="280" height="150"></canvas>
+                    <br>
+                    <button onclick="drawOnCanvas()">Draw Shapes</button>
+                    <button onclick="clearCanvas()">Clear</button>
+                </div>
+
+                <!-- Drag and Drop -->
+                <div class="card">
+                    <h3>Drag and Drop API</h3>
+                    <div>
+                        <span class="drag-item" draggable="true" ondragstart="drag(event)" id="drag1">Drag Me 1</span>
+                        <span class="drag-item" draggable="true" ondragstart="drag(event)" id="drag2">Drag Me 2</span>
+                    </div>
+                    <div class="drop-zone"
+                         ondrop="drop(event)"
+                         ondragover="allowDrop(event)"
+                         ondragenter="this.classList.add('drag-over')"
+                         ondragleave="this.classList.remove('drag-over')">
+                        Drop Zone - Drop items here
+                    </div>
+                </div>
+
+                <!-- Data Attributes -->
+                <div class="card">
+                    <h3>Data Attributes</h3>
+                    <div id="user-card"
+                         data-user-id="12345"
+                         data-user-name="John Doe"
+                         data-user-role="admin"
+                         style="padding: 10px; background: #e3f2fd; border-radius: 4px;">
+                        This div has custom data attributes
+                    </div>
+                    <button onclick="readDataAttributes()">Read Data Attributes</button>
+                    <div id="data-output" class="output">Data attributes will appear here...</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION: Other HTML5 Features -->
+        <section id="other">
+            <h2>9. Other HTML5 Features</h2>
+
+            <div class="grid">
+                <div class="card">
+                    <h3>Content Editable</h3>
+                    <div contenteditable="true"
+                         style="border: 2px dashed #ccc; padding: 15px; border-radius: 4px; min-height: 60px;">
+                        This content is editable! Click here and start typing...
+                    </div>
+                    <p><code>contenteditable="true"</code></p>
+                </div>
+
+                <div class="card">
+                    <h3>Spellcheck</h3>
+                    <textarea spellcheck="true" rows="3" style="width: 100%;"
+                              placeholder="Type something with misspellings to see spellcheck...">
+                    </textarea>
+                    <p><code>spellcheck="true"</code></p>
+                </div>
+
+                <div class="card">
+                    <h3>Translate Attribute</h3>
+                    <p translate="yes">This text should be translated.</p>
+                    <p translate="no">This text should NOT be translated (e.g., brand names).</p>
+                </div>
+
+                <div class="card">
+                    <h3>Direction Attributes</h3>
+                    <p dir="ltr">Left to Right (LTR) text direction</p>
+                    <p dir="rtl">Right to Left (RTL) text direction - مرحبا</p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- ==================== FOOTER ==================== -->
+    <footer>
+        <span class="demo-label">&lt;footer&gt;</span>
+        <p>&copy; 2024 Revature Training - HTML5 Features Demo</p>
+        <p>
+            <a href="#semantic">Back to Top</a> |
+            <a href="https://developer.mozilla.org/en-US/docs/Web/HTML" target="_blank" rel="noopener noreferrer">MDN HTML Docs</a> |
+            <a href="https://www.w3.org/TR/html52/" target="_blank" rel="noopener noreferrer">W3C Specification</a>
+        </p>
+        <address>
+            Contact: <a href="mailto:training@revature.com">training@revature.com</a>
+        </address>
+    </footer>
+
+    <!-- JavaScript for Interactive Demos -->
+    <script>
+        // Form Submit Handler
+        function handleFormSubmit(event) {
+            event.preventDefault();
+            const formData = new FormData(event.target);
+            const data = Object.fromEntries(formData.entries());
+            document.getElementById('form-output').innerHTML =
+                '<strong>Form Data:</strong><pre>' + JSON.stringify(data, null, 2) + '</pre>';
+        }
+
+        // Local Storage Functions
+        function saveToLocalStorage() {
+            const key = document.getElementById('storage-key').value;
+            const value = document.getElementById('storage-value').value;
+            if (key && value) {
+                localStorage.setItem(key, value);
+                document.getElementById('storage-output').textContent = `Saved: ${key} = ${value}`;
+            }
+        }
+
+        function loadFromLocalStorage() {
+            const key = document.getElementById('storage-key').value;
+            const value = localStorage.getItem(key);
+            document.getElementById('storage-output').textContent = value
+                ? `Loaded: ${key} = ${value}`
+                : `Key "${key}" not found`;
+        }
+
+        function clearLocalStorage() {
+            localStorage.clear();
+            document.getElementById('storage-output').textContent = 'Local storage cleared!';
+        }
+
+        // Session Storage Functions
+        function saveToSessionStorage() {
+            const key = document.getElementById('session-key').value;
+            const value = document.getElementById('session-value').value;
+            if (key && value) {
+                sessionStorage.setItem(key, value);
+                document.getElementById('session-output').textContent = `Saved: ${key} = ${value}`;
+            }
+        }
+
+        function loadFromSessionStorage() {
+            const key = document.getElementById('session-key').value;
+            const value = sessionStorage.getItem(key);
+            document.getElementById('session-output').textContent = value
+                ? `Loaded: ${key} = ${value}`
+                : `Key "${key}" not found`;
+        }
+
+        function clearSessionStorage() {
+            sessionStorage.clear();
+            document.getElementById('session-output').textContent = 'Session storage cleared!';
+        }
+
+        // Geolocation
+        function getLocation() {
+            const output = document.getElementById('geo-output');
+            if (navigator.geolocation) {
+                output.textContent = 'Getting location...';
+                navigator.geolocation.getCurrentPosition(
+                    (position) => {
+                        output.innerHTML = `
+                            <strong>Your Location:</strong><br>
+                            Latitude: ${position.coords.latitude}<br>
+                            Longitude: ${position.coords.longitude}<br>
+                            Accuracy: ${position.coords.accuracy} meters
+                        `;
+                    },
+                    (error) => {
+                        output.textContent = `Error: ${error.message}`;
+                    }
+                );
+            } else {
+                output.textContent = 'Geolocation is not supported by this browser.';
+            }
+        }
+
+        // Canvas
+        function drawOnCanvas() {
+            const canvas = document.getElementById('myCanvas');
+            const ctx = canvas.getContext('2d');
+
+            // Clear canvas
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+            // Draw rectangle
+            ctx.fillStyle = '#1a237e';
+            ctx.fillRect(10, 10, 80, 60);
+
+            // Draw circle
+            ctx.beginPath();
+            ctx.arc(150, 50, 40, 0, 2 * Math.PI);
+            ctx.fillStyle = '#4caf50';
+            ctx.fill();
+
+            // Draw line
+            ctx.beginPath();
+            ctx.moveTo(200, 10);
+            ctx.lineTo(270, 70);
+            ctx.strokeStyle = '#e91e63';
+            ctx.lineWidth = 3;
+            ctx.stroke();
+
+            // Draw text
+            ctx.fillStyle = '#333';
+            ctx.font = '16px Arial';
+            ctx.fillText('Canvas Demo!', 10, 100);
+
+            // Draw triangle
+            ctx.beginPath();
+            ctx.moveTo(220, 90);
+            ctx.lineTo(250, 140);
+            ctx.lineTo(190, 140);
+            ctx.closePath();
+            ctx.fillStyle = '#ff9800';
+            ctx.fill();
+        }
+
+        function clearCanvas() {
+            const canvas = document.getElementById('myCanvas');
+            const ctx = canvas.getContext('2d');
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+        }
+
+        // Drag and Drop
+        function allowDrop(event) {
+            event.preventDefault();
+        }
+
+        function drag(event) {
+            event.dataTransfer.setData('text', event.target.id);
+        }
+
+        function drop(event) {
+            event.preventDefault();
+            event.target.classList.remove('drag-over');
+            const data = event.dataTransfer.getData('text');
+            const draggedElement = document.getElementById(data);
+            if (draggedElement) {
+                event.target.appendChild(draggedElement);
+            }
+        }
+
+        // Data Attributes
+        function readDataAttributes() {
+            const userCard = document.getElementById('user-card');
+            const output = document.getElementById('data-output');
+            output.innerHTML = `
+                <strong>Data Attributes:</strong><br>
+                data-user-id: ${userCard.dataset.userId}<br>
+                data-user-name: ${userCard.dataset.userName}<br>
+                data-user-role: ${userCard.dataset.userRole}
+            `;
+        }
+
+        // Initialize canvas with a placeholder
+        window.onload = function() {
+            const canvas = document.getElementById('myCanvas');
+            const ctx = canvas.getContext('2d');
+            ctx.fillStyle = '#f5f5f5';
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+            ctx.fillStyle = '#999';
+            ctx.font = '14px Arial';
+            ctx.textAlign = 'center';
+            ctx.fillText('Click "Draw Shapes" to see canvas in action', canvas.width/2, canvas.height/2);
+        };
+    </script>
+</body>
+</html>
