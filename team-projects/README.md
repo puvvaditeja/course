@@ -12,7 +12,8 @@ Each project is designed for a **team of 4 members**, following Agile developmen
 
 | Week | Focus | Milestone |
 |------|-------|-----------|
-| 1-2 | HTML, CSS, Bootstrap, Git, Agile | UI Foundation |
+| 1-2 | HTML, CSS, Bootstrap, Git, Agile | UI Storyboard/Wireframe |
+| **2 (End)** | **UI REVIEW/DEMO** | **Wireframe Walkthrough** |
 | 3-5 | Java, MySQL, JDBC | Backend Development |
 | **6** | **PROJECT 1 PRESENTATION** | **Java + MySQL + JDBC** |
 | 7-8 | Spring Boot, Spring JPA | Framework Migration |
@@ -20,6 +21,29 @@ Each project is designed for a **team of 4 members**, following Agile developmen
 | **11** | **PROJECT 2 PRESENTATION** | **Spring Boot + Angular** |
 | 12 | Docker, Kubernetes, GCP | Cloud Deployment |
 | **13** | **PROJECT 3 / FINAL DEMO** | **Full Stack + Cloud** |
+
+### UI Storyboard/Wireframe Phase (Week 1-2)
+
+The initial UI development serves as a **visual storyboard and wireframe** for the entire project:
+
+- **Purpose:** Design and visualize all application screens before backend development
+- **Deliverable:** Fully functional HTML/CSS/Bootstrap pages representing the complete user journey
+- **Review:** End of Week 2 demo to validate UI design and user flow before proceeding
+
+**What the UI Storyboard Demonstrates:**
+- All pages and navigation flows
+- Form layouts with field requirements (ready for backend validation)
+- Data display formats (tables, cards, lists)
+- User interactions and workflows
+- Responsive design across devices
+
+**UI Review Criteria:**
+- [ ] All pages/screens completed
+- [ ] Navigation between pages works
+- [ ] Forms have proper fields and validation attributes
+- [ ] Responsive on mobile, tablet, desktop
+- [ ] Follows semantic HTML best practices
+- [ ] Team demonstrates user journey walkthrough
 
 ---
 
@@ -73,7 +97,8 @@ Each project is designed for a **team of 4 members**, following Agile developmen
 
 | Phase | Timeline | Technologies | Min Stories/Member | Min Total |
 |-------|----------|--------------|-------------------|-----------|
-| **UI Foundation** | Week 1-2 | HTML, CSS, Bootstrap | 3+ | 12+ |
+| **UI Storyboard/Wireframe** | Week 1-2 | HTML, CSS, Bootstrap | 3+ | 12+ |
+| *UI Review/Demo* | *Week 2 End* | | | *12+* |
 | **Java Backend** | Week 3-5 | Java, MySQL, JDBC | 3+ | 12+ |
 | *Project 1* | *Week 6* | | | *24+* |
 | **Spring Framework** | Week 7-8 | Spring Boot, Spring JPA | 3+ | 12+ |
@@ -82,7 +107,7 @@ Each project is designed for a **team of 4 members**, following Agile developmen
 | **Cloud Deployment** | Week 12 | Docker, K8s, GCP | 2+ | 8+ |
 | *Project 3 / Final* | *Week 13* | | | *56+* |
 
-> **Note:** Each learner should complete a **minimum of 3 features per phase**. Facilitators/Mentors may add more user stories based on project complexity and learner progress. Current document contains **Phase 1: UI Foundation** stories only.
+> **Note:** Each learner should complete a **minimum of 3 features per phase**. Facilitators/Mentors may add more user stories based on project complexity and learner progress. Current document contains **Phase 1: UI Storyboard/Wireframe** stories only.
 
 ---
 
@@ -536,16 +561,17 @@ All UI elements include data attributes for easy Angular migration:
 
 ## Getting Started
 
-### Week 1-2: UI Foundation
+### Week 1-2: UI Storyboard/Wireframe Development
 
 1. **Form your team** of 4 members
 2. **Choose a project** from the list above
 3. **Create a GitHub repository** with proper setup
-4. **Set up the project board** with issues for all 12 UI features
-5. **Assign features** to team members (3 each)
+4. **Set up the project board** with issues for all 12+ UI features
+5. **Assign features** to team members (minimum 3 each)
 6. **Start Sprint 1** - Begin with setup and core structure
 7. **Daily standups** - Communicate progress and blockers
-8. **Complete UI** - All HTML/CSS/Bootstrap features by end of Week 2
+8. **Complete UI Storyboard** - All pages by end of Week 2
+9. **UI Review/Demo** - Present wireframe walkthrough to facilitator/mentor
 
 ### Week 3-5: Java Backend (Building to Project 1)
 
