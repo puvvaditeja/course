@@ -137,5 +137,3 @@ Submit a zip file containing:
 | Navigation & Utilities | 15 |
 | **Total** | **100** |
 
-## Due Date
-Submit by end of weekend (Sunday 11:59 PM)

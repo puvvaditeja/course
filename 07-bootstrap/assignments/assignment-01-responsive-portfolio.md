@@ -105,5 +105,3 @@ Submit a folder containing:
 | Footer | 10 |
 | **Total** | **100** |
 
-## Due Date
-Submit by end of weekend (Sunday 11:59 PM)
