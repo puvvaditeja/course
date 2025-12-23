@@ -1,238 +1,406 @@
 # Code Challenges: JavaScript
 
-Short coding problems to practice JavaScript fundamentals. Complete each challenge in a separate file.
+Practice JavaScript with DOM manipulation, objects, and core concepts. Each challenge builds practical skills.
 
 ---
 
-## Getting Started Challenges
+## DOM Manipulation Challenges
 
-### Challenge 1: Mad Libs Game
-**File:** `mad-libs.js`
+### Challenge 1: Interactive Counter
+**Files:** `counter.html`, `counter.js`
 
-Create a Mad Libs-style story generator:
+Build a counter with increment, decrement, and reset buttons:
+
+```
+┌─────────────────────────────┐
+│           0                 │
+│   [-]    [Reset]    [+]     │
+│                             │
+│   Step: [1] [5] [10]        │
+└─────────────────────────────┘
+```
+
+**Requirements:**
+- Display current count (starts at 0)
+- Increment/decrement buttons
+- Reset button returns to 0
+- Step selector changes increment amount
+- Count cannot go below 0
+- Change color: green for positive, red for negative, black for zero
+
+---
+
+### Challenge 2: Dynamic Form Validator
+**Files:** `form-validator.html`, `form-validator.js`
+
+Create a registration form with real-time validation:
+
+**Fields:**
+- Username (3-15 chars, alphanumeric only)
+- Email (valid email format)
+- Password (8+ chars, 1 uppercase, 1 number, 1 special char)
+- Confirm Password (must match)
+
+**Requirements:**
+- Validate on blur (when user leaves field)
+- Show error messages below each field
+- Show green checkmark for valid fields
+- Disable submit button until all fields valid
+- No form submission if invalid
+
+---
+
+### Challenge 3: Todo List with Categories
+**Files:** `todo.html`, `todo.js`
+
+Build a categorized todo list:
+
+```
+┌─────────────────────────────────────┐
+│ Add Task: [____________] [Add]      │
+│ Category: [Work ▼]                  │
+├─────────────────────────────────────┤
+│ Filter: [All] [Work] [Personal]     │
+├─────────────────────────────────────┤
+│ □ Complete project report    [Work] │
+│ ☑ Buy groceries          [Personal] │
+│ □ Review code                [Work] │
+└─────────────────────────────────────┘
+```
+
+**Requirements:**
+- Add tasks with category selection
+- Toggle complete/incomplete (checkbox)
+- Delete task (X button on hover)
+- Filter by category
+- Show task count per category
+- Store in localStorage
+
+---
+
+### Challenge 4: Tab Component
+**Files:** `tabs.html`, `tabs.js`
+
+Create a reusable tab component:
+
+```
+┌──────┬──────┬──────┐
+│ Tab1 │ Tab2 │ Tab3 │
+├──────┴──────┴──────┤
+│                    │
+│   Content for      │
+│   selected tab     │
+│                    │
+└────────────────────┘
+```
+
+**Requirements:**
+- Click tab to show its content
+- Active tab has different style
+- Only one tab active at a time
+- Keyboard navigation (arrow keys)
+- Create tabs dynamically from data array
 
 ```javascript
-// Ask the user for:
-// - A name
-// - An adjective
-// - A noun
-// - A verb
-// - A place
-
-// Create a story using their inputs
-// Example output:
-// "One day, John found a shiny unicorn that could dance in the kitchen."
+const tabsData = [
+    { title: 'Overview', content: 'Overview content here...' },
+    { title: 'Features', content: 'Features content here...' },
+    { title: 'Pricing', content: 'Pricing content here...' }
+];
 ```
 
 ---
 
-### Challenge 2: Temperature Converter
-**File:** `temperature-converter.js`
+### Challenge 5: Modal Component
+**Files:** `modal.html`, `modal.js`
 
-Create a temperature converter:
+Build a reusable modal/popup system:
+
+**Requirements:**
+- Open modal with button click
+- Close with X button, overlay click, or Escape key
+- Prevent body scroll when modal open
+- Support multiple modals on same page
+- Animate open/close (fade + scale)
+- Create modal from JavaScript:
 
 ```javascript
-// Ask user to choose conversion type:
-// 1. Celsius to Fahrenheit
-// 2. Fahrenheit to Celsius
-
-// Ask for the temperature value
-
-// Perform conversion and display result
-// Formulas:
-// F = (C × 9/5) + 32
-// C = (F − 32) × 5/9
+const modal = createModal({
+    title: 'Confirm Delete',
+    content: 'Are you sure you want to delete this item?',
+    buttons: [
+        { text: 'Cancel', type: 'secondary', onClick: closeModal },
+        { text: 'Delete', type: 'danger', onClick: handleDelete }
+    ]
+});
+modal.open();
 ```
 
 ---
 
-### Challenge 3: Basic Quiz
-**File:** `basic-quiz.js`
+### Challenge 6: Accordion Component
+**Files:** `accordion.html`, `accordion.js`
 
-Create a simple quiz:
+Create an expandable accordion:
+
+```
+┌────────────────────────────────┐
+│ ▼ Section 1                    │
+├────────────────────────────────┤
+│   Expanded content for         │
+│   section 1 is visible         │
+├────────────────────────────────┤
+│ ▶ Section 2                    │
+├────────────────────────────────┤
+│ ▶ Section 3                    │
+└────────────────────────────────┘
+```
+
+**Requirements:**
+- Click header to expand/collapse
+- Smooth height animation
+- Option: allow multiple open OR only one at a time
+- Arrow icon rotates on expand
+- Build from data array:
 
 ```javascript
-// Create a 3-question quiz
-// Keep track of the score
-// Display final score at the end
-
-// Example questions:
-// 1. What is 5 + 3?
-// 2. What is the capital of France?
-// 3. What color is the sky?
+const accordionData = [
+    { title: 'What is JavaScript?', content: '...' },
+    { title: 'What is the DOM?', content: '...' },
+    { title: 'What are events?', content: '...' }
+];
 ```
 
 ---
 
-### Challenge 4: BMI Calculator
-**File:** `bmi-calculator.js`
+### Challenge 7: Image Gallery
+**Files:** `gallery.html`, `gallery.js`
 
-Create a BMI calculator:
+Build an image gallery with lightbox:
+
+**Requirements:**
+- Display thumbnail grid
+- Click thumbnail to open lightbox (full view)
+- Previous/Next navigation in lightbox
+- Keyboard navigation (arrows, Escape to close)
+- Image counter (3 of 10)
+- Lazy load thumbnails
 
 ```javascript
-// Ask for weight in kg
-// Ask for height in meters
-// Calculate BMI: weight / (height * height)
-// Display BMI and category:
-// - Underweight: < 18.5
-// - Normal: 18.5 - 24.9
-// - Overweight: 25 - 29.9
-// - Obese: >= 30
+const images = [
+    { thumb: 'thumb1.jpg', full: 'full1.jpg', caption: 'Sunset' },
+    { thumb: 'thumb2.jpg', full: 'full2.jpg', caption: 'Mountains' },
+    // ...
+];
 ```
 
 ---
 
-## Variables & Data Types Challenges
+## JavaScript Objects Challenges
 
-### Challenge 5: Variable Swap
-**File:** `variable-swap.js`
+### Challenge 8: Shopping Cart Object
+**File:** `shopping-cart.js`
 
-Swap two variables without using a third variable:
+Create a shopping cart with object methods:
 
 ```javascript
-let x = 5;
-let y = 10;
+const cart = createShoppingCart();
 
-// Swap x and y without creating a new variable
-// Your code here
+cart.addItem({ id: 1, name: 'Laptop', price: 999, quantity: 1 });
+cart.addItem({ id: 2, name: 'Mouse', price: 29, quantity: 2 });
+cart.addItem({ id: 1, name: 'Laptop', price: 999, quantity: 1 }); // Should increase quantity
 
-console.log(x); // Should be 10
-console.log(y); // Should be 5
+console.log(cart.getItems());
+// [{ id: 1, name: 'Laptop', price: 999, quantity: 2 }, { id: 2, name: 'Mouse', price: 29, quantity: 2 }]
+
+cart.updateQuantity(1, 3);  // Set laptop quantity to 3
+cart.removeItem(2);         // Remove mouse
+
+console.log(cart.getTotal());        // 2997
+console.log(cart.getItemCount());    // 3
+console.log(cart.isEmpty());         // false
+
+cart.applyDiscount('SAVE10', 10);    // 10% discount
+console.log(cart.getTotal());        // 2697.30
+
+cart.clear();
+console.log(cart.isEmpty());         // true
 ```
 
 ---
 
-### Challenge 6: Type Checker Function
-**File:** `type-checker.js`
+### Challenge 9: Library Management System
+**File:** `library.js`
 
-Create a function that returns the actual type of any value:
+Build a library system using objects and classes:
 
 ```javascript
-function getType(value) {
-    // Return:
-    // - "null" for null
-    // - "array" for arrays
-    // - "object" for plain objects
-    // - "function" for functions
-    // - The typeof result for primitives
-}
+const library = createLibrary();
 
-// Tests
-console.log(getType(null));        // "null"
-console.log(getType([1, 2, 3]));   // "array"
-console.log(getType({ a: 1 }));    // "object"
-console.log(getType(() => {}));    // "function"
-console.log(getType(42));          // "number"
-console.log(getType("hello"));     // "string"
+// Add books
+library.addBook({ isbn: '123', title: '1984', author: 'Orwell', copies: 3 });
+library.addBook({ isbn: '456', title: 'Dune', author: 'Herbert', copies: 2 });
+
+// Add members
+library.addMember({ id: 'M1', name: 'John', email: 'john@example.com' });
+library.addMember({ id: 'M2', name: 'Jane', email: 'jane@example.com' });
+
+// Borrow books
+library.borrowBook('M1', '123');  // John borrows 1984
+library.borrowBook('M2', '123');  // Jane borrows 1984
+
+console.log(library.getAvailableCopies('123'));  // 1
+
+library.returnBook('M1', '123');  // John returns 1984
+
+console.log(library.getMemberHistory('M1'));
+// [{ isbn: '123', title: '1984', borrowedAt: Date, returnedAt: Date }]
+
+console.log(library.getOverdueBooks());  // Books not returned within 14 days
+console.log(library.searchBooks('orwell'));  // Search by title or author
 ```
 
 ---
 
-### Challenge 7: Deep Clone
+### Challenge 10: Event Emitter
+**File:** `event-emitter.js`
+
+Implement a pub/sub event system:
+
+```javascript
+const emitter = createEventEmitter();
+
+// Subscribe to events
+const unsubscribe = emitter.on('userLogin', (user) => {
+    console.log(`${user.name} logged in`);
+});
+
+emitter.on('userLogin', (user) => {
+    console.log(`Send welcome email to ${user.email}`);
+});
+
+// One-time listener
+emitter.once('appStart', () => {
+    console.log('App started - this only runs once');
+});
+
+// Emit events
+emitter.emit('userLogin', { name: 'John', email: 'john@example.com' });
+// Output:
+// "John logged in"
+// "Send welcome email to john@example.com"
+
+emitter.emit('appStart');  // "App started - this only runs once"
+emitter.emit('appStart');  // Nothing happens
+
+unsubscribe();  // Remove first listener
+emitter.emit('userLogin', { name: 'Jane', email: 'jane@example.com' });
+// Only outputs: "Send welcome email to jane@example.com"
+
+emitter.off('userLogin');  // Remove all userLogin listeners
+```
+
+---
+
+## Core JavaScript Challenges
+
+### Challenge 11: Deep Clone
 **File:** `deep-clone.js`
 
-Create a function to deep clone an object:
+Create a function to deep clone objects and arrays:
 
 ```javascript
-let original = {
+const original = {
     name: 'John',
-    address: {
-        city: 'New York',
-        zip: '10001'
-    },
-    hobbies: ['reading', 'gaming']
+    address: { city: 'New York', zip: '10001' },
+    hobbies: ['reading', 'gaming'],
+    metadata: { created: new Date(), tags: new Set(['user', 'admin']) }
 };
 
 function deepClone(obj) {
-    // Your code here
+    // Handle: objects, arrays, Date, Set, Map, null, primitives
 }
 
-let cloned = deepClone(original);
+const cloned = deepClone(original);
 cloned.address.city = 'Boston';
 cloned.hobbies.push('swimming');
 
-console.log(original.address.city);  // Should still be 'New York'
-console.log(original.hobbies);       // Should still be ['reading', 'gaming']
+console.log(original.address.city);  // Still 'New York'
+console.log(original.hobbies);       // Still ['reading', 'gaming']
 ```
 
 ---
 
-## Operators & Control Flow Challenges
+### Challenge 12: Type Checker
+**File:** `type-checker.js`
 
-### Challenge 8: Number Pyramid
-**File:** `number-pyramid.js`
-
-Print a number pyramid:
+Create a comprehensive type checking utility:
 
 ```javascript
-function printPyramid(rows) {
-    // For rows = 5, output:
-    //     1
-    //    121
-    //   12321
-    //  1234321
-    // 123454321
-}
+const typeOf = (value) => {
+    // Return accurate type for any value
+};
+
+console.log(typeOf(null));           // "null"
+console.log(typeOf(undefined));      // "undefined"
+console.log(typeOf(42));             // "number"
+console.log(typeOf(NaN));            // "nan"
+console.log(typeOf('hello'));        // "string"
+console.log(typeOf(true));           // "boolean"
+console.log(typeOf(Symbol()));       // "symbol"
+console.log(typeOf([]));             // "array"
+console.log(typeOf({}));             // "object"
+console.log(typeOf(() => {}));       // "function"
+console.log(typeOf(new Date()));     // "date"
+console.log(typeOf(new Map()));      // "map"
+console.log(typeOf(new Set()));      // "set"
+console.log(typeOf(/regex/));        // "regexp"
+console.log(typeOf(new Error()));    // "error"
+console.log(typeOf(Promise.resolve())); // "promise"
 ```
 
 ---
 
-### Challenge 9: Prime Numbers
-**File:** `prime-numbers.js`
-
-Find all prime numbers:
-
-```javascript
-function findPrimes(limit) {
-    // Return an array of all prime numbers from 2 to limit
-}
-
-console.log(findPrimes(30));
-// [2, 3, 5, 7, 11, 13, 17, 19, 23, 29]
-```
-
----
-
-### Challenge 10: Validate Password
+### Challenge 13: Validate Password
 **File:** `validate-password.js`
 
-Create a password validator:
+Create a password validator with detailed feedback:
 
 ```javascript
 function validatePassword(password) {
-    // Return an object with:
-    // - isValid: boolean
-    // - errors: array of error messages
-
+    // Return: { isValid: boolean, score: number, errors: [], suggestions: [] }
+    //
     // Rules:
-    // - At least 8 characters
-    // - Contains at least one uppercase letter
-    // - Contains at least one lowercase letter
-    // - Contains at least one number
-    // - Contains at least one special character (!@#$%^&*)
+    // - Minimum 8 characters
+    // - At least one uppercase letter
+    // - At least one lowercase letter
+    // - At least one number
+    // - At least one special character (!@#$%^&*()_+-=)
+    // - No common passwords (password, 123456, qwerty, etc.)
+    //
+    // Score: 0-100 based on strength
 }
 
-console.log(validatePassword('Abc123!@'));
-// { isValid: true, errors: [] }
-
 console.log(validatePassword('abc'));
-// { isValid: false, errors: ['Too short', 'Missing uppercase', 'Missing number', 'Missing special character'] }
+// { isValid: false, score: 15, errors: ['Too short', ...], suggestions: ['Add numbers', ...] }
+
+console.log(validatePassword('MyP@ssw0rd!2024'));
+// { isValid: true, score: 95, errors: [], suggestions: [] }
 ```
 
 ---
 
-## Functions Challenges
-
-### Challenge 11: Function Composition
+### Challenge 14: Function Composition
 **File:** `compose.js`
 
-Create a compose function:
+Implement compose and pipe functions:
 
 ```javascript
-// Create a function that composes multiple functions
-const compose = (...functions) => {
-    // Return a function that applies all functions right-to-left
-};
+// compose: right to left
+const compose = (...fns) => { /* implementation */ };
+
+// pipe: left to right
+const pipe = (...fns) => { /* implementation */ };
 
 const addOne = x => x + 1;
 const double = x => x * 2;
@@ -240,281 +408,235 @@ const square = x => x * x;
 
 const composed = compose(addOne, double, square);
 console.log(composed(3)); // addOne(double(square(3))) = addOne(double(9)) = addOne(18) = 19
+
+const piped = pipe(square, double, addOne);
+console.log(piped(3)); // addOne(double(square(3))) = 19
 ```
 
 ---
 
-### Challenge 12: Curry Function
-**File:** `curry.js`
-
-Implement currying:
-
-```javascript
-// Create a curry function that allows partial application
-const curry = (fn) => {
-    // Return a curried version of fn
-};
-
-const add = (a, b, c) => a + b + c;
-const curriedAdd = curry(add);
-
-console.log(curriedAdd(1)(2)(3));    // 6
-console.log(curriedAdd(1, 2)(3));    // 6
-console.log(curriedAdd(1)(2, 3));    // 6
-console.log(curriedAdd(1, 2, 3));    // 6
-```
-
----
-
-### Challenge 13: Memoization
+### Challenge 15: Memoization
 **File:** `memoize.js`
 
-Create a memoize function:
+Create a memoize function with cache management:
 
 ```javascript
-const memoize = (fn) => {
-    // Return a memoized version that caches results
+const memoize = (fn, options = {}) => {
+    // Options: maxSize, ttl (time-to-live in ms)
 };
 
-// Test with an expensive function
-const expensiveOperation = (n) => {
+const expensiveFn = (n) => {
     console.log('Computing...');
-    let result = 0;
-    for (let i = 0; i < n * 1000000; i++) {
-        result += i;
-    }
-    return result;
+    return n * n;
 };
 
-const memoizedOperation = memoize(expensiveOperation);
+const memoized = memoize(expensiveFn, { maxSize: 100, ttl: 60000 });
 
-console.log(memoizedOperation(5)); // "Computing..." then result
-console.log(memoizedOperation(5)); // Just result (cached, no "Computing...")
+console.log(memoized(5)); // "Computing..." then 25
+console.log(memoized(5)); // 25 (cached, no log)
+console.log(memoized(6)); // "Computing..." then 36
+
+// After 60 seconds, cache expires
+// console.log(memoized(5)); // "Computing..." then 25
 ```
 
 ---
 
-### Challenge 14: Debounce Function
-**File:** `debounce.js`
+### Challenge 16: Debounce & Throttle
+**File:** `debounce-throttle.js`
 
-Implement debounce:
+Implement both debounce and throttle:
 
 ```javascript
-const debounce = (fn, delay) => {
-    // Return a debounced version of fn
-    // Only executes after delay ms of inactivity
-};
+// Debounce: execute after delay of inactivity
+const debounce = (fn, delay) => { /* implementation */ };
 
-// Usage example:
-// const handleSearch = debounce((query) => {
-//     console.log('Searching for:', query);
-// }, 300);
+// Throttle: execute at most once per interval
+const throttle = (fn, interval) => { /* implementation */ };
+
+// Usage:
+const handleSearch = debounce((query) => {
+    console.log('Searching:', query);
+}, 300);
+
+const handleScroll = throttle(() => {
+    console.log('Scroll position:', window.scrollY);
+}, 100);
 ```
 
 ---
 
-## Scope & Closures Challenges
-
-### Challenge 15: Once Function
-**File:** `once.js`
-
-A function that can only be called once:
-
-```javascript
-function once(fn) {
-    // Return a function that can only execute fn once
-    // Subsequent calls return the first result
-}
-
-const initialize = once(() => {
-    console.log('Initializing...');
-    return 'Initialized';
-});
-
-console.log(initialize()); // "Initializing..." then "Initialized"
-console.log(initialize()); // Just "Initialized" (no log, cached result)
-console.log(initialize()); // Just "Initialized"
-```
-
----
-
-### Challenge 16: Rate Limiter
-**File:** `rate-limiter.js`
-
-Limit function calls:
-
-```javascript
-function createRateLimiter(fn, limit, interval) {
-    // Return a function that can only be called 'limit' times per 'interval' ms
-    // Returns false if rate limit exceeded
-}
-
-const limitedFetch = createRateLimiter(
-    (url) => console.log('Fetching:', url),
-    3,  // 3 calls
-    1000 // per second
-);
-
-console.log(limitedFetch('/api/1')); // "Fetching: /api/1", true
-console.log(limitedFetch('/api/2')); // "Fetching: /api/2", true
-console.log(limitedFetch('/api/3')); // "Fetching: /api/3", true
-console.log(limitedFetch('/api/4')); // false (rate limited)
-```
-
----
-
-### Challenge 17: Private Class-like Structure
-**File:** `create-person.js`
-
-Create a "class" with private members using closures:
-
-```javascript
-function createPerson(name, age) {
-    // Private variables and validation
-
-    return {
-        getName: function() { /* ... */ },
-        getAge: function() { /* ... */ },
-        setName: function(newName) { /* validate and set */ },
-        setAge: function(newAge) { /* validate: must be 0-150 */ },
-        birthday: function() { /* increment age */ },
-        introduce: function() { /* return introduction string */ }
-    };
-}
-
-const person = createPerson('John', 25);
-console.log(person.getName());     // "John"
-console.log(person.getAge());      // 25
-person.birthday();
-console.log(person.getAge());      // 26
-person.setAge(200);                // Should fail validation
-console.log(person.getAge());      // Still 26
-console.log(person.introduce());   // "Hi, I'm John and I'm 26 years old."
-console.log(person.name);          // undefined (private)
-```
-
----
-
-## Array Methods Challenges
-
-### Challenge 18: Implement Your Own Methods
+### Challenge 17: Array Methods Implementation
 **File:** `array-methods.js`
 
-Recreate array methods without using them:
+Implement array methods without using built-ins:
 
 ```javascript
-// Implement myMap
-function myMap(arr, callback) {
-    // Your implementation
-}
+// Implement these without using the native methods
+function myMap(arr, callback) { }
+function myFilter(arr, callback) { }
+function myReduce(arr, callback, initialValue) { }
+function myFind(arr, callback) { }
+function myEvery(arr, callback) { }
+function mySome(arr, callback) { }
+function myFlat(arr, depth = 1) { }
 
-// Implement myFilter
-function myFilter(arr, callback) {
-    // Your implementation
-}
-
-// Implement myReduce
-function myReduce(arr, callback, initialValue) {
-    // Your implementation
-}
-
-// Test
-console.log(myMap([1, 2, 3], x => x * 2)); // [2, 4, 6]
-console.log(myFilter([1, 2, 3, 4], x => x > 2)); // [3, 4]
-console.log(myReduce([1, 2, 3, 4], (acc, x) => acc + x, 0)); // 10
+// Tests
+console.log(myMap([1, 2, 3], x => x * 2));           // [2, 4, 6]
+console.log(myFilter([1, 2, 3, 4], x => x > 2));     // [3, 4]
+console.log(myReduce([1, 2, 3], (a, b) => a + b, 0)); // 6
+console.log(myFind([1, 2, 3], x => x > 1));          // 2
+console.log(myFlat([1, [2, [3, [4]]]], 2));          // [1, 2, 3, [4]]
 ```
 
 ---
 
-### Challenge 19: Data Pipeline
-**File:** `data-pipeline.js`
+### Challenge 18: Data Transformer
+**File:** `data-transformer.js`
 
-Create a reusable data pipeline:
+Build a chainable data transformation utility:
 
 ```javascript
-function createPipeline(...operations) {
-    return function(data) {
-        return operations.reduce((result, operation) => operation(result), data);
-    };
-}
+const transform = (data) => ({
+    filter: (fn) => transform(data.filter(fn)),
+    map: (fn) => transform(data.map(fn)),
+    sort: (fn) => transform([...data].sort(fn)),
+    take: (n) => transform(data.slice(0, n)),
+    groupBy: (key) => { /* return grouped object */ },
+    value: () => data
+});
 
-// Create operations
-const filterInStock = products => products.filter(p => p.inStock);
-const sortByPrice = products => [...products].sort((a, b) => a.price - b.price);
-const getNames = products => products.map(p => p.name);
-const takeFirst = n => items => items.slice(0, n);
+const users = [
+    { name: 'John', age: 30, dept: 'Engineering' },
+    { name: 'Jane', age: 25, dept: 'Marketing' },
+    { name: 'Bob', age: 35, dept: 'Engineering' },
+    { name: 'Alice', age: 28, dept: 'Marketing' }
+];
 
-// Create pipeline
-const getTopCheapestInStock = createPipeline(
-    filterInStock,
-    sortByPrice,
-    takeFirst(3),
-    getNames
-);
+const result = transform(users)
+    .filter(u => u.age > 25)
+    .sort((a, b) => a.age - b.age)
+    .map(u => u.name)
+    .take(2)
+    .value();
 
-// Test with sample products array
+console.log(result); // ['Jane', 'John'] -- wait, Jane is 25, filtered out
+// Actually: ['John', 'Bob'] -- ages 30, 35 sorted = John(30), Bob(35), take 2
 ```
 
 ---
 
-### Challenge 20: Complex Aggregation
-**File:** `product-report.js`
+### Challenge 19: Observable Pattern
+**File:** `observable.js`
 
-Build a complete report:
+Create a simple observable/reactive value:
 
 ```javascript
-function generateProductReport(products) {
-    return {
-        totalProducts: /* count */,
-        totalValue: /* sum of prices */,
-        averagePrice: /* average */,
-        averageRating: /* average */,
-
-        byCategory: /* { category: { count, totalValue, products: [...] } } */,
-
-        stockStatus: {
-            inStock: /* count */,
-            outOfStock: /* count */,
-            inStockPercentage: /* percentage */
-        },
-
-        priceRanges: {
-            budget: /* count of items under $100 */,
-            midRange: /* count of items $100-$500 */,
-            premium: /* count of items over $500 */
-        },
-
-        topRated: /* top 3 products by rating */,
-        recommendations: /* products with rating >= 4.5 and in stock */
-    };
+function createObservable(initialValue) {
+    // Return an observable that notifies subscribers on change
 }
+
+const count = createObservable(0);
+
+// Subscribe to changes
+count.subscribe((newValue, oldValue) => {
+    console.log(`Count changed from ${oldValue} to ${newValue}`);
+});
+
+count.set(1);  // "Count changed from 0 to 1"
+count.set(5);  // "Count changed from 1 to 5"
+console.log(count.get());  // 5
+
+// Computed observable
+const doubled = count.computed(val => val * 2);
+doubled.subscribe(val => console.log('Doubled:', val));
+
+count.set(10);
+// "Count changed from 5 to 10"
+// "Doubled: 20"
+```
+
+---
+
+### Challenge 20: State Machine
+**File:** `state-machine.js`
+
+Implement a finite state machine:
+
+```javascript
+const trafficLight = createStateMachine({
+    initial: 'red',
+    states: {
+        red: { on: { TIMER: 'green' } },
+        green: { on: { TIMER: 'yellow' } },
+        yellow: { on: { TIMER: 'red' } }
+    }
+});
+
+console.log(trafficLight.state);  // 'red'
+trafficLight.send('TIMER');
+console.log(trafficLight.state);  // 'green'
+trafficLight.send('TIMER');
+console.log(trafficLight.state);  // 'yellow'
+
+// With actions
+const door = createStateMachine({
+    initial: 'closed',
+    states: {
+        closed: {
+            on: { OPEN: 'open' },
+            onEnter: () => console.log('Door closed')
+        },
+        open: {
+            on: { CLOSE: 'closed' },
+            onEnter: () => console.log('Door opened')
+        }
+    }
+});
+
+door.send('OPEN');   // "Door opened"
+door.send('CLOSE');  // "Door closed"
+door.send('OPEN');   // "Door opened"
 ```
 
 ---
 
 ## Submission
 
-Place all challenge files in: `06-javascript/challenges/`
+Place all challenge files in your repo: `06-javascript/challenges/`
 
-| # | Challenge | File | Status |
+### DOM Challenges
+| # | Challenge | Files | Skills |
+|---|-----------|-------|--------|
+| 1 | Interactive Counter | `counter.html`, `counter.js` | Events, DOM updates |
+| 2 | Form Validator | `form-validator.html`, `form-validator.js` | Validation, events |
+| 3 | Todo List | `todo.html`, `todo.js` | CRUD, localStorage |
+| 4 | Tab Component | `tabs.html`, `tabs.js` | Components, keyboard |
+| 5 | Modal Component | `modal.html`, `modal.js` | Overlay, animation |
+| 6 | Accordion | `accordion.html`, `accordion.js` | Toggle, animation |
+| 7 | Image Gallery | `gallery.html`, `gallery.js` | Lightbox, navigation |
+
+### Object Challenges
+| # | Challenge | File | Skills |
 |---|-----------|------|--------|
-| 1 | Mad Libs Game | `mad-libs.js` | ⬜ |
-| 2 | Temperature Converter | `temperature-converter.js` | ⬜ |
-| 3 | Basic Quiz | `basic-quiz.js` | ⬜ |
-| 4 | BMI Calculator | `bmi-calculator.js` | ⬜ |
-| 5 | Variable Swap | `variable-swap.js` | ⬜ |
-| 6 | Type Checker | `type-checker.js` | ⬜ |
-| 7 | Deep Clone | `deep-clone.js` | ⬜ |
-| 8 | Number Pyramid | `number-pyramid.js` | ⬜ |
-| 9 | Prime Numbers | `prime-numbers.js` | ⬜ |
-| 10 | Validate Password | `validate-password.js` | ⬜ |
-| 11 | Function Composition | `compose.js` | ⬜ |
-| 12 | Curry Function | `curry.js` | ⬜ |
-| 13 | Memoization | `memoize.js` | ⬜ |
-| 14 | Debounce Function | `debounce.js` | ⬜ |
-| 15 | Once Function | `once.js` | ⬜ |
-| 16 | Rate Limiter | `rate-limiter.js` | ⬜ |
-| 17 | Private Class | `create-person.js` | ⬜ |
-| 18 | Array Methods | `array-methods.js` | ⬜ |
-| 19 | Data Pipeline | `data-pipeline.js` | ⬜ |
-| 20 | Product Report | `product-report.js` | ⬜ |
+| 8 | Shopping Cart | `shopping-cart.js` | Object methods, state |
+| 9 | Library System | `library.js` | OOP, relationships |
+| 10 | Event Emitter | `event-emitter.js` | Pub/sub pattern |
+
+### Core JavaScript
+| # | Challenge | File | Skills |
+|---|-----------|------|--------|
+| 11 | Deep Clone | `deep-clone.js` | Recursion, types |
+| 12 | Type Checker | `type-checker.js` | Type detection |
+| 13 | Password Validator | `validate-password.js` | Validation, regex |
+| 14 | Compose/Pipe | `compose.js` | Higher-order functions |
+| 15 | Memoization | `memoize.js` | Caching, closures |
+| 16 | Debounce/Throttle | `debounce-throttle.js` | Timing, closures |
+| 17 | Array Methods | `array-methods.js` | Implementation |
+| 18 | Data Transformer | `data-transformer.js` | Chaining, fluent API |
+| 19 | Observable | `observable.js` | Reactive pattern |
+| 20 | State Machine | `state-machine.js` | FSM pattern |
+
+---
+
+*Updated: December 2025*
