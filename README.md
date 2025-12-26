@@ -6,8 +6,6 @@ Welcome to the Cognizant Java Full Stack Engineer with Angular training program!
 
 ### Program Information
 - **Duration**: 13 weeks
-- **Training Partner**: Revature
-- **Client**: Cognizant
 - **Format**: Instructor-led training with hands-on projects
 
 ## What You'll Learn
@@ -300,7 +298,3 @@ HTML exercises follow a 3-version progressive enhancement approach:
 ---
 
 **Ready to begin?** Start with [Module 1: Linux Fundamentals](./01-linux/)
-
----
-
-Copyright 2025 Revature, LLC. All Rights Reserved.
