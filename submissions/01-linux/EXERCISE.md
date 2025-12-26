@@ -1,71 +1,110 @@
-# Exercise: Linux Fundamentals - Log Analyzer
+# Exercise: Log File Analyzer Script
+
+| Property | Value |
+|----------|-------|
+| **Topic** | 01-linux |
+| **Type** | Exercise |
+| **Difficulty** | Beginner |
 
 ## Objective
-Create a shell script that analyzes server log files and generates a summary report.
+Create a shell script that analyzes a log file and generates a summary report.
+
+## Sample Log File
+
+A sample log file is provided for testing: **[sample-log.txt](./sample-log.txt)**
+
+You can use this file to test your script:
+```bash
+./log-analyzer.sh sample-log.txt
+```
 
 ## Requirements
+
+Create a script called `log-analyzer.sh` that:
+
+1. Takes a log file path as a command-line argument
+2. Handles the case when the specified file doesn't exist (show error message)
+3. Counts the total number of lines in the log file
+4. Counts how many lines contain "ERROR", "WARNING", and "INFO"
+5. Extracts and displays unique IP addresses (if any) from the log
+6. Outputs a formatted summary report
+
+## Sample Log Format
+```
+2024-01-15 10:23:45 INFO User login successful from 192.168.1.100
+2024-01-15 10:24:12 ERROR Database connection failed
+2024-01-15 10:25:33 WARNING High memory usage detected
+2024-01-15 10:26:01 INFO Request processed from 10.0.0.50
+```
+
+## Expected Output
+```
+========== LOG ANALYSIS REPORT ==========
+File: /path/to/logfile.log
+Total Lines: 100
+-----------------------------------------
+INFO:    45
+WARNING: 30
+ERROR:   25
+-----------------------------------------
+Unique IP Addresses Found:
+  - 192.168.1.100
+  - 10.0.0.50
+=========================================
+```
+
+## Skills Tested
+- Shell script basics (shebang, variables)
+- Command-line arguments (`$1`, `$#`)
+- Conditional statements (`if`, `else`)
+- Text processing (`grep`, `wc`, `sort`, `uniq`)
+- Regular expressions basics
+- File operations
+
+## Bonus Challenge
+- Add a flag `-v` for verbose output that shows each log entry categorized
+- Calculate and display the percentage of each log level
+
+---
+
+## Submission
 
 ### Required Files
 | File | Description |
 |------|-------------|
-| `log-analyzer.sh` | Main shell script |
+| `log-analyzer.sh` | Your shell script solution |
 
-### Functional Requirements
-1. Accept a log file path as a command-line argument
-2. Count total number of log entries
-3. Count entries by log level (ERROR, WARN, INFO, DEBUG)
-4. Display the top 5 most frequent error messages
-5. Output results in a formatted summary
-
-### Technical Requirements
-- [ ] Include shebang (`#!/bin/bash`)
-- [ ] Include `set -e` for error handling
-- [ ] Validate input arguments
-- [ ] Use variables (properly quoted)
-- [ ] Include helpful comments
-
-## Expected Output
+### Folder Structure
+Submit your solution in your repository under:
 ```
-=== Log Analysis Report ===
-File: /path/to/logfile.log
-Total Entries: 1000
-
-Log Level Summary:
-  ERROR: 50
-  WARN:  150
-  INFO:  700
-  DEBUG: 100
-
-Top 5 Error Messages:
-  1. Connection timeout (15 occurrences)
-  2. File not found (12 occurrences)
-  ...
+your-repo/
+└── 01-linux/
+    └── log-analyzer.sh
 ```
 
-## Sample Usage
-```bash
-./log-analyzer.sh /var/log/application.log
-./log-analyzer.sh sample.log
-```
+### Technical Checklist
+- [ ] File named exactly `log-analyzer.sh`
+- [ ] Includes shebang (`#!/bin/bash`)
+- [ ] Script is executable (`chmod +x log-analyzer.sh`)
+- [ ] Handles missing file argument
+- [ ] Tested with provided sample-log.txt
 
-## Hints
-- Use `grep -c` to count occurrences
-- Use `awk` or `cut` to extract fields
-- Use `sort | uniq -c | sort -rn | head -5` for top 5
-
-## Evaluation Criteria
+### Evaluation Criteria
 | Criteria | Points |
 |----------|--------|
 | Script runs without errors | 20 |
 | Correct argument handling | 15 |
-| Accurate log level counts | 25 |
-| Top errors displayed | 20 |
-| Code quality & best practices | 20 |
+| Accurate line/level counts | 25 |
+| IP extraction works | 20 |
+| Code quality (comments, structure) | 20 |
 | **Total** | **100** |
 
-## Submission Checklist
-- [ ] File named exactly `log-analyzer.sh`
-- [ ] Script is executable (`chmod +x log-analyzer.sh`)
-- [ ] Placed in `01-linux/` folder
-- [ ] Tested with sample log file
-- [ ] Committed and pushed to repository
+### How to Submit
+```bash
+# In your repository
+mkdir -p 01-linux
+cp log-analyzer.sh 01-linux/
+git add 01-linux/log-analyzer.sh
+git commit -m "Complete 01-linux exercise: log analyzer"
+git push
+```

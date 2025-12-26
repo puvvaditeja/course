@@ -1,92 +1,86 @@
-# Exercise: MySQL - E-Commerce Database
+# Exercise: E-Commerce Database Design and Queries
 
 ## Objective
-Design and implement a relational database schema for an e-commerce platform.
+Design and implement a relational database for an e-commerce application, then write SQL queries to manage and analyze the data.
 
-## Requirements
+## Part 1: Database Design
 
-### Required Files
-| File | Description |
-|------|-------------|
-| `schema.sql` | Table definitions (CREATE statements) |
-| `seed_data.sql` | Sample data (INSERT statements) |
-| `queries.sql` | Required queries |
+### Requirements
+Create a MySQL database called `ecommerce_db` with the following tables:
 
-### Database Schema
+#### 1. customers
+- customer_id (Primary Key, Auto Increment)
+- first_name, last_name
+- email (unique)
+- phone
+- created_at (timestamp)
 
-Design tables for:
-1. **customers** - Customer information
-2. **products** - Product catalog
-3. **categories** - Product categories
-4. **orders** - Customer orders
-5. **order_items** - Items in each order
+#### 2. categories
+- category_id (Primary Key)
+- category_name
+- description
 
-### schema.sql Requirements
-```sql
--- Required tables with minimum columns:
+#### 3. products
+- product_id (Primary Key)
+- product_name
+- description
+- price (decimal)
+- stock_quantity
+- category_id (Foreign Key)
+- created_at
 
--- customers: id, name, email, phone, address, created_at
--- products: id, name, description, price, stock_quantity, category_id
--- categories: id, name, description
--- orders: id, customer_id, order_date, total_amount, status
--- order_items: id, order_id, product_id, quantity, unit_price
-```
+#### 4. orders
+- order_id (Primary Key)
+- customer_id (Foreign Key)
+- order_date
+- status (enum: 'pending', 'processing', 'shipped', 'delivered', 'cancelled')
+- total_amount
+- shipping_address
 
-### Technical Requirements
-- [ ] Use appropriate data types
-- [ ] Define PRIMARY KEY for all tables
-- [ ] Define FOREIGN KEY relationships
-- [ ] Add NOT NULL constraints where appropriate
-- [ ] Add DEFAULT values where sensible
-- [ ] Create at least one INDEX
+#### 5. order_items
+- order_item_id (Primary Key)
+- order_id (Foreign Key)
+- product_id (Foreign Key)
+- quantity
+- unit_price
 
-### queries.sql - Required Queries
-Write SQL queries for:
+## Part 2: SQL Queries
 
-1. List all products with their category names
-2. Find customers who placed orders in the last 30 days
-3. Calculate total revenue per category
-4. Find top 5 best-selling products
-5. List orders with total items and amount per order
-6. Find products that are low in stock (< 10)
-7. Calculate average order value per customer
-8. Find categories with no products
+Write SQL queries for the following tasks:
 
-## Sample Schema Structure
-```sql
-CREATE TABLE categories (
-    id INT PRIMARY KEY AUTO_INCREMENT,
-    name VARCHAR(100) NOT NULL,
-    description TEXT,
-    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
-);
+### Basic Queries
+1. Insert sample data (at least 5 records per table)
+2. Select all products with their category names
+3. Find all orders for a specific customer
+4. Update product stock after an order
+5. Delete cancelled orders older than 30 days
 
-CREATE TABLE products (
-    id INT PRIMARY KEY AUTO_INCREMENT,
-    name VARCHAR(200) NOT NULL,
-    description TEXT,
-    price DECIMAL(10,2) NOT NULL,
-    stock_quantity INT DEFAULT 0,
-    category_id INT,
-    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    FOREIGN KEY (category_id) REFERENCES categories(id)
-);
--- Continue for other tables...
-```
+### Intermediate Queries
+6. Find the top 5 best-selling products
+7. Calculate total revenue per category
+8. List customers who haven't ordered in the last 6 months
+9. Find products that are low in stock (quantity < 10)
 
-## Evaluation Criteria
-| Criteria | Points |
-|----------|--------|
-| Correct table structure | 20 |
-| Proper relationships (FK) | 20 |
-| Constraints & indexes | 15 |
-| Seed data quality | 15 |
-| Query correctness | 30 |
-| **Total** | **100** |
+### Advanced Queries
+10. Create a view for order summary with customer and product details
+11. Write a query using subquery to find customers who ordered above-average amounts
+12. Use GROUP BY and HAVING to find categories with more than $1000 in sales
+13. Write a transaction to process an order (insert order, order_items, update stock)
 
-## Submission Checklist
-- [ ] All three `.sql` files present
-- [ ] Placed in `09-mysql/` folder
-- [ ] Scripts run without errors
-- [ ] Foreign keys properly defined
-- [ ] Committed and pushed to repository
+## Expected Deliverables
+1. `schema.sql` - Database and table creation scripts
+2. `seed_data.sql` - INSERT statements for sample data
+3. `queries.sql` - All query solutions
+
+## Skills Tested
+- DDL: CREATE DATABASE, CREATE TABLE
+- DML: INSERT, UPDATE, DELETE, SELECT
+- Constraints: PRIMARY KEY, FOREIGN KEY, UNIQUE, NOT NULL
+- Joins: INNER JOIN, LEFT JOIN
+- Aggregations: COUNT, SUM, AVG, GROUP BY, HAVING
+- Subqueries and Views
+- Transactions
+
+## Bonus Challenge
+- Implement a stored procedure for processing orders
+- Create triggers to automatically update stock and log order history

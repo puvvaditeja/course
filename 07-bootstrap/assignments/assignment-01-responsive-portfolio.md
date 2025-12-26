@@ -1,5 +1,12 @@
 # Assignment 1: Responsive Portfolio Page with Bootstrap
 
+| Property | Value |
+|----------|-------|
+| **Topic** | 07-bootstrap |
+| **Type** | Assignment |
+| **Week** | 2 |
+| **Due** | End of Week 2 |
+
 ## Objective
 Create a responsive personal portfolio page using Bootstrap's grid system and utility classes.
 
@@ -105,3 +112,42 @@ Submit a folder containing:
 | Footer | 10 |
 | **Total** | **100** |
 
+---
+
+## Submission
+
+### Required Files
+| File | Description |
+|------|-------------|
+| `index.html` | Main portfolio page |
+| `images/` | Folder with images (if any) |
+| `README.md` | Setup instructions (optional) |
+
+### Folder Structure
+Submit your solution in your repository under:
+```
+your-repo/
+└── 07-bootstrap/
+    └── assignment-01/
+        ├── index.html
+        ├── images/
+        └── README.md
+```
+
+### Technical Checklist
+- [ ] Uses Bootstrap 5.x CDN
+- [ ] Responsive on mobile, tablet, desktop
+- [ ] Navigation collapses on mobile
+- [ ] Projects grid adjusts columns by screen size
+- [ ] Form has validation classes
+- [ ] No custom CSS (Bootstrap only)
+
+### How to Submit
+```bash
+# In your repository
+mkdir -p 07-bootstrap/assignment-01
+cp -r your-files/* 07-bootstrap/assignment-01/
+git add 07-bootstrap/assignment-01/
+git commit -m "Complete 07-bootstrap assignment-01: responsive portfolio"
+git push
+```

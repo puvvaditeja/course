@@ -1,97 +1,124 @@
-# Exercise: Java Core - Library Management System
+# Exercise: Library Management System
 
 ## Objective
-Build a library management system demonstrating core Java concepts: OOP, Collections, Exceptions, and File I/O.
+Build a console-based Library Management System that demonstrates Core Java concepts including OOP, Collections, Streams, Exception Handling, and File I/O.
 
 ## Requirements
 
-### Required Files
-| File | Description |
-|------|-------------|
-| `Book.java` | Book entity class |
-| `Member.java` | Library member class |
-| `Genre.java` | Enum for book genres |
-| `LibraryService.java` | Business logic |
-| `LibraryException.java` | Custom exception |
-| `Main.java` | Entry point (optional) |
+### Domain Classes
 
-### Class Specifications
+#### Book
+- ISBN (unique identifier)
+- Title
+- Author
+- Genre (enum: FICTION, NON_FICTION, SCIENCE, HISTORY, TECHNOLOGY)
+- PublishedYear
+- Available (boolean)
 
-#### Book.java
-```java
-public class Book {
-    private String isbn;
-    private String title;
-    private String author;
-    private Genre genre;
-    private boolean available;
+#### Member
+- MemberId (auto-generated)
+- Name
+- Email
+- MembershipDate
+- BorrowedBooks (List of Book)
 
-    // Constructor, getters, setters
-    // equals() and hashCode() based on isbn
-    // toString()
-}
+#### BorrowRecord
+- RecordId
+- Member
+- Book
+- BorrowDate
+- DueDate
+- ReturnDate (nullable)
+
+### Functionality
+
+1. **Book Management**
+   - Add new books
+   - Search books by title, author, or genre
+   - List all available books
+   - Remove books from library
+
+2. **Member Management**
+   - Register new members
+   - Search members by name or email
+   - View member's borrowed books
+
+3. **Borrowing System**
+   - Borrow a book (max 3 books per member)
+   - Return a book
+   - Check overdue books
+   - Calculate late fees ($0.50 per day)
+
+4. **Reports (Using Streams)**
+   - Most popular books (most borrowed)
+   - Members with overdue books
+   - Books by genre statistics
+   - Revenue from late fees
+
+### Java Concepts to Demonstrate
+
+- **OOP**: Encapsulation, Inheritance, Polymorphism
+- **Collections**: ArrayList, HashMap, HashSet
+- **Generics**: Custom generic repository class
+- **Streams**: filter, map, collect, groupingBy, reduce
+- **Exceptions**: Custom LibraryException hierarchy
+- **Optional**: For nullable return values
+- **File I/O**: Save/load data to JSON or serialization
+- **Java 21 Features**: Records, Pattern Matching, Text Blocks
+
+## Class Structure
+
+```
+src/
+├── model/
+│   ├── Book.java
+│   ├── Member.java
+│   ├── BorrowRecord.java
+│   └── Genre.java (enum)
+├── repository/
+│   ├── Repository.java (generic interface)
+│   ├── BookRepository.java
+│   └── MemberRepository.java
+├── service/
+│   ├── LibraryService.java
+│   └── ReportService.java
+├── exception/
+│   ├── LibraryException.java
+│   ├── BookNotAvailableException.java
+│   └── MemberLimitExceededException.java
+└── Main.java
 ```
 
-#### Member.java
-```java
-public class Member {
-    private String memberId;
-    private String name;
-    private List<Book> borrowedBooks;
-    private static final int MAX_BOOKS = 5;
+## Sample Output
+```
+=== Library Management System ===
+1. Manage Books
+2. Manage Members
+3. Borrow/Return Books
+4. Reports
+5. Exit
 
-    // Constructor, getters
-    // borrowBook(Book book) throws LibraryException
-    // returnBook(Book book)
-}
+Choice: 4
+
+=== Reports ===
+1. Most Popular Books
+2. Overdue Books
+3. Genre Statistics
+4. Late Fee Revenue
+
+Choice: 3
+
+Genre Statistics:
+TECHNOLOGY: 45 books (12 borrowed)
+FICTION: 38 books (20 borrowed)
+SCIENCE: 25 books (8 borrowed)
+...
 ```
 
-#### Genre.java (Enum)
-```java
-public enum Genre {
-    FICTION, NON_FICTION, SCIENCE, HISTORY, BIOGRAPHY, TECHNOLOGY
-}
-```
-
-#### LibraryService.java
-```java
-public class LibraryService {
-    private Map<String, Book> books;      // isbn -> Book
-    private Map<String, Member> members;  // memberId -> Member
-
-    // addBook(Book book)
-    // removeBook(String isbn)
-    // registerMember(Member member)
-    // borrowBook(String memberId, String isbn) throws LibraryException
-    // returnBook(String memberId, String isbn)
-    // searchByTitle(String title) -> List<Book>
-    // searchByAuthor(String author) -> List<Book>
-    // getAvailableBooks() -> List<Book>
-}
-```
-
-### Technical Requirements
-- [ ] Proper encapsulation (private fields, public methods)
-- [ ] Use appropriate Collections (List, Map, Set)
-- [ ] Custom exception with meaningful messages
-- [ ] Input validation
-- [ ] JavaDoc comments on public methods
-- [ ] Proper use of `@Override` annotation
-- [ ] Follow Java naming conventions
-
-## Evaluation Criteria
-| Criteria | Points |
-|----------|--------|
-| Correct class structure & OOP | 25 |
-| Collections used appropriately | 20 |
-| Exception handling | 15 |
-| Business logic correctness | 20 |
-| Code quality & conventions | 20 |
-| **Total** | **100** |
-
-## Submission Checklist
-- [ ] All required `.java` files present
-- [ ] Placed in `10-java-core/` folder
-- [ ] Code compiles without errors
-- [ ] Classes follow specifications
-- [ ] Committed and pushed to repository
+## Skills Tested
+- Object-Oriented Design
+- Java Collections Framework
+- Stream API operations
+- Exception handling best practices
+- File I/O operations
+- Java 21 features

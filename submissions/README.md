@@ -1,6 +1,6 @@
 # Submission Guidelines
 
-Follow these guidelines to submit your exercises and assignments for review.
+Follow these guidelines to submit your exercises and challenges for review.
 
 ---
 
@@ -32,12 +32,12 @@ fullstack-workshop/
 ├── 02-git/
 ├── 03-agile/
 ├── 04-html/
-│   ├── portfolio.html            # Exercise
-│   └── challenge-01/             # Challenge
+│   └── portfolio.html            # Exercise
 ├── 05-css/
 ├── 06-javascript/
-│   ├── task-manager.html         # Exercise
-│   ├── task-manager.js           # Exercise
+│   ├── objects.js                # Exercise 07
+│   ├── dom-events.html           # Exercise 08
+│   ├── dom-events.js             # Exercise 08
 │   └── challenge-01/             # Challenge
 ├── 07-bootstrap/
 ├── 08-jquery/
@@ -46,6 +46,7 @@ fullstack-workshop/
 │   ├── queries.sql               # Exercise
 │   └── challenge-01/             # Challenge
 ├── 10-java-core/
+│   └── challenge-01/             # Challenge
 ├── 11-jdbc/
 ├── 12-testing/
 ├── 13-logging/
@@ -59,11 +60,10 @@ fullstack-workshop/
 ├── 21-angular/
 ├── 22-rxjs/
 ├── 23-docker/
+│   └── challenge-01/             # Challenge
 ├── 24-kubernetes/
 ├── 25-gcp/
 ├── 26-devops/
-├── week-01/                      # Weekly Assignment
-├── week-02/
 └── README.md
 ```
 
@@ -73,13 +73,17 @@ fullstack-workshop/
 
 ### 1. Exercises (per topic)
 
-Daily exercises for each topic - small, focused tasks on specific concepts.
+Focused tasks on specific concepts. Each exercise contains multiple **Problems** to solve.
 
 | Property | Value |
 |----------|-------|
-| **Location in course** | `XX-topic/exercises/exercise-01.md` |
+| **Location in course** | `submissions/XX-topic/EXERCISE.md` or `submissions/XX-topic/exercises/` |
 | **Submit to** | `XX-topic/` folder in your repo |
 | **File names** | Exactly as specified in exercise |
+
+**Topics with multiple exercises:**
+- `04-html/exercises/` - 6 exercises (exercise-01 to exercise-06)
+- `06-javascript/exercises/` - 8 exercises (exercise-01 to exercise-08)
 
 **Example submissions:**
 ```
@@ -89,8 +93,9 @@ your-repo/
 ├── 04-html/
 │   └── portfolio.html
 └── 06-javascript/
-    ├── task-manager.html
-    └── task-manager.js
+    ├── objects.js
+    ├── dom-events.html
+    └── dom-events.js
 ```
 
 ---
@@ -101,9 +106,16 @@ More complex problems that combine multiple concepts within a topic.
 
 | Property | Value |
 |----------|-------|
-| **Location in course** | `XX-topic/challenges/challenge-01.md` |
+| **Location in course** | `submissions/XX-topic/challenges/CODE-CHALLENGE.md` |
 | **Submit to** | `XX-topic/challenge-01/` folder in your repo |
 | **File names** | As specified in challenge |
+
+**Topics with challenges:**
+- 01-linux
+- 06-javascript
+- 09-mysql
+- 10-java-core
+- 23-docker
 
 **Example submissions:**
 ```
@@ -123,24 +135,6 @@ your-repo/
 
 ---
 
-### 3. Weekly Assignments
-
-End-of-week assignments covering multiple topics from that week.
-
-| Property | Value |
-|----------|-------|
-| **Location in course** | `week-XX/assignment.md` |
-| **Submit to** | `week-XX/` folder in your repo |
-
-**Example submission:**
-```
-your-repo/
-└── week-01/
-    └── (assignment files)
-```
-
----
-
 ## Naming Conventions
 
 ### Folder Names
@@ -148,14 +142,14 @@ your-repo/
 |---------|-----------|
 | `01-linux` | `1.linux`, `linux`, `Linux` |
 | `04-html` | `4-html`, `html`, `HTML` |
-| `week-01` | `week1`, `Week-01`, `w1` |
+| `challenge-01` | `challenge1`, `Challenge-01` |
 
 ### File Names
 | Correct | Incorrect |
 |---------|-----------|
 | `log-analyzer.sh` | `LogAnalyzer.sh`, `script.sh` |
 | `portfolio.html` | `Portfolio.html`, `index.html` |
-| `task-manager.js` | `taskManager.js`, `app.js` |
+| `objects.js` | `Objects.js`, `exercise-07.js` |
 
 **Always use the exact file name specified in the exercise.**
 
@@ -198,8 +192,8 @@ Complete XX-topic: brief description
 **Examples:**
 - `Complete 01-linux: log analyzer script`
 - `Complete 04-html: portfolio page`
-- `Complete 06-javascript: task manager app`
-- `Complete week-01: weekly assignment`
+- `Complete 06-javascript: objects exercise`
+- `Complete 06-javascript/challenge-01: DOM project`
 
 ---
 
@@ -250,6 +244,32 @@ Complete XX-topic: brief description
 
 ---
 
+## Quick Reference
+
+### Exercises by Topic
+| Topic | Folder | Expected Files |
+|-------|--------|----------------|
+| Linux | `01-linux/` | `log-analyzer.sh` |
+| HTML | `04-html/` | `portfolio.html` |
+| CSS | `05-css/` | `styles.css` |
+| JavaScript | `06-javascript/` | `objects.js`, `dom-events.html`, `dom-events.js` |
+| Bootstrap | `07-bootstrap/` | `dashboard.html` |
+| jQuery | `08-jquery/` | `quiz.html`, `quiz.js` |
+| MySQL | `09-mysql/` | `schema.sql`, `queries.sql` |
+| Java Core | `10-java-core/` | `Book.java`, `Member.java`, `LibraryService.java` |
+| Docker | `23-docker/` | `Dockerfile`, `docker-compose.yml` |
+
+### Challenges by Topic
+| Topic | Folder | Description |
+|-------|--------|-------------|
+| Linux | `01-linux/challenge-01/` | Advanced shell scripting |
+| JavaScript | `06-javascript/challenge-01/` | Complex application |
+| MySQL | `09-mysql/challenge-01/` | Advanced queries |
+| Java Core | `10-java-core/challenge-01/` | Design patterns |
+| Docker | `23-docker/challenge-01/` | Multi-container orchestration |
+
+---
+
 ## Common Mistakes
 
 ### Wrong folder name
@@ -270,13 +290,13 @@ your-repo/
 ### Wrong file name
 ```
 # WRONG
-01-linux/
-├── LogAnalyzer.sh    # Should be log-analyzer.sh
-└── script.sh         # Use exact name from exercise
+06-javascript/
+├── Objects.js        # Should be objects.js
+└── exercise-07.js    # Use exact name from exercise
 
 # CORRECT
-01-linux/
-└── log-analyzer.sh
+06-javascript/
+└── objects.js
 ```
 
 ### Files in wrong location
@@ -296,38 +316,9 @@ your-repo/
 
 ---
 
-## Quick Reference
-
-### Exercises
-| Topic | Folder | Expected Files |
-|-------|--------|----------------|
-| Linux | `01-linux/` | `log-analyzer.sh` |
-| HTML | `04-html/` | `portfolio.html` |
-| JavaScript | `06-javascript/` | `task-manager.html`, `task-manager.js` |
-| Bootstrap | `07-bootstrap/` | `dashboard.html` |
-| jQuery | `08-jquery/` | `quiz.html`, `quiz.js` |
-| MySQL | `09-mysql/` | `schema.sql`, `queries.sql` |
-| Java Core | `10-java-core/` | `Book.java`, `Member.java`, `LibraryService.java` |
-| Docker | `23-docker/` | `Dockerfile`, `docker-compose.yml` |
-
-### Challenges
-| Topic | Folder | Description |
-|-------|--------|-------------|
-| Linux | `01-linux/challenge-01/` | Advanced shell scripting |
-| JavaScript | `06-javascript/challenge-01/` | Complex DOM manipulation |
-| Java Core | `10-java-core/challenge-01/` | Design patterns implementation |
-
-### Weekly Assignments
-| Week | Folder | Topics Covered |
-|------|--------|----------------|
-| Week 1 | `week-01/` | Linux, Git, Agile, HTML, CSS |
-| Week 2 | `week-02/` | JavaScript, Bootstrap, jQuery |
-
----
-
 ## Getting Help
 
-1. Read the exercise requirements in `XX-topic/exercises/`
+1. Read the exercise requirements in `submissions/XX-topic/`
 2. Check your `review.md` files for feedback
 3. Ask during training sessions
 4. Reach out to your trainer

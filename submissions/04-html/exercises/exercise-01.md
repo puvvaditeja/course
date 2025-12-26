@@ -1,5 +1,11 @@
 # Exercise: Build a Personal Portfolio Page
 
+| Property | Value |
+|----------|-------|
+| **Topic** | 04-html |
+| **Type** | Exercise |
+| **Difficulty** | Beginner |
+
 ## Objective
 Create a semantic HTML5 portfolio page that showcases your skills, projects, and contact information.
 
@@ -59,3 +65,48 @@ Build an HTML page (`portfolio.html`) that includes:
 
 ## Validation
 Your HTML should pass the W3C Validator without errors.
+
+---
+
+## Submission
+
+### Required Files
+| File | Description |
+|------|-------------|
+| `portfolio.html` | Your HTML portfolio page |
+
+### Folder Structure
+Submit your solution in your repository under:
+```
+your-repo/
+└── 04-html/
+    └── portfolio.html
+```
+
+### Technical Checklist
+- [ ] File named exactly `portfolio.html`
+- [ ] Valid HTML5 DOCTYPE declaration
+- [ ] Uses semantic elements (header, nav, main, section, footer)
+- [ ] All images have alt attributes
+- [ ] Form has proper labels and validation
+- [ ] Passes W3C Validator
+
+### Evaluation Criteria
+| Criteria | Points |
+|----------|--------|
+| Valid HTML5 structure | 20 |
+| Semantic elements used correctly | 20 |
+| All required sections present | 20 |
+| Form with validation attributes | 20 |
+| Accessibility (alt, labels) | 20 |
+| **Total** | **100** |
+
+### How to Submit
+```bash
+# In your repository
+mkdir -p 04-html
+cp portfolio.html 04-html/
+git add 04-html/portfolio.html
+git commit -m "Complete 04-html exercise: portfolio page"
+git push
+```
