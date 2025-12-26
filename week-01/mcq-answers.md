@@ -2402,7 +2402,3 @@ This document contains answers and explanations for the Week 01 MCQ.
 - **B) A branch name** - Branches have names, not hashes.
 - **D) A tag** - Tags are named references to commits.
 
----
-
-
-*Answer key for Week 01 curriculum - Revature Training Program*

@@ -1514,7 +1514,3 @@ diff, stash, reset, revert, remote
 - Flexbox, Grid, Media Queries
 - Positioning, Transitions, Animations
 - Pseudo-classes, Pseudo-elements, Variables
-
----
-
-*Generated for Week 01 curriculum - Revature Training Program*

@@ -1,4 +1,4 @@
-# Week 01 - Multiple Choice Questions (Randomized)
+# Week 01 - Multiple Choice Questions
 
 This document contains 150 multiple choice questions covering the key concepts from Week 01 modules: Linux, Git, Agile, HTML, and CSS. Questions are randomized across all topics.
 

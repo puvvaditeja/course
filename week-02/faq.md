@@ -1810,7 +1810,3 @@ Effects: show(), hide(), toggle(), fadeIn(), slideUp()
 AJAX: $.ajax(), $.get(), $.post(), $.getJSON()
 Traversal: parent(), children(), siblings(), next(), prev()
 ```
-
----
-
-*Generated for Week 02 curriculum - Revature Training Program*

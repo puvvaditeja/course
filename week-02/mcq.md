@@ -1,4 +1,4 @@
-# Week 02 - Multiple Choice Questions (Randomized)
+# Week 02 - Multiple Choice Questions
 
 This document contains 120 multiple choice questions covering the key concepts from Week 02 modules: JavaScript, Bootstrap, and jQuery. Questions are randomized across all topics.
 

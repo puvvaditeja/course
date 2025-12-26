@@ -1778,7 +1778,3 @@ This document contains answers and explanations for the Week 02 MCQ.
 - **A) `collapse`** - Used within accordion but not the main class.
 - Others are not valid Bootstrap 5 classes.
 
----
-
-
-*Answer key for Week 02 curriculum - Revature Training Program*
