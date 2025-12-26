@@ -22,18 +22,69 @@ This program covers the complete technology stack required for modern enterprise
 - **Cloud**: Google Cloud Platform (GCP)
 - **Methodologies**: Agile, Scrum
 
+## Repository Structure
+
+```
+course/
+├── 01-linux/                    # Technology modules (01-27)
+├── 02-git/
+├── ...
+├── 27-http/
+│
+├── week-01/                     # Weekly assessment resources
+│   ├── faq.md                   # Frequently asked questions
+│   ├── mcq.md                   # Multiple choice questions (150)
+│   └── mcq-answers.md           # Answer key with explanations
+│
+├── week-02/
+│   ├── faq.md
+│   ├── mcq.md                   # Multiple choice questions (120)
+│   └── mcq-answers.md
+│
+├── submissions/                 # Learner submission folder
+│   ├── 01-linux/
+│   │   └── exercises/
+│   ├── 04-html/
+│   │   └── exercises/           # Exercise files for submission
+│   ├── 06-javascript/
+│   │   └── exercises/
+│   └── ...                      # All 27 modules
+│
+├── projects-self/               # Individual projects
+│   ├── project-1-java-mysql-jdbc/
+│   ├── project-2-spring-angular/
+│   └── project-3-cloud-deployment/
+│
+├── projects-team/               # Team-based collaborative projects
+│   ├── README.md                # Project guidelines & timeline
+│   ├── project-01-restaurant.md
+│   ├── project-02-ecommerce.md
+│   └── ... (10 project options)
+│
+└── resources/
+    ├── setup-guides/
+    ├── cheat-sheets/
+    ├── presentations/
+    └── curriculum.pdf
+```
+
 ## Course Structure
 
 ### Week 1: Foundation
-- Linux fundamentals
-- Git and version control
-- HTML5 and CSS3
-- Agile methodology
+**Topics:** Linux, Git, HTML5, CSS3, Agile
+| Resource | Description |
+|----------|-------------|
+| [week-01/faq.md](./week-01/faq.md) | 30 Q&As covering all Week 1 topics |
+| [week-01/mcq.md](./week-01/mcq.md) | 150 MCQs for practice |
+| [week-01/mcq-answers.md](./week-01/mcq-answers.md) | Answer key with explanations |
 
-### Week 2: JavaScript Fundamentals
-- JavaScript ES6+
-- Bootstrap 5
-- jQuery
+### Week 2: JavaScript & Bootstrap
+**Topics:** JavaScript ES6+, Bootstrap 5, jQuery
+| Resource | Description |
+|----------|-------------|
+| [week-02/faq.md](./week-02/faq.md) | 30 Q&As covering JavaScript, Bootstrap, jQuery |
+| [week-02/mcq.md](./week-02/mcq.md) | 120 MCQs for practice |
+| [week-02/mcq-answers.md](./week-02/mcq-answers.md) | Answer key with explanations |
 
 ### Week 3: Database & Java Basics
 - MySQL database
@@ -59,17 +110,12 @@ This program covers the complete technology stack required for modern enterprise
 - Spring Boot fundamentals
 - Reactive programming with WebFlux
 
-### Week 7: Spring Data & REST
+### Week 7-8: Spring Data & REST APIs
 - Spring Data JPA
 - Hibernate ORM
 - RESTful API development
+- **REST API Interim Milestone (Week 8)**
 - **Project 2 Starts** (Spring Boot + Angular)
-
-### Week 8: Microservices
-- Microservices architecture
-- API Gateway and Service Discovery
-- Security and authentication
-- Fault tolerance and resilience
 
 ### Week 9: TypeScript & Angular
 - TypeScript fundamentals
@@ -97,44 +143,82 @@ This program covers the complete technology stack required for modern enterprise
 - Project 3 completion
 - Code review and presentation
 
-## Learning Path
+## Technology Modules
 
-### 📚 Technology Modules
+| # | Module | Topics |
+|---|--------|--------|
+| 01 | [Linux](./01-linux/) | Shell commands, scripting, file system |
+| 02 | [Git](./02-git/) | Version control, branching, collaboration |
+| 03 | [Agile](./03-agile/) | Scrum, Kanban, user stories |
+| 04 | [HTML5](./04-html/) | Semantic HTML, forms, accessibility |
+| 05 | [CSS3](./05-css/) | Flexbox, Grid, responsive design |
+| 06 | [JavaScript](./06-javascript/) | ES6+, DOM, async programming |
+| 07 | [Bootstrap](./07-bootstrap/) | Components, grid system, utilities |
+| 08 | [jQuery](./08-jquery/) | DOM manipulation, AJAX, plugins |
+| 09 | [MySQL](./09-mysql/) | SQL, database design, optimization |
+| 10 | [Core Java](./10-java-core/) | OOP, collections, streams |
+| 11 | [JDBC](./11-jdbc/) | Database connectivity, transactions |
+| 12 | [Testing](./12-testing/) | JUnit, Mockito, TDD |
+| 13 | [Logging](./13-logging/) | Log4j, SLF4J, best practices |
+| 14 | [Spring Framework](./14-spring-framework/) | DI, IoC, AOP |
+| 15 | [Spring Boot](./15-spring-boot/) | Auto-configuration, starters |
+| 16 | [Spring MVC](./16-spring-mvc/) | Controllers, views, validation |
+| 17 | [Spring Data JPA](./17-spring-data-jpa/) | Repositories, queries, relationships |
+| 18 | [REST API](./18-rest-api/) | RESTful services, documentation |
+| 19 | [Microservices](./19-microservices/) | Architecture, patterns, resilience |
+| 20 | [TypeScript](./20-typescript/) | Types, interfaces, generics |
+| 21 | [Angular](./21-angular/) | Components, services, routing |
+| 22 | [RxJS](./22-rxjs/) | Observables, operators, patterns |
+| 23 | [Docker](./23-docker/) | Containers, images, compose |
+| 24 | [Kubernetes](./24-kubernetes/) | Orchestration, deployments, services |
+| 25 | [GCP](./25-gcp/) | Cloud services, deployment |
+| 26 | [DevOps](./26-devops/) | CI/CD, automation, monitoring |
+| 27 | [HTTP](./27-http/) | Protocol, methods, status codes |
 
-1. [Linux Fundamentals](./01-linux/)
-2. [Git Version Control](./02-git/)
-3. [Agile Methodology](./03-agile/)
-4. [HTML5](./04-html/)
-5. [CSS3](./05-css/)
-6. [JavaScript](./06-javascript/)
-7. [Bootstrap](./07-bootstrap/)
-8. [jQuery](./08-jquery/)
-9. [MySQL Database](./09-mysql/)
-10. [Core Java](./10-java-core/)
-11. [JDBC](./11-jdbc/)
-12. [Testing (JUnit & Mockito)](./12-testing/)
-13. [Logging Frameworks](./13-logging/)
-14. [Spring Framework](./14-spring-framework/)
-15. [Spring Boot](./15-spring-boot/)
-16. [Spring MVC](./16-spring-mvc/)
-17. [Spring Data JPA](./17-spring-data-jpa/)
-18. [REST APIs](./18-rest-api/)
-19. [Microservices](./19-microservices/)
-20. [TypeScript](./20-typescript/)
-21. [Angular](./21-angular/)
-22. [RxJS](./22-rxjs/)
-23. [Docker](./23-docker/)
-24. [Kubernetes](./24-kubernetes/)
-25. [Google Cloud Platform](./25-gcp/)
-26. [DevOps](./26-devops/)
+## Projects
 
-### 🚀 Projects
+### Individual Projects (projects-self/)
 
-| Project | Technologies | Duration | Description |
-|---------|-------------|----------|-------------|
-| [Project 1](./projects-self/project-1-java-mysql-jdbc/) | Java, MySQL, JDBC | Week 3 | Console-based application with database integration |
-| [Project 2](./projects-self/project-2-spring-angular/) | Spring Boot, Spring Data JPA, Angular | Weeks 7-10 | Full-stack web application with REST APIs |
-| [Project 3](./projects-self/project-3-cloud-deployment/) | Full Stack + Docker + Kubernetes + GCP | Weeks 12-13 | Cloud-native microservices deployment |
+| Project | Technologies | Week | Description |
+|---------|-------------|------|-------------|
+| [Project 1](./projects-self/project-1-java-mysql-jdbc/) | Java, MySQL, JDBC | 3 | Console-based application with database |
+| [Project 2](./projects-self/project-2-spring-angular/) | Spring Boot, Angular | 7-10 | Full-stack web application |
+| [Project 3](./projects-self/project-3-cloud-deployment/) | Full Stack + Cloud | 11-13 | Cloud-native deployment |
+
+### Team Projects (projects-team/)
+
+Collaborative projects for team-based learning. See [projects-team/README.md](./projects-team/README.md) for:
+- 10 project options across different domains
+- Team formation guidelines
+- Sprint timeline and milestones
+- REST API interim milestone at Week 8
+- Evaluation criteria
+
+## Submissions
+
+All exercises and coding challenges are submitted to the `submissions/` folder. Each module has its own subfolder:
+
+```
+submissions/
+├── 04-html/
+│   └── exercises/
+│       ├── exercise-01.md      # Personal Portfolio (3 versions)
+│       ├── exercise-02.md      # Blog Article Page
+│       ├── exercise-03.md      # Registration Form
+│       ├── exercise-04.md      # Media Gallery
+│       ├── exercise-05.md      # Product Comparison
+│       └── exercise-06.md      # Restaurant Menu
+└── 06-javascript/
+    └── exercises/
+        ├── exercise-01.md through exercise-08.md
+```
+
+### Progressive Enhancement (HTML Exercises)
+
+HTML exercises follow a 3-version progressive enhancement approach:
+- **Version 1**: Raw HTML (semantic structure)
+- **Version 2**: HTML + CSS3 (custom styling)
+- **Version 3**: HTML + Bootstrap 5 (framework-based)
 
 ## Prerequisites
 
@@ -142,17 +226,16 @@ This program covers the complete technology stack required for modern enterprise
 - Java Development Kit (JDK 21)
 - IntelliJ IDEA or Eclipse
 - Visual Studio Code
-- MySQL Server
+- MySQL Server 8.x
 - Node.js and npm
 - Git
 - Docker Desktop
-- Postman or similar API testing tool
+- Postman
 
 ### Recommended Knowledge
 - Basic programming concepts
 - Understanding of web fundamentals
 - Familiarity with command line interface
-- Basic SQL knowledge (helpful but not required)
 
 ## Getting Started
 
@@ -164,100 +247,24 @@ This program covers the complete technology stack required for modern enterprise
 
 2. **Setup your development environment**
    - Follow the guides in [resources/setup-guides](./resources/setup-guides/)
-   - Install all required software listed above
 
 3. **Start with Week 1**
    - Begin with [Linux Fundamentals](./01-linux/)
-   - Follow the sequential order of modules
-   - Complete exercises after each topic
+   - Review [week-01/faq.md](./week-01/faq.md) for key concepts
+   - Practice with [week-01/mcq.md](./week-01/mcq.md)
 
-4. **Practice regularly**
-   - Work on exercises in each module
-   - Build small projects alongside learning
-   - Participate in code reviews
+4. **Submit your work**
+   - Complete exercises in `submissions/<module>/exercises/`
+   - Follow the submission guidelines in each exercise file
 
-## Repository Structure
+## Assessment Resources
 
-```
-course/
-├── 01-linux/              # Linux fundamentals and shell scripting
-├── 02-git/                # Version control with Git
-├── ...                    # Technology modules (03-26)
-├── projects/              # Three major projects
-│   ├── project-1-java-mysql-jdbc/
-│   ├── project-2-spring-angular/
-│   └── project-3-cloud-deployment/
-└── resources/             # Setup guides, cheat sheets, references
-```
+| Week | FAQ | MCQ | Topics |
+|------|-----|-----|--------|
+| Week 1 | [30 Q&As](./week-01/faq.md) | [150 questions](./week-01/mcq.md) | Linux, Git, Agile, HTML, CSS |
+| Week 2 | [30 Q&As](./week-02/faq.md) | [120 questions](./week-02/mcq.md) | JavaScript, Bootstrap, jQuery |
 
-Each technology folder contains:
-- `README.md` - Detailed content and learning objectives
-- `exercises/` - Hands-on practice exercises
-
-## How to Use This Repository
-
-### For Self-Paced Learning
-1. Follow modules sequentially (01 through 26)
-2. Read the README in each folder
-3. Complete all exercises before moving forward
-4. Attempt projects at the designated weeks
-
-### For Instructor-Led Training
-1. Your instructor will guide you through topics
-2. Use this repository for reference and exercises
-3. Submit exercises and projects as directed
-4. Collaborate with peers on group activities
-
-## Resources
-
-- [Setup Guides](./resources/setup-guides/) - Installation and configuration
-- [Cheat Sheets](./resources/cheat-sheets/) - Quick reference materials
-- [Additional Reading](./resources/additional-reading/) - Supplementary resources
-- [Curriculum PDF](./resources/curriculum.pdf) - Official curriculum document
-
-## Support and Communication
-
-### Getting Help
-- Ask questions during live sessions
-- Use discussion forums or Slack channels
-- Reach out to your instructor or mentors
-- Collaborate with fellow learners
-
-### Best Practices
-- Code daily - consistency is key
-- Comment your code clearly
-- Follow naming conventions
-- Write tests for your code
-- Commit code regularly to Git
-- Participate in code reviews
-
-## Assessment
-
-### Evaluation Criteria
-- Exercise completion
-- Project submissions
-- Code quality and best practices
-- Problem-solving approach
-- Participation and collaboration
-
-### Projects Assessment
-Each project is evaluated on:
-- Functionality and requirements completion
-- Code organization and structure
-- Use of design patterns
-- Error handling
-- Documentation
-- Presentation skills
-
-## Career Readiness
-
-Upon successful completion, you'll be prepared for roles such as:
-- Java Developer
-- Full Stack Developer
-- Backend Engineer
-- Frontend Developer (Angular)
-- Software Engineer
-- DevOps Engineer
+**MCQ Answer Distribution**: All MCQs have equal distribution across A, B, C, D options (25% each)
 
 ## Technologies & Versions
 
@@ -265,32 +272,35 @@ Upon successful completion, you'll be prepared for roles such as:
 |-----------|---------|
 | Java | 21 |
 | Spring Boot | 3.x |
-| Angular | 16 |
+| Angular | 16+ |
 | MySQL | 8.x |
 | Docker | Latest |
 | Kubernetes | Latest |
-
-## Contributing
-
-This is a training repository. If you find errors or have suggestions:
-1. Create an issue describing the problem
-2. Discuss with your instructor
-3. Submit corrections if approved
-
-## License
-
-This curriculum and materials are proprietary to Revature, LLC. All content is for educational purposes only and should not be reproduced or distributed without explicit permission.
-
-Copyright © 2025 Revature, LLC. All Rights Reserved.
-
----
+| Node.js | 18+ |
 
 ## Quick Links
 
-- [Week 1 Orientation](./01-linux/)
-- [Individual Projects](./projects-self/)
-- [Team Projects](./projects-team/)
-- [Setup Instructions](./resources/setup-guides/)
-- [FAQs](./resources/faqs.md)
+| Resource | Description |
+|----------|-------------|
+| [Week 1 Materials](./week-01/) | FAQ, MCQ, Answers |
+| [Week 2 Materials](./week-02/) | FAQ, MCQ, Answers |
+| [Submissions](./submissions/) | Exercise submission folder |
+| [Individual Projects](./projects-self/) | 3 self-paced projects |
+| [Team Projects](./projects-team/) | 10 collaborative project options |
+| [Setup Guides](./resources/setup-guides/) | Installation instructions |
+| [Cheat Sheets](./resources/cheat-sheets/) | Quick references |
 
-**Ready to begin?** Start with [Module 1: Linux Fundamentals](./01-linux/) 🚀
+## Support
+
+- Ask questions during live sessions
+- Use discussion forums or Slack channels
+- Reach out to your instructor or mentors
+- Collaborate with fellow learners
+
+---
+
+**Ready to begin?** Start with [Module 1: Linux Fundamentals](./01-linux/)
+
+---
+
+Copyright 2025 Revature, LLC. All Rights Reserved.
