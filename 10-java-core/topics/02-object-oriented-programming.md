@@ -1168,31 +1168,80 @@ public class User implements Serializable {
 
 ## Non-Access Modifiers
 
-Modifiers that provide additional properties to classes, methods, and fields.
+Non-access modifiers provide additional properties to classes, methods, and fields beyond access control. They define behavior, state characteristics, and compile-time constraints.
+
+### Overview of Non-Access Modifiers
+
+| Modifier | Applies To | Purpose |
+|----------|-----------|---------|
+| `final` | Class, Method, Variable | Prevents modification/extension |
+| `abstract` | Class, Method | Declares incomplete implementation |
+| `static` | Variable, Method, Block, Class | Belongs to class, not instance |
+| `synchronized` | Method, Block | Thread-safe access |
+| `volatile` | Variable | Thread visibility guarantee |
+| `transient` | Variable | Exclude from serialization |
+| `native` | Method | Implemented in native code |
+| `strictfp` | Class, Method | Strict floating-point |
+| `sealed` | Class, Interface | Restricts inheritance (Java 17+) |
+
+---
 
 ### final Modifier
+
+The `final` keyword prevents modification and provides immutability guarantees.
 
 #### final Variables
 
 Cannot be reassigned after initialization.
 
 ```java
-public class Example {
-    // final instance variable - must be initialized
+public class FinalVariables {
+    // 1. Final instance variable - must be initialized once
     private final int ID;
 
-    // final static variable (constant)
+    // 2. Final static variable (constant)
     public static final double PI = 3.14159;
     public static final String APP_NAME = "MyApp";
 
-    public Example(int id) {
-        this.ID = id;  // Can initialize in constructor
+    // 3. Blank final - initialized in constructor
+    private final String createdAt;
+
+    public FinalVariables(int id) {
+        this.ID = id;  // First assignment - OK
         // this.ID = 100;  // ERROR: Cannot reassign
+        this.createdAt = java.time.Instant.now().toString();
     }
 
     public void method() {
+        // 4. Local final variable
         final int localVar = 10;
         // localVar = 20;  // ERROR: Cannot reassign
+
+        // 5. Effectively final (Java 8+) - for lambdas
+        int effectivelyFinal = 5;  // Never reassigned
+        Runnable r = () -> System.out.println(effectivelyFinal);  // OK
+    }
+}
+```
+
+**Important: Final doesn't mean immutable for objects!**
+
+```java
+public class FinalObjectReference {
+    public static void main(String[] args) {
+        final List<String> list = new ArrayList<>();
+
+        // Reference cannot change
+        // list = new ArrayList<>();  // ERROR
+
+        // But object content CAN change!
+        list.add("Hello");    // OK
+        list.add("World");    // OK
+        list.clear();         // OK
+
+        // For true immutability, use immutable collections
+        final List<String> immutable = List.of("A", "B", "C");
+        // immutable.add("D");  // Runtime error: UnsupportedOperationException
     }
 }
 ```
@@ -1203,175 +1252,677 @@ Cannot be overridden by subclasses.
 
 ```java
 public class Parent {
-    public final void finalMethod() {
-        System.out.println("Cannot be overridden");
+    // Cannot be overridden
+    public final void criticalMethod() {
+        System.out.println("Critical logic - don't change!");
     }
 
+    // Can be overridden
     public void normalMethod() {
-        System.out.println("Can be overridden");
+        System.out.println("Can be customized");
     }
 }
 
 public class Child extends Parent {
     // @Override
-    // public void finalMethod() { }  // ERROR: Cannot override
+    // public void criticalMethod() { }  // ERROR: Cannot override final
 
     @Override
     public void normalMethod() {
-        System.out.println("Overridden");
+        System.out.println("Customized behavior");
     }
 }
 ```
+
+**Use cases for final methods:**
+- Security-critical operations
+- Template method pattern (invariant parts)
+- Performance optimization (JVM can inline)
 
 #### final Classes
 
-Cannot be extended.
+Cannot be extended (no subclasses).
 
 ```java
-public final class ImmutableClass {
-    private final int value;
+// Cannot be extended
+public final class ImmutablePoint {
+    private final int x;
+    private final int y;
 
-    public ImmutableClass(int value) {
-        this.value = value;
+    public ImmutablePoint(int x, int y) {
+        this.x = x;
+        this.y = y;
     }
 
-    public int getValue() {
-        return value;
-    }
+    public int getX() { return x; }
+    public int getY() { return y; }
 }
 
-// public class SubClass extends ImmutableClass { }  // ERROR: Cannot extend
+// ERROR: Cannot extend final class
+// public class ColoredPoint extends ImmutablePoint { }
+
+// Examples from Java API:
+// String, Integer, Double, etc. are all final classes
 ```
+
+**Benefits of final classes:**
+- Prevents breaking changes through inheritance
+- Ensures immutability (combined with final fields)
+- Allows JVM optimizations
+
+#### final Parameters
+
+```java
+public class FinalParameters {
+    // Parameter cannot be reassigned
+    public void process(final String input) {
+        // input = "modified";  // ERROR
+        System.out.println(input.toUpperCase());  // OK to use
+    }
+
+    // Useful in lambdas and anonymous classes
+    public Runnable createTask(final String message) {
+        return () -> System.out.println(message);  // Captures final/effectively final
+    }
+}
+```
+
+---
 
 ### abstract Modifier
 
+Declares incomplete implementations that must be completed by subclasses.
+
 #### abstract Methods
 
-No implementation, must be overridden.
+No implementation body - subclasses must provide it.
 
 ```java
 public abstract class Shape {
-    public abstract void draw();  // No body
+    protected String color;
 
-    public void display() {        // Concrete method allowed
-        System.out.println("Displaying shape");
+    // Abstract methods - no body
+    public abstract double calculateArea();
+    public abstract double calculatePerimeter();
+
+    // Concrete methods allowed
+    public void setColor(String color) {
+        this.color = color;
+    }
+
+    public void display() {
+        System.out.println("Color: " + color);
+        System.out.println("Area: " + calculateArea());
+    }
+}
+
+public class Rectangle extends Shape {
+    private double width, height;
+
+    public Rectangle(double width, double height) {
+        this.width = width;
+        this.height = height;
+    }
+
+    @Override
+    public double calculateArea() {
+        return width * height;
+    }
+
+    @Override
+    public double calculatePerimeter() {
+        return 2 * (width + height);
     }
 }
 ```
 
 #### abstract Classes
 
-Cannot be instantiated, may contain abstract methods.
+Cannot be instantiated directly.
 
 ```java
-public abstract class AbstractClass {
-    public abstract void abstractMethod();
+public abstract class Animal {
+    protected String name;
 
-    public void concreteMethod() {
-        System.out.println("Concrete implementation");
+    // Constructor allowed (called by subclass)
+    public Animal(String name) {
+        this.name = name;
+    }
+
+    // Abstract method
+    public abstract void makeSound();
+
+    // Concrete method
+    public void sleep() {
+        System.out.println(name + " is sleeping");
     }
 }
 
-// AbstractClass obj = new AbstractClass();  // ERROR
+// Usage
+// Animal animal = new Animal("Generic");  // ERROR: Cannot instantiate
+
+Animal dog = new Animal("Buddy") {  // Anonymous subclass
+    @Override
+    public void makeSound() {
+        System.out.println("Woof!");
+    }
+};
 ```
+
+#### Abstract Class Rules
+
+```java
+// 1. Can have constructor
+public abstract class Base {
+    public Base() { }
+}
+
+// 2. Can have all concrete methods
+public abstract class ConcreteAbstract {
+    public void method1() { }
+    public void method2() { }
+    // Just prevents instantiation
+}
+
+// 3. If class has abstract method, class MUST be abstract
+public abstract class MustBeAbstract {
+    public abstract void mustImplement();  // Forces class to be abstract
+}
+
+// 4. First concrete subclass must implement all abstract methods
+public abstract class A {
+    public abstract void m1();
+    public abstract void m2();
+}
+
+public abstract class B extends A {
+    @Override
+    public void m1() { }  // Partial implementation OK
+    // m2() still abstract
+}
+
+public class C extends B {
+    @Override
+    public void m2() { }  // Must implement remaining
+}
+```
+
+---
 
 ### static Modifier
 
-Covered in detail in the Static Members section.
+Static members belong to the class, not instances.
+
+#### static Fields
 
 ```java
-public class Example {
-    private static int count = 0;
+public class Counter {
+    // Static field - shared by all instances
+    private static int totalCount = 0;
+
+    // Instance field - unique per object
+    private int instanceId;
+
+    public Counter() {
+        totalCount++;
+        this.instanceId = totalCount;
+    }
+
+    public static int getTotalCount() {
+        return totalCount;
+    }
+
+    public int getInstanceId() {
+        return instanceId;
+    }
+}
+
+// Usage
+Counter c1 = new Counter();  // totalCount = 1, instanceId = 1
+Counter c2 = new Counter();  // totalCount = 2, instanceId = 2
+Counter c3 = new Counter();  // totalCount = 3, instanceId = 3
+
+System.out.println(Counter.getTotalCount());  // 3
+```
+
+#### static Methods
+
+```java
+public class MathUtils {
+    // Static method - called on class, not instance
+    public static int add(int a, int b) {
+        return a + b;
+    }
+
+    public static int max(int... numbers) {
+        int result = Integer.MIN_VALUE;
+        for (int n : numbers) {
+            if (n > result) result = n;
+        }
+        return result;
+    }
+
+    // Static methods CANNOT:
+    // - Access instance variables
+    // - Use 'this' keyword
+    // - Be overridden (can be hidden)
+
+    private int instanceVar = 10;
 
     public static void staticMethod() {
-        System.out.println("Static method");
+        // System.out.println(instanceVar);  // ERROR
+        // System.out.println(this);         // ERROR
+    }
+}
+
+// Usage - no object needed
+int sum = MathUtils.add(5, 3);
+int maximum = MathUtils.max(1, 5, 3, 9, 2);
+```
+
+#### static Blocks (Initializers)
+
+```java
+public class Configuration {
+    private static Map<String, String> config;
+
+    // Static block - runs once when class is loaded
+    static {
+        System.out.println("Loading configuration...");
+        config = new HashMap<>();
+        config.put("db.host", "localhost");
+        config.put("db.port", "5432");
+
+        // Can have multiple static blocks - execute in order
+    }
+
+    static {
+        config.put("app.name", "MyApp");
+    }
+
+    public static String get(String key) {
+        return config.get(key);
+    }
+}
+
+// Class loading triggers static blocks
+String host = Configuration.get("db.host");
+```
+
+#### static Nested Classes
+
+```java
+public class Outer {
+    private static int staticVar = 10;
+    private int instanceVar = 20;
+
+    // Static nested class
+    public static class StaticNested {
+        public void display() {
+            System.out.println(staticVar);    // OK - static
+            // System.out.println(instanceVar);  // ERROR - instance
+        }
+    }
+
+    // Non-static inner class (for comparison)
+    public class Inner {
+        public void display() {
+            System.out.println(staticVar);    // OK
+            System.out.println(instanceVar);  // OK
+        }
+    }
+}
+
+// Usage
+Outer.StaticNested nested = new Outer.StaticNested();  // No Outer instance needed
+Outer.Inner inner = new Outer().new Inner();           // Outer instance required
+```
+
+---
+
+### synchronized Modifier
+
+Ensures thread-safe access to shared resources.
+
+#### synchronized Methods
+
+```java
+public class BankAccount {
+    private double balance;
+
+    // Synchronized instance method - locks on 'this'
+    public synchronized void deposit(double amount) {
+        double newBalance = balance + amount;
+        // Simulate processing time
+        try { Thread.sleep(100); } catch (InterruptedException e) { }
+        balance = newBalance;
+    }
+
+    public synchronized void withdraw(double amount) {
+        if (balance >= amount) {
+            double newBalance = balance - amount;
+            try { Thread.sleep(100); } catch (InterruptedException e) { }
+            balance = newBalance;
+        }
+    }
+
+    public synchronized double getBalance() {
+        return balance;
     }
 }
 ```
 
-### synchronized Modifier
-
-Thread-safe execution (covered in Multithreading section).
+#### synchronized Blocks
 
 ```java
 public class Counter {
     private int count = 0;
+    private final Object lock = new Object();
 
-    // Synchronized method
-    public synchronized void increment() {
-        count++;
+    public void increment() {
+        // Synchronized on specific lock object
+        synchronized(lock) {
+            count++;
+        }
     }
 
-    // Synchronized block
+    // Synchronized on this
     public void decrement() {
         synchronized(this) {
             count--;
         }
     }
+
+    // Synchronized on class object (for static context)
+    public static void staticMethod() {
+        synchronized(Counter.class) {
+            // Critical section
+        }
+    }
 }
 ```
+
+#### synchronized Static Methods
+
+```java
+public class SharedResource {
+    private static int sharedValue = 0;
+
+    // Locks on SharedResource.class object
+    public static synchronized void updateShared(int value) {
+        sharedValue = value;
+    }
+
+    // Equivalent block version
+    public static void updateSharedAlternative(int value) {
+        synchronized(SharedResource.class) {
+            sharedValue = value;
+        }
+    }
+}
+```
+
+---
 
 ### volatile Modifier
 
-Ensures visibility across threads (covered in Multithreading section).
+Guarantees visibility of variable changes across threads.
 
 ```java
-public class SharedData {
+public class VolatileExample {
+    // Without volatile - threads may cache value
+    private boolean running = true;
+
+    // With volatile - changes immediately visible to all threads
     private volatile boolean flag = false;
 
-    public void setFlag() {
-        flag = true;  // Immediately visible to all threads
+    public void stop() {
+        flag = true;  // Change immediately visible
     }
 
-    public boolean getFlag() {
-        return flag;
+    public void process() {
+        while (!flag) {  // Reads latest value
+            // Do work
+        }
+        System.out.println("Stopped!");
     }
 }
 ```
 
-### transient Modifier
-
-Field should not be serialized.
+**When to use volatile:**
 
 ```java
-import java.io.Serializable;
+// 1. Simple flags
+private volatile boolean shutdown = false;
+
+// 2. Status indicators
+private volatile int status = INITIALIZING;
+
+// 3. Double-checked locking (with synchronized)
+public class Singleton {
+    private static volatile Singleton instance;
+
+    public static Singleton getInstance() {
+        if (instance == null) {
+            synchronized(Singleton.class) {
+                if (instance == null) {
+                    instance = new Singleton();
+                }
+            }
+        }
+        return instance;
+    }
+}
+
+// volatile does NOT make compound operations atomic!
+// For: count++, use AtomicInteger instead
+```
+
+---
+
+### transient Modifier
+
+Excludes fields from serialization.
+
+```java
+import java.io.*;
 
 public class User implements Serializable {
+    private static final long serialVersionUID = 1L;
+
     private String username;
-    private transient String password;  // Won't be serialized
+    private transient String password;      // Not serialized
+    private transient Connection dbConn;     // Not serialized
 
     public User(String username, String password) {
         this.username = username;
         this.password = password;
     }
-}
-```
 
-### native Modifier
+    // After deserialization, transient fields are:
+    // - null for objects
+    // - 0 for numbers
+    // - false for booleans
 
-Method implemented in native code (C/C++).
-
-```java
-public class NativeExample {
-    public native void nativeMethod();
-
-    static {
-        System.loadLibrary("nativelib");
+    // Re-initialize transient fields if needed
+    private void readObject(ObjectInputStream ois)
+            throws IOException, ClassNotFoundException {
+        ois.defaultReadObject();
+        this.password = "";  // Set default value
     }
 }
 ```
+
+**Use transient for:**
+- Sensitive data (passwords, keys)
+- Non-serializable fields (connections, streams)
+- Cached/computed values
+- Logger instances
+
+---
+
+### native Modifier
+
+Indicates method is implemented in native code (C/C++/assembly).
+
+```java
+public class NativeExample {
+    // Declaration only - no body
+    public native void nativeMethod();
+    public native int computeNative(int[] data);
+
+    // Load native library
+    static {
+        System.loadLibrary("mylib");  // Loads libmylib.so or mylib.dll
+    }
+}
+
+// Use cases:
+// - JNI (Java Native Interface) calls
+// - Performance-critical operations
+// - System-level operations
+// - Existing C/C++ libraries
+```
+
+---
 
 ### strictfp Modifier
 
 Ensures consistent floating-point calculations across platforms.
 
 ```java
-public strictfp class MathOperations {
+// Applied to class - all methods use strict FP
+public strictfp class StrictMath {
     public double calculate() {
-        return 1.0 / 3.0;  // Consistent result on all platforms
+        return 1.0 / 3.0;  // Same result on all platforms
     }
 }
+
+// Applied to method only
+public class MixedPrecision {
+    public strictfp double preciseCalc() {
+        return Math.PI * Math.E;  // Strict mode
+    }
+
+    public double normalCalc() {
+        return Math.PI * Math.E;  // Platform-dependent
+    }
+}
+
+// Note: Since Java 17, strictfp is default and keyword is redundant
 ```
+
+---
+
+### sealed Modifier (Java 17+)
+
+Restricts which classes can extend or implement.
+
+#### sealed Classes
+
+```java
+// Only specified classes can extend
+public sealed class Shape
+    permits Circle, Rectangle, Triangle {
+
+    public abstract double area();
+}
+
+// Permitted subclasses must be final, sealed, or non-sealed
+public final class Circle extends Shape {
+    private double radius;
+
+    public Circle(double radius) {
+        this.radius = radius;
+    }
+
+    @Override
+    public double area() {
+        return Math.PI * radius * radius;
+    }
+}
+
+public final class Rectangle extends Shape {
+    private double width, height;
+
+    public Rectangle(double w, double h) {
+        this.width = w;
+        this.height = h;
+    }
+
+    @Override
+    public double area() {
+        return width * height;
+    }
+}
+
+// Can be further extended if non-sealed
+public non-sealed class Triangle extends Shape {
+    @Override
+    public double area() {
+        return 0;  // Simplified
+    }
+}
+
+// Anyone can extend non-sealed Triangle
+public class RightTriangle extends Triangle { }
+```
+
+#### sealed Interfaces
+
+```java
+public sealed interface Expression
+    permits Constant, Variable, BinaryOp {
+}
+
+public final class Constant implements Expression {
+    private final int value;
+    public Constant(int value) { this.value = value; }
+}
+
+public final class Variable implements Expression {
+    private final String name;
+    public Variable(String name) { this.name = name; }
+}
+
+public sealed class BinaryOp implements Expression
+    permits Add, Subtract, Multiply {
+}
+
+public final class Add extends BinaryOp { }
+public final class Subtract extends BinaryOp { }
+public final class Multiply extends BinaryOp { }
+```
+
+#### Pattern Matching with sealed Classes
+
+```java
+// Compiler knows all subtypes - exhaustive switch
+public static double calculate(Shape shape) {
+    return switch (shape) {
+        case Circle c -> c.area();
+        case Rectangle r -> r.area();
+        case Triangle t -> t.area();
+        // No default needed - compiler knows it's exhaustive
+    };
+}
+```
+
+---
+
+### Non-Access Modifiers Summary
+
+| Modifier | Variables | Methods | Classes | Key Behavior |
+|----------|-----------|---------|---------|--------------|
+| `final` | Cannot reassign | Cannot override | Cannot extend | Immutability |
+| `abstract` | N/A | No body | Cannot instantiate | Incomplete |
+| `static` | Class-level | Class-level | Nested only | Shared |
+| `synchronized` | N/A | Thread-safe | N/A | Locking |
+| `volatile` | Thread-visible | N/A | N/A | No caching |
+| `transient` | Skip serialize | N/A | N/A | Exclusion |
+| `native` | N/A | Native code | N/A | JNI |
+| `strictfp` | N/A | Strict FP | Strict FP | Consistent |
+| `sealed` | N/A | N/A | Limit inheritance | Control |
 
 ---
 
@@ -1538,14 +2089,16 @@ System.out.println(map.get(p2));  // Should return "Value1"
 
 ## Garbage Collection
 
-Automatic memory management in Java.
+Automatic memory management is one of Java's most powerful features. The Garbage Collector (GC) automatically reclaims memory occupied by objects that are no longer in use.
 
 ### How Garbage Collection Works
+
+The GC identifies and removes objects that are no longer reachable from any live reference in the application.
 
 ```java
 public class GCExample {
     public static void main(String[] args) {
-        // Object created
+        // Object created - referenced by p1
         Person p1 = new Person("Alice");
 
         // Another reference to same object
@@ -1558,6 +2111,34 @@ public class GCExample {
         p2 = null;  // Object eligible for GC
     }
 }
+```
+
+### Object Reachability
+
+An object is considered reachable if it can be accessed through a chain of references starting from a **GC Root**.
+
+**GC Roots include:**
+- Local variables in currently executing methods
+- Active Java threads
+- Static variables
+- JNI references
+
+```
+GC Roots                    Heap Objects
+┌─────────────┐
+│ Thread      │──────────► Object A ──────► Object C
+│ Stack       │                │
+└─────────────┘                ▼
+                           Object B ──────► Object D
+┌─────────────┐
+│ Static      │──────────► Object E
+│ Variables   │
+└─────────────┘
+
+Object F  ◄─────── Object G    (Unreachable - eligible for GC)
+     │
+     ▼
+Object H
 ```
 
 ### Making Objects Eligible for GC
@@ -1578,29 +2159,282 @@ public void method() {
 
 // 4. Anonymous objects
 new Person("Alice").display();  // Eligible immediately after use
+
+// 5. Island of Isolation
+public class Node {
+    Node next;
+}
+
+Node a = new Node();
+Node b = new Node();
+a.next = b;
+b.next = a;  // Circular reference
+a = null;
+b = null;   // Both eligible despite circular reference!
 ```
 
-### Requesting Garbage Collection
+### Generational Garbage Collection
+
+The JVM uses a generational approach based on the observation that most objects die young.
+
+```
+┌─────────────────────────────────────────────────────────────────────┐
+│                           HEAP MEMORY                                │
+├─────────────────────────────────────────────────────────────────────┤
+│                                                                      │
+│  ┌────────────────────────────────────────────────────────────────┐ │
+│  │                    YOUNG GENERATION                             │ │
+│  │                                                                  │ │
+│  │  ┌──────────────────────────────────────────────────────────┐  │ │
+│  │  │                     EDEN SPACE                            │  │ │
+│  │  │                                                           │  │ │
+│  │  │  • New objects allocated here                             │  │ │
+│  │  │  • Minor GC triggered when full                           │  │ │
+│  │  │  • Most objects die here (never leave Eden)               │  │ │
+│  │  │                                                           │  │ │
+│  │  └──────────────────────────────────────────────────────────┘  │ │
+│  │                                                                  │ │
+│  │  ┌───────────────────┐       ┌───────────────────┐             │ │
+│  │  │   SURVIVOR S0     │       │   SURVIVOR S1     │             │ │
+│  │  │   (From Space)    │       │   (To Space)      │             │ │
+│  │  │                   │       │                   │             │ │
+│  │  │  Objects that     │  ◄──► │  Objects copied   │             │ │
+│  │  │  survived GC      │       │  back and forth   │             │ │
+│  │  │                   │       │                   │             │ │
+│  │  └───────────────────┘       └───────────────────┘             │ │
+│  │                                                                  │ │
+│  │  After N survivals (threshold), objects promoted to Old Gen     │ │
+│  └────────────────────────────────────────────────────────────────┘ │
+│                              ↓ Promotion                             │
+│  ┌────────────────────────────────────────────────────────────────┐ │
+│  │                     OLD GENERATION (Tenured)                    │ │
+│  │                                                                  │ │
+│  │  • Long-lived objects                                           │ │
+│  │  • Major GC (Full GC) when full - more expensive                │ │
+│  │  • Large objects may be allocated directly here                 │ │
+│  │                                                                  │ │
+│  └────────────────────────────────────────────────────────────────┘ │
+│                                                                      │
+└─────────────────────────────────────────────────────────────────────┘
+
+┌─────────────────────────────────────────────────────────────────────┐
+│                         METASPACE                                    │
+│                    (Native Memory, not Heap)                         │
+│                                                                      │
+│  • Class metadata                                                    │
+│  • Method bytecode                                                   │
+│  • Constant pool                                                     │
+│  • Grows automatically (limited by system memory)                    │
+└─────────────────────────────────────────────────────────────────────┘
+```
+
+### GC Types
+
+#### Minor GC (Young Generation GC)
 
 ```java
-// Suggest GC (not guaranteed to run immediately)
-System.gc();  // or
-Runtime.getRuntime().gc();
+// Triggered when Eden space is full
+// Fast - only scans young generation
+// Uses copying algorithm
 
-// Note: You cannot force garbage collection!
-// JVM decides when to run GC
+// Objects flow:
+// Eden → Survivor S0/S1 → Old Generation
+
+// Example scenario:
+public void createManyObjects() {
+    for (int i = 0; i < 1000000; i++) {
+        String temp = new String("Object " + i);  // Short-lived
+        // Object dies after loop iteration
+    }
+    // Most objects collected by Minor GC
+}
+```
+
+#### Major GC (Old Generation GC)
+
+```java
+// Triggered when Old Generation is full
+// Slower - scans entire old generation
+// May cause longer pause times
+
+// Objects that survive many Minor GCs are promoted here
+public class LongLivedCache {
+    private static Map<String, Object> cache = new HashMap<>();
+
+    public static void store(String key, Object value) {
+        cache.put(key, value);  // Long-lived, goes to Old Gen
+    }
+}
+```
+
+#### Full GC
+
+```java
+// Cleans entire heap (Young + Old + Metaspace)
+// Most expensive - longest pause times
+// Triggered by:
+//   - System.gc() call
+//   - Old generation full
+//   - Metaspace full
+//   - Promotion failure
+```
+
+### GC Algorithms
+
+#### 1. Serial GC
+
+```bash
+# Single-threaded, simple, stop-the-world
+java -XX:+UseSerialGC MyApp
+
+# Best for:
+# - Small applications
+# - Single-core machines
+# - Limited memory environments
+```
+
+#### 2. Parallel GC (Throughput Collector)
+
+```bash
+# Multi-threaded, optimized for throughput
+java -XX:+UseParallelGC MyApp
+
+# Configure threads
+java -XX:ParallelGCThreads=4 MyApp
+
+# Best for:
+# - Batch processing
+# - Applications where pause time is less critical
+# - Multi-core systems
+```
+
+#### 3. G1 GC (Garbage First) - Default since Java 9
+
+```bash
+# Balanced throughput and latency
+java -XX:+UseG1GC MyApp
+
+# Set pause time goal (milliseconds)
+java -XX:MaxGCPauseMillis=200 MyApp
+
+# Best for:
+# - Large heaps (> 4GB)
+# - Applications requiring predictable pause times
+# - General-purpose use
+```
+
+**G1 GC Heap Structure:**
+
+```
+┌─────┬─────┬─────┬─────┬─────┬─────┬─────┬─────┐
+│  E  │  E  │  S  │  O  │  O  │  E  │  H  │  O  │
+├─────┼─────┼─────┼─────┼─────┼─────┼─────┼─────┤
+│  O  │  E  │  O  │  O  │  E  │  S  │  O  │  E  │
+├─────┼─────┼─────┼─────┼─────┼─────┼─────┼─────┤
+│  E  │  O  │  E  │  H  │  H  │  O  │  E  │  O  │
+└─────┴─────┴─────┴─────┴─────┴─────┴─────┴─────┘
+
+E = Eden Region       S = Survivor Region
+O = Old Region        H = Humongous (large objects)
+
+• Heap divided into equal-sized regions
+• GC can choose which regions to collect
+• Prioritizes regions with most garbage ("Garbage First")
+```
+
+#### 4. ZGC (Z Garbage Collector) - Java 11+
+
+```bash
+# Ultra-low latency (< 10ms pauses)
+java -XX:+UseZGC MyApp
+
+# Best for:
+# - Very large heaps (up to 16TB)
+# - Latency-sensitive applications
+# - Pause times must be minimal
+```
+
+#### 5. Shenandoah GC - Java 12+
+
+```bash
+# Low-latency, concurrent
+java -XX:+UseShenandoahGC MyApp
+
+# Similar to ZGC but different implementation
+# Concurrent compaction
+```
+
+### GC Algorithm Comparison
+
+| Algorithm | Pause Time | Throughput | Heap Size | Use Case |
+|-----------|-----------|------------|-----------|----------|
+| Serial | Long | Low | Small | Single-core, small apps |
+| Parallel | Medium | High | Medium | Batch processing |
+| G1 | Predictable | Medium | Large | General purpose |
+| ZGC | Very short | Medium | Very large | Low-latency critical |
+| Shenandoah | Very short | Medium | Large | Low-latency |
+
+### Monitoring and Tuning GC
+
+#### GC Logging
+
+```bash
+# Enable GC logging (Java 9+)
+java -Xlog:gc*:file=gc.log:time,uptime,level,tags MyApp
+
+# Verbose GC output
+java -Xlog:gc*=debug:file=gc.log MyApp
+
+# Example output:
+# [0.015s][info][gc] Using G1
+# [0.234s][info][gc] GC(0) Pause Young (Normal) 24M->8M(256M) 5.123ms
+# [1.567s][info][gc] GC(1) Pause Young (Normal) 32M->12M(256M) 7.456ms
+```
+
+#### Heap Configuration
+
+```bash
+# Initial and maximum heap size
+java -Xms512m -Xmx2g MyApp
+
+# Young generation size
+java -Xmn256m MyApp
+
+# Survivor ratio (Eden:Survivor)
+java -XX:SurvivorRatio=8 MyApp  # Eden is 8x each Survivor
+
+# New/Old generation ratio
+java -XX:NewRatio=2 MyApp  # Old is 2x Young
+
+# Metaspace size
+java -XX:MetaspaceSize=128m -XX:MaxMetaspaceSize=256m MyApp
+```
+
+#### Analyzing GC Logs
+
+```
+[GC (Allocation Failure) [PSYoungGen: 65536K->10752K(76288K)]
+    65536K->15840K(251392K), 0.0156712 secs]
+    [Times: user=0.05 sys=0.01, real=0.02 secs]
+
+Explanation:
+- PSYoungGen: Parallel Scavenge Young Generation
+- 65536K->10752K: Young gen before -> after
+- (76288K): Total young gen capacity
+- 65536K->15840K: Total heap before -> after
+- (251392K): Total heap capacity
+- 0.0156712 secs: GC pause time
 ```
 
 ### finalize() Method (Deprecated)
 
-Called before object is garbage collected (avoid using).
-
 ```java
+// Deprecated since Java 9 - DO NOT USE
 public class Resource {
     @Override
     protected void finalize() throws Throwable {
         try {
-            // Cleanup code (not recommended)
+            // Cleanup code (unreliable!)
             System.out.println("Finalize called");
         } finally {
             super.finalize();
@@ -1608,12 +2442,22 @@ public class Resource {
     }
 }
 
-// Better: Use try-with-resources or explicit cleanup
+// Problems with finalize():
+// 1. No guarantee when (or if) it will be called
+// 2. Can resurrect objects
+// 3. Adds GC overhead
+// 4. Not thread-safe
+// 5. May cause memory leaks
+```
+
+### Modern Resource Management
+
+```java
+// Better: Use try-with-resources (Java 7+)
 public class Resource implements AutoCloseable {
     @Override
     public void close() {
-        // Cleanup code
-        System.out.println("Cleanup");
+        System.out.println("Resource closed");
     }
 }
 
@@ -1621,47 +2465,170 @@ public class Resource implements AutoCloseable {
 try (Resource r = new Resource()) {
     // Use resource
 }  // close() automatically called
+
+// Multiple resources
+try (FileInputStream fis = new FileInputStream("input.txt");
+     FileOutputStream fos = new FileOutputStream("output.txt")) {
+    // Use both streams
+}  // Both closed automatically (in reverse order)
 ```
 
 ### Memory Leaks in Java
 
-Despite GC, memory leaks can occur:
+Despite GC, memory leaks can still occur:
 
 ```java
-// 1. Static collections
+// 1. Static collections that grow indefinitely
 public class Cache {
     private static Map<String, Object> cache = new HashMap<>();
 
     public void add(String key, Object value) {
-        cache.put(key, value);  // Never removed, grows forever
+        cache.put(key, value);  // Never removed!
     }
+
+    // Fix: Use bounded cache or weak references
+    private static Map<String, Object> boundedCache =
+        new LinkedHashMap<>(100, 0.75f, true) {
+            @Override
+            protected boolean removeEldestEntry(Map.Entry eldest) {
+                return size() > 100;  // Remove oldest when > 100
+            }
+        };
 }
 
 // 2. Unclosed resources
 public void readFile() {
     FileReader reader = new FileReader("file.txt");
-    // Forgot to close - resource leak
+    // If exception occurs, reader never closed
 }
 
-// Fix: Use try-with-resources
+// Fix: try-with-resources
 public void readFile() throws IOException {
     try (FileReader reader = new FileReader("file.txt")) {
         // Use reader
-    }  // Automatically closed
+    }
 }
 
-// 3. Event listeners not removed
-button.addActionListener(listener);
-// Later: button.removeActionListener(listener);  // Don't forget!
+// 3. Listeners not removed
+public class Observable {
+    private List<Listener> listeners = new ArrayList<>();
+
+    public void addListener(Listener l) {
+        listeners.add(l);
+    }
+
+    // Missing: removeListener method or WeakReference
+}
+
+// 4. Inner class holding reference to outer class
+public class Outer {
+    private byte[] largeData = new byte[1000000];
+
+    public Runnable getTask() {
+        return new Runnable() {  // Holds reference to Outer
+            public void run() {
+                System.out.println("Task");
+            }
+        };
+    }
+
+    // Fix: Use static inner class or lambda
+    public Runnable getTaskFixed() {
+        return () -> System.out.println("Task");  // No outer reference
+    }
+}
+
+// 5. String.intern() abuse
+public void processStrings(List<String> strings) {
+    for (String s : strings) {
+        String interned = s.intern();  // Added to string pool forever
+    }
+}
+```
+
+### Weak References
+
+Use weak references for caches and listeners:
+
+```java
+import java.lang.ref.WeakReference;
+import java.util.WeakHashMap;
+
+// WeakReference - collected when no strong references exist
+WeakReference<ExpensiveObject> weakRef =
+    new WeakReference<>(new ExpensiveObject());
+
+ExpensiveObject obj = weakRef.get();  // May return null
+if (obj != null) {
+    // Use object
+}
+
+// WeakHashMap - entries removed when keys are weakly reachable
+Map<Key, Value> cache = new WeakHashMap<>();
+cache.put(new Key("temp"), new Value());
+// Entry automatically removed when Key has no strong references
+```
+
+### Reference Types Comparison
+
+```java
+// 1. Strong Reference (default)
+Object strong = new Object();  // Never collected while referenced
+
+// 2. Weak Reference
+WeakReference<Object> weak = new WeakReference<>(new Object());
+// Collected at next GC if no strong references
+
+// 3. Soft Reference
+SoftReference<Object> soft = new SoftReference<>(new Object());
+// Collected only when memory is low
+
+// 4. Phantom Reference
+PhantomReference<Object> phantom =
+    new PhantomReference<>(new Object(), referenceQueue);
+// Used for cleanup, object already finalized
+
+// Reachability order:
+// Strong > Soft > Weak > Phantom > Unreachable
 ```
 
 ### Best Practices
 
-1. **Don't rely on finalize()**: Use try-with-resources or explicit cleanup
-2. **Avoid memory leaks**: Close resources, remove listeners, clear caches
-3. **Don't call System.gc()**: Let JVM manage GC
-4. **Use weak references**: For caches (WeakHashMap)
-5. **Profile your application**: Find memory leaks with tools
+1. **Let GC do its job**: Don't call `System.gc()` - JVM knows best
+2. **Size heap appropriately**: Not too small (frequent GC), not too large (long pauses)
+3. **Use try-with-resources**: For all closeable resources
+4. **Avoid finalize()**: Use `Cleaner` (Java 9+) if needed
+5. **Profile your application**: Use tools like VisualVM, JConsole, or async-profiler
+6. **Choose the right GC**: Match GC algorithm to your requirements
+7. **Monitor GC logs**: Watch for frequent Full GCs or long pauses
+8. **Avoid memory leaks**: Clear caches, remove listeners, close resources
+9. **Use weak references for caches**: Let GC manage cache eviction
+10. **Minimize object creation**: Reuse objects when possible
+
+### GC Diagnostic Commands
+
+```bash
+# Print GC details before termination
+java -XX:+PrintGCDetails -XX:+PrintGCDateStamps MyApp
+
+# Heap dump on OutOfMemoryError
+java -XX:+HeapDumpOnOutOfMemoryError -XX:HeapDumpPath=/tmp/heap.hprof MyApp
+
+# Enable NMT (Native Memory Tracking)
+java -XX:NativeMemoryTracking=summary MyApp
+
+# JConsole for monitoring
+jconsole
+
+# VisualVM for profiling
+jvisualvm
+
+# Get heap histogram
+jmap -histo <pid>
+
+# Force heap dump
+jmap -dump:format=b,file=heap.hprof <pid>
+```
 
 ---
 
@@ -1676,8 +2643,10 @@ button.addActionListener(listener);
 | Inheritance | Code reuse, IS-A relationship, method overriding |
 | Abstract Classes | Cannot instantiate, may have abstract methods |
 | Interfaces | Contract, multiple inheritance, default methods (Java 8+) |
+| Non-Access Modifiers | final, abstract, static, synchronized, volatile, transient, native, strictfp, sealed |
 | equals/hashCode | Override together, important for collections |
-| Garbage Collection | Automatic memory management, finalize deprecated |
+| Garbage Collection | Generational GC, Minor/Major/Full GC, G1/ZGC algorithms |
+| GC Best Practices | Try-with-resources, avoid memory leaks, use weak references |
 
 ## Next Topic
 
