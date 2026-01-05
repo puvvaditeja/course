@@ -31,8 +31,10 @@ Java was designed with five primary goals:
 | Java 5 | 2004 | Generics, annotations, enums, autoboxing |
 | Java 8 | 2014 | Lambdas, Stream API, default methods |
 | Java 11 | 2018 | LTS release, var keyword, HTTP client |
+| Java 15 | 2020 | [Text Blocks](#text-blocks-java-15) |
+| Java 16 | 2021 | [Records](./02-object-oriented-programming.md#records-java-16) |
 | Java 17 | 2021 | LTS release, sealed classes, pattern matching |
-| Java 21 | 2023 | LTS release, virtual threads, record patterns |
+| Java 21 | 2023 | LTS release, [Virtual Threads](./09-multithreading.md#virtual-threads-java-21), record patterns |
 
 ---
 

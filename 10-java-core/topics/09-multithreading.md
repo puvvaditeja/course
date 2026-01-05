@@ -1012,6 +1012,234 @@ public class FutureExample {
 
 ---
 
+## Virtual Threads (Java 21+)
+
+Virtual threads are lightweight threads that dramatically reduce the cost of creating and managing threads, enabling high-throughput concurrent applications.
+
+### Platform Threads vs Virtual Threads
+
+```java
+// Platform thread (traditional) - expensive, OS-managed
+Thread platformThread = new Thread(() -> {
+    System.out.println("Platform thread");
+});
+
+// Virtual thread - lightweight, JVM-managed
+Thread virtualThread = Thread.ofVirtual().start(() -> {
+    System.out.println("Virtual thread");
+});
+```
+
+**Key differences:**
+
+| Aspect | Platform Threads | Virtual Threads |
+|--------|------------------|-----------------|
+| Cost | Heavy (~1MB stack) | Lightweight (~few KB) |
+| Count | Limited (thousands) | Millions possible |
+| Managed by | Operating System | JVM |
+| Blocking | Blocks OS thread | Unmounts from carrier |
+| Use case | CPU-intensive work | I/O-intensive work |
+
+### Creating Virtual Threads
+
+```java
+// Method 1: Thread.ofVirtual()
+Thread vThread = Thread.ofVirtual().start(() -> {
+    System.out.println("Running in virtual thread");
+});
+
+// Method 2: Thread.startVirtualThread()
+Thread vThread2 = Thread.startVirtualThread(() -> {
+    System.out.println("Another virtual thread");
+});
+
+// Method 3: Named virtual thread
+Thread namedVThread = Thread.ofVirtual()
+    .name("my-virtual-thread")
+    .start(() -> {
+        System.out.println("Named: " + Thread.currentThread().getName());
+    });
+
+// Method 4: Virtual thread factory
+ThreadFactory factory = Thread.ofVirtual()
+    .name("worker-", 0)  // worker-0, worker-1, etc.
+    .factory();
+
+Thread t1 = factory.newThread(() -> System.out.println("Task 1"));
+Thread t2 = factory.newThread(() -> System.out.println("Task 2"));
+t1.start();
+t2.start();
+```
+
+### ExecutorService with Virtual Threads
+
+```java
+// Virtual thread per task executor - ideal for I/O-bound tasks
+try (ExecutorService executor = Executors.newVirtualThreadPerTaskExecutor()) {
+
+    // Submit many tasks - each gets its own virtual thread
+    for (int i = 0; i < 10000; i++) {
+        int taskId = i;
+        executor.submit(() -> {
+            // Simulate I/O operation
+            Thread.sleep(Duration.ofSeconds(1));
+            return "Result " + taskId;
+        });
+    }
+
+}  // Auto-shutdown with try-with-resources
+```
+
+### Practical Example: HTTP Client
+
+```java
+import java.net.http.*;
+import java.net.URI;
+
+public class VirtualThreadHttpClient {
+    public static void main(String[] args) throws Exception {
+        HttpClient client = HttpClient.newHttpClient();
+
+        List<String> urls = List.of(
+            "https://api.example.com/users",
+            "https://api.example.com/products",
+            "https://api.example.com/orders"
+        );
+
+        // Fetch all URLs concurrently with virtual threads
+        try (ExecutorService executor = Executors.newVirtualThreadPerTaskExecutor()) {
+            List<Future<String>> futures = urls.stream()
+                .map(url -> executor.submit(() -> fetchUrl(client, url)))
+                .toList();
+
+            for (Future<String> future : futures) {
+                System.out.println(future.get());
+            }
+        }
+    }
+
+    static String fetchUrl(HttpClient client, String url) throws Exception {
+        HttpRequest request = HttpRequest.newBuilder()
+            .uri(URI.create(url))
+            .build();
+        HttpResponse<String> response = client.send(request,
+            HttpResponse.BodyHandlers.ofString());
+        return response.body();
+    }
+}
+```
+
+### Structured Concurrency (Preview)
+
+Structured concurrency treats multiple tasks as a single unit of work.
+
+```java
+import java.util.concurrent.StructuredTaskScope;
+
+// Note: Preview feature, may require --enable-preview
+
+public class StructuredConcurrencyExample {
+
+    record UserData(String user, String orders) {}
+
+    UserData fetchUserData(int userId) throws Exception {
+        try (var scope = new StructuredTaskScope.ShutdownOnFailure()) {
+
+            // Fork subtasks
+            Future<String> userFuture = scope.fork(() -> fetchUser(userId));
+            Future<String> ordersFuture = scope.fork(() -> fetchOrders(userId));
+
+            // Wait for all tasks
+            scope.join();
+            scope.throwIfFailed();
+
+            // Combine results
+            return new UserData(userFuture.resultNow(), ordersFuture.resultNow());
+        }
+    }
+
+    String fetchUser(int id) { /* fetch from API */ }
+    String fetchOrders(int id) { /* fetch from API */ }
+}
+```
+
+### When to Use Virtual Threads
+
+```java
+// GOOD: I/O-bound operations - virtual threads excel here
+try (var executor = Executors.newVirtualThreadPerTaskExecutor()) {
+    // Database queries
+    executor.submit(() -> database.query("SELECT * FROM users"));
+
+    // HTTP requests
+    executor.submit(() -> httpClient.send(request));
+
+    // File I/O
+    executor.submit(() -> Files.readString(path));
+}
+
+// NOT IDEAL: CPU-bound operations - use platform threads
+ExecutorService cpuExecutor = Executors.newFixedThreadPool(
+    Runtime.getRuntime().availableProcessors()
+);
+cpuExecutor.submit(() -> computeIntensiveTask());
+```
+
+### Best Practices
+
+```java
+// 1. Don't pool virtual threads - create new ones as needed
+// BAD
+ExecutorService pool = Executors.newFixedThreadPool(100);
+
+// GOOD
+ExecutorService executor = Executors.newVirtualThreadPerTaskExecutor();
+
+
+// 2. Avoid thread-local heavy usage (can cause memory issues)
+// Be cautious with ThreadLocal in virtual threads
+
+
+// 3. Use try-with-resources for auto-shutdown
+try (var executor = Executors.newVirtualThreadPerTaskExecutor()) {
+    // Submit tasks
+}  // Automatically shuts down
+
+
+// 4. Check if running in virtual thread
+if (Thread.currentThread().isVirtual()) {
+    System.out.println("Running in virtual thread");
+}
+```
+
+### Virtual Threads vs Traditional Approaches
+
+| Scenario | Before Java 21 | With Virtual Threads |
+|----------|----------------|---------------------|
+| 10,000 concurrent requests | Complex async/reactive code | Simple blocking code |
+| Thread management | Manual pooling required | Create freely |
+| Blocking operations | Avoid or use callbacks | Use naturally |
+| Code complexity | High (CompletableFuture chains) | Low (sequential style) |
+| Debugging | Difficult (async stack traces) | Easy (normal stack traces) |
+
+```java
+// Before: Complex async chain
+CompletableFuture.supplyAsync(() -> fetchUser())
+    .thenCompose(user -> fetchOrders(user))
+    .thenCompose(orders -> processOrders(orders))
+    .thenAccept(result -> System.out.println(result));
+
+// With Virtual Threads: Simple sequential code
+Thread.startVirtualThread(() -> {
+    User user = fetchUser();           // Blocks, but it's fine
+    List<Order> orders = fetchOrders(user);
+    Result result = processOrders(orders);
+    System.out.println(result);
+});
+```
+
+---
+
 ## Summary
 
 | Concept | Key Points |
@@ -1024,6 +1252,7 @@ public class FutureExample {
 | Livelock | Threads actively responding but making no progress |
 | Producer-Consumer | Use wait/notify or BlockingQueue |
 | Thread Pools | ExecutorService for reusing threads |
+| Virtual Threads (Java 21+) | Lightweight threads for high-throughput I/O-bound applications |
 
 ## Next Topic
 
