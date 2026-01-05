@@ -1114,8 +1114,8 @@ Non-access modifiers provide additional properties to classes, methods, and fiel
 | `final` | Class, Method, Variable | Prevents modification/extension |
 | `abstract` | Class, Method | Declares incomplete implementation |
 | `static` | Variable, Method, Block, Class | Belongs to class, not instance |
-| `synchronized` | Method, Block | Thread-safe access |
-| `volatile` | Variable | Thread visibility guarantee |
+| `synchronized` | Method, Block | Thread-safe access (see [Multithreading](./08-multithreading.md)) |
+| `volatile` | Variable | Thread visibility (see [Multithreading](./08-multithreading.md)) |
 | `transient` | Variable | Exclude from serialization |
 | `native` | Method | Implemented in native code |
 | `strictfp` | Class, Method | Strict floating-point |
@@ -1517,146 +1517,6 @@ Outer.Inner inner = new Outer().new Inner();           // Outer instance require
 
 ---
 
-### synchronized Modifier
-
-Ensures thread-safe access to shared resources.
-
-#### synchronized Methods
-
-```java
-public class BankAccount {
-    private double balance;
-
-    // Synchronized instance method - locks on 'this'
-    public synchronized void deposit(double amount) {
-        double newBalance = balance + amount;
-        // Simulate processing time
-        try { Thread.sleep(100); } catch (InterruptedException e) { }
-        balance = newBalance;
-    }
-
-    public synchronized void withdraw(double amount) {
-        if (balance >= amount) {
-            double newBalance = balance - amount;
-            try { Thread.sleep(100); } catch (InterruptedException e) { }
-            balance = newBalance;
-        }
-    }
-
-    public synchronized double getBalance() {
-        return balance;
-    }
-}
-```
-
-#### synchronized Blocks
-
-```java
-public class Counter {
-    private int count = 0;
-    private final Object lock = new Object();
-
-    public void increment() {
-        // Synchronized on specific lock object
-        synchronized(lock) {
-            count++;
-        }
-    }
-
-    // Synchronized on this
-    public void decrement() {
-        synchronized(this) {
-            count--;
-        }
-    }
-
-    // Synchronized on class object (for static context)
-    public static void staticMethod() {
-        synchronized(Counter.class) {
-            // Critical section
-        }
-    }
-}
-```
-
-#### synchronized Static Methods
-
-```java
-public class SharedResource {
-    private static int sharedValue = 0;
-
-    // Locks on SharedResource.class object
-    public static synchronized void updateShared(int value) {
-        sharedValue = value;
-    }
-
-    // Equivalent block version
-    public static void updateSharedAlternative(int value) {
-        synchronized(SharedResource.class) {
-            sharedValue = value;
-        }
-    }
-}
-```
-
----
-
-### volatile Modifier
-
-Guarantees visibility of variable changes across threads.
-
-```java
-public class VolatileExample {
-    // Without volatile - threads may cache value
-    private boolean running = true;
-
-    // With volatile - changes immediately visible to all threads
-    private volatile boolean flag = false;
-
-    public void stop() {
-        flag = true;  // Change immediately visible
-    }
-
-    public void process() {
-        while (!flag) {  // Reads latest value
-            // Do work
-        }
-        System.out.println("Stopped!");
-    }
-}
-```
-
-**When to use volatile:**
-
-```java
-// 1. Simple flags
-private volatile boolean shutdown = false;
-
-// 2. Status indicators
-private volatile int status = INITIALIZING;
-
-// 3. Double-checked locking (with synchronized)
-public class Singleton {
-    private static volatile Singleton instance;
-
-    public static Singleton getInstance() {
-        if (instance == null) {
-            synchronized(Singleton.class) {
-                if (instance == null) {
-                    instance = new Singleton();
-                }
-            }
-        }
-        return instance;
-    }
-}
-
-// volatile does NOT make compound operations atomic!
-// For: count++, use AtomicInteger instead
-```
-
----
-
 ### transient Modifier
 
 Excludes fields from serialization.
@@ -1854,8 +1714,8 @@ public static double calculate(Shape shape) {
 | `final` | Cannot reassign | Cannot override | Cannot extend | Immutability |
 | `abstract` | N/A | No body | Cannot instantiate | Incomplete |
 | `static` | Class-level | Class-level | Nested only | Shared |
-| `synchronized` | N/A | Thread-safe | N/A | Locking |
-| `volatile` | Thread-visible | N/A | N/A | No caching |
+| `synchronized` | N/A | Thread-safe | N/A | See [Multithreading](./08-multithreading.md) |
+| `volatile` | Thread-visible | N/A | N/A | See [Multithreading](./08-multithreading.md) |
 | `transient` | Skip serialize | N/A | N/A | Exclusion |
 | `native` | N/A | Native code | N/A | JNI |
 | `strictfp` | N/A | Strict FP | Strict FP | Consistent |
