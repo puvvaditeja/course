@@ -1,9 +1,32 @@
-# Exercise: Library Management System
+# Java Core - Practice Exercises
 
-## Objective
+## Overview
+
+This module covers Core Java concepts through structured hands-on exercises. Each section focuses on specific concepts with practical implementations.
+
+## Exercise Topics
+
+| # | Focus Area | Topics |
+|---|------------|--------|
+| 1 | OOP Foundations | Classes, Static Members, Inheritance, Polymorphism |
+| 2 | OOP Advanced + Exceptions | Interfaces, Generics, Annotations, Exception Handling |
+| 3 | Collections + Functional | Collections, Lambdas, Optional, Stream API |
+| 4 | I/O + Concurrency | File I/O, Serialization, Multithreading, CompletableFuture |
+
+## Exercise Files
+
+- [OOP Foundations](exercises/exercise-01-oop-foundations.md)
+- [OOP Advanced + Exceptions](exercises/exercise-02-oop-advanced.md)
+- [Collections + Functional + Streams](exercises/exercise-03-collections-streams.md)
+- [I/O + Concurrency](exercises/exercise-04-io-concurrency.md)
+
+## Final Project
+
+After completing the exercises, build the **Library Management System** as a capstone project.
+
+### Project: Library Management System
+
 Build a console-based Library Management System that demonstrates Core Java concepts including OOP, Collections, Streams, Exception Handling, and File I/O.
-
-## Requirements
 
 ### Domain Classes
 
@@ -55,18 +78,7 @@ Build a console-based Library Management System that demonstrates Core Java conc
    - Books by genre statistics
    - Revenue from late fees
 
-### Java Concepts to Demonstrate
-
-- **OOP**: Encapsulation, Inheritance, Polymorphism
-- **Collections**: ArrayList, HashMap, HashSet
-- **Generics**: Custom generic repository class
-- **Streams**: filter, map, collect, groupingBy, reduce
-- **Exceptions**: Custom LibraryException hierarchy
-- **Optional**: For nullable return values
-- **File I/O**: Save/load data to JSON or serialization
-- **Java 21 Features**: Records, Pattern Matching, Text Blocks
-
-## Class Structure
+### Project Structure
 
 ```
 src/
@@ -89,36 +101,30 @@ src/
 └── Main.java
 ```
 
-## Sample Output
-```
-=== Library Management System ===
-1. Manage Books
-2. Manage Members
-3. Borrow/Return Books
-4. Reports
-5. Exit
+### Java Concepts to Demonstrate
 
-Choice: 4
+- **OOP**: Encapsulation, Inheritance, Polymorphism
+- **Collections**: ArrayList, HashMap, HashSet
+- **Generics**: Custom generic repository class
+- **Streams**: filter, map, collect, groupingBy, reduce
+- **Exceptions**: Custom LibraryException hierarchy
+- **Optional**: For nullable return values
+- **File I/O**: Save/load data to JSON or serialization
+- **Java 21 Features**: Records, Pattern Matching, Text Blocks
 
-=== Reports ===
-1. Most Popular Books
-2. Overdue Books
-3. Genre Statistics
-4. Late Fee Revenue
+## Submission Checklist
 
-Choice: 3
+| Exercise | Status |
+|----------|--------|
+| OOP Foundations | ⬜ |
+| OOP Advanced + Exceptions | ⬜ |
+| Collections + Streams | ⬜ |
+| I/O + Concurrency | ⬜ |
+| Library Management System | ⬜ |
 
-Genre Statistics:
-TECHNOLOGY: 45 books (12 borrowed)
-FICTION: 38 books (20 borrowed)
-SCIENCE: 25 books (8 borrowed)
-...
-```
+## Submission Instructions
 
-## Skills Tested
-- Object-Oriented Design
-- Java Collections Framework
-- Stream API operations
-- Exception handling best practices
-- File I/O operations
-- Java 21 features
+1. Create a folder named `java-core-exercises`
+2. Add subfolders for each topic: `oop-foundations`, `oop-advanced`, `collections-streams`, `io-concurrency`
+3. Add a `library-system` folder for the final project
+4. Submit the complete folder as a zip file or GitHub repository link
