@@ -12,6 +12,8 @@ This module covers Core Java concepts through structured hands-on exercises. Eac
 | 2 | OOP Advanced + Exceptions | Interfaces, Generics, Annotations, Exception Handling |
 | 3 | Collections + Functional | Collections, Lambdas, Optional, Stream API |
 | 4 | I/O + Concurrency | File I/O, Serialization, Multithreading, CompletableFuture |
+| 5 | File Processing | CSV Processing, Properties Files, Directory Operations, Text Transformation |
+| 6 | Collections Deep Dive | Comparators, TreeSet/TreeMap, Deque Patterns, Collections Utilities |
 
 ## Exercise Files
 
@@ -19,6 +21,8 @@ This module covers Core Java concepts through structured hands-on exercises. Eac
 - [OOP Advanced + Exceptions](exercises/exercise-02-oop-advanced.md)
 - [Collections + Functional + Streams](exercises/exercise-03-collections-streams.md)
 - [I/O + Concurrency](exercises/exercise-04-io-concurrency.md)
+- [File Processing](exercises/exercise-05-file-processing.md)
+- [Collections Deep Dive](exercises/exercise-06-collections-deep-dive.md)
 
 ## Final Project
 
@@ -120,11 +124,13 @@ src/
 | OOP Advanced + Exceptions | ⬜ |
 | Collections + Streams | ⬜ |
 | I/O + Concurrency | ⬜ |
+| File Processing | ⬜ |
+| Collections Deep Dive | ⬜ |
 | Library Management System | ⬜ |
 
 ## Submission Instructions
 
 1. Create a folder named `java-core-exercises`
-2. Add subfolders for each topic: `oop-foundations`, `oop-advanced`, `collections-streams`, `io-concurrency`
+2. Add subfolders for each topic: `oop-foundations`, `oop-advanced`, `collections-streams`, `io-concurrency`, `file-processing`, `collections-deep-dive`
 3. Add a `library-system` folder for the final project
 4. Submit the complete folder as a zip file or GitHub repository link
