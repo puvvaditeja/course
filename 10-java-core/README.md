@@ -17,7 +17,16 @@ By the end of this module, you will be able to:
 
 This module is organized into subdirectories:
 - [Topics](./topics/) - Detailed topic content
-- [Exercises](./exercises/) - Practice problems
+- [Exercises](../submissions/10-java-core/exercises/) - Practice problems
+- [Demos](../resources/demo/) - Runnable code demos
+
+## Recent Updates
+
+- **Reactive Programming Demo** - Added Java Flow API example with CSV Publisher/Subscriber pattern demonstrating SubmissionPublisher, backpressure handling, and async data streaming
+- **Networking Topics** - Added comprehensive networking content covering sockets, HTTP clients, and network I/O
+- **Reactive Programming** - Added detailed coverage of Reactive Manifesto, Java Flow API, and Project Reactor basics
+- **File Processing Exercise** - New exercise for advanced file operations and processing
+- **Collections Deep Dive Exercise** - New exercise for advanced collections patterns and usage
 
 ## Detailed Topic Files
 
@@ -52,10 +61,17 @@ This module is organized into subdirectories:
 - JVM architecture, Class loading, Memory management, Garbage Collection
 
 ### 11. [Networking](./topics/11-networking.md)
-- Sockets, TCP/UDP, HTTP clients, URL handling
+- Sockets (TCP/UDP), ServerSocket, DatagramSocket
+- HTTP clients (HttpURLConnection, HttpClient API)
+- URL handling, URI parsing
+- Network I/O with streams
 
 ### 12. [Reactive Programming](./topics/12-reactive-programming.md)
-- Reactive streams, Project Reactor, Flux, Mono
+- Reactive Manifesto principles (Responsive, Resilient, Elastic, Message-Driven)
+- Java Flow API (Publisher, Subscriber, Subscription, Processor)
+- SubmissionPublisher for reactive streams
+- Backpressure handling
+- Project Reactor (Flux, Mono) - optional
 
 ### 13. [Debugging](./topics/13-debugging.md)
 - Debugging concepts, IntelliJ debugger, Breakpoints, Stepping, Evaluation
@@ -495,13 +511,20 @@ thread.start();
 
 ## Exercises
 
-See the [exercises](./exercises/) directory for:
-- Basic Java syntax problems
-- OOP design exercises
-- Collection manipulation tasks
-- Stream API challenges
-- Multithreading problems
-- Design pattern implementations
+See the [exercises](../submissions/10-java-core/exercises/) directory for:
+- [Exercise 01: OOP Foundations](../submissions/10-java-core/exercises/exercise-01-oop-foundations.md) - Classes, objects, encapsulation
+- [Exercise 02: OOP Advanced](../submissions/10-java-core/exercises/exercise-02-oop-advanced.md) - Inheritance, polymorphism, interfaces
+- [Exercise 03: Collections & Streams](../submissions/10-java-core/exercises/exercise-03-collections-streams.md) - Collection manipulation, Stream API
+- [Exercise 04: I/O & Concurrency](../submissions/10-java-core/exercises/exercise-04-io-concurrency.md) - File handling, multithreading
+- [Exercise 05: File Processing](../submissions/10-java-core/exercises/exercise-05-file-processing.md) - Advanced file operations
+- [Exercise 06: Collections Deep Dive](../submissions/10-java-core/exercises/exercise-06-collections-deep-dive.md) - Advanced collections usage
+
+## Demos
+
+Runnable code demonstrations:
+- [Reactive Programming Demo](../resources/demo/java-reactive-program/) - CSV Publisher/Subscriber pattern with Java Flow API
+  - `CsvPublisherSubscriber.java` - Reactive streams with SubmissionPublisher
+  - `CsvFlux.java` - Project Reactor implementation
 
 ## Additional Resources
 
