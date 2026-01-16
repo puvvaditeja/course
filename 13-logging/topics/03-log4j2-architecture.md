@@ -431,181 +431,17 @@ Combine multiple filters:
 
 ---
 
-## Plugin System
+## Advanced Features (Reference)
 
-Log4J 2 uses a powerful plugin architecture for extensibility.
+Log4J 2 provides advanced features for specialized use cases:
 
-### Plugin Types
+| Feature | Purpose | When to Use |
+|---------|---------|-------------|
+| Plugin System | Custom appenders, layouts, filters | Enterprise extensions |
+| Programmatic Config | Runtime configuration | Embedded/testing scenarios |
+| Dynamic Reconfiguration | Change log levels at runtime | Production troubleshooting |
 
-- **Core Plugins**: Logger, Appender, Layout, Filter
-- **Converter Plugins**: Pattern converters
-- **Lookup Plugins**: Variable substitution
-- **Custom Plugins**: User-defined extensions
-
-### Creating a Custom Appender
-
-```java
-import org.apache.logging.log4j.core.*;
-import org.apache.logging.log4j.core.appender.AbstractAppender;
-import org.apache.logging.log4j.core.config.plugins.*;
-
-@Plugin(name = "CustomAppender", category = Core.CATEGORY_NAME, elementType = Appender.ELEMENT_TYPE)
-public class CustomAppender extends AbstractAppender {
-
-    protected CustomAppender(String name, Filter filter, Layout<? extends Serializable> layout) {
-        super(name, filter, layout, true, null);
-    }
-
-    @Override
-    public void append(LogEvent event) {
-        // Custom logic to handle log event
-        String message = new String(getLayout().toByteArray(event));
-        // Send to custom destination (database, queue, API, etc.)
-        sendToCustomDestination(message);
-    }
-
-    @PluginFactory
-    public static CustomAppender createAppender(
-            @PluginAttribute("name") String name,
-            @PluginElement("Filter") Filter filter,
-            @PluginElement("Layout") Layout<? extends Serializable> layout) {
-
-        if (name == null) {
-            LOGGER.error("No name provided for CustomAppender");
-            return null;
-        }
-        if (layout == null) {
-            layout = PatternLayout.createDefaultLayout();
-        }
-        return new CustomAppender(name, filter, layout);
-    }
-
-    private void sendToCustomDestination(String message) {
-        // Implementation
-    }
-}
-```
-
-**Usage in configuration:**
-```xml
-<Appenders>
-    <CustomAppender name="Custom">
-        <PatternLayout pattern="%d %-5p - %m%n"/>
-    </CustomAppender>
-</Appenders>
-```
-
-### Creating a Custom Layout
-
-```java
-import org.apache.logging.log4j.core.Layout;
-import org.apache.logging.log4j.core.LogEvent;
-import org.apache.logging.log4j.core.config.plugins.*;
-
-@Plugin(name = "CustomLayout", category = Node.CATEGORY, elementType = Layout.ELEMENT_TYPE)
-public class CustomLayout extends AbstractStringLayout {
-
-    protected CustomLayout() {
-        super(StandardCharsets.UTF_8);
-    }
-
-    @Override
-    public String toSerializable(LogEvent event) {
-        // Custom formatting
-        return String.format("[%s] %s - %s%n",
-            event.getLevel(),
-            event.getLoggerName(),
-            event.getMessage().getFormattedMessage());
-    }
-
-    @PluginFactory
-    public static CustomLayout createLayout() {
-        return new CustomLayout();
-    }
-}
-```
-
----
-
-## Configuration API
-
-Programmatic configuration for dynamic scenarios.
-
-### ConfigurationBuilder API
-
-```java
-import org.apache.logging.log4j.Level;
-import org.apache.logging.log4j.core.appender.ConsoleAppender;
-import org.apache.logging.log4j.core.config.Configurator;
-import org.apache.logging.log4j.core.config.builder.api.*;
-import org.apache.logging.log4j.core.config.builder.impl.BuiltConfiguration;
-
-public class ProgrammaticConfig {
-
-    public static void configure() {
-        ConfigurationBuilder<BuiltConfiguration> builder =
-            ConfigurationBuilderFactory.newConfigurationBuilder();
-
-        builder.setStatusLevel(Level.ERROR);
-        builder.setConfigurationName("ProgrammaticConfig");
-
-        // Create pattern layout
-        LayoutComponentBuilder layoutBuilder = builder.newLayout("PatternLayout")
-            .addAttribute("pattern", "%d [%t] %-5level: %msg%n%throwable");
-
-        // Create console appender
-        AppenderComponentBuilder consoleBuilder = builder.newAppender("Stdout", "CONSOLE")
-            .addAttribute("target", ConsoleAppender.Target.SYSTEM_OUT)
-            .add(layoutBuilder);
-        builder.add(consoleBuilder);
-
-        // Create file appender
-        AppenderComponentBuilder fileBuilder = builder.newAppender("LogFile", "File")
-            .addAttribute("fileName", "logs/app.log")
-            .add(layoutBuilder);
-        builder.add(fileBuilder);
-
-        // Create loggers
-        builder.add(builder.newLogger("com.company", Level.DEBUG)
-            .add(builder.newAppenderRef("LogFile"))
-            .addAttribute("additivity", false));
-
-        builder.add(builder.newRootLogger(Level.INFO)
-            .add(builder.newAppenderRef("Stdout"))
-            .add(builder.newAppenderRef("LogFile")));
-
-        // Apply configuration
-        Configurator.initialize(builder.build());
-    }
-}
-```
-
-### Dynamic Reconfiguration
-
-```java
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.core.LoggerContext;
-import org.apache.logging.log4j.core.config.Configuration;
-import org.apache.logging.log4j.core.config.LoggerConfig;
-
-public class DynamicConfig {
-
-    public static void changeLogLevel(String loggerName, Level newLevel) {
-        LoggerContext ctx = (LoggerContext) LogManager.getContext(false);
-        Configuration config = ctx.getConfiguration();
-
-        LoggerConfig loggerConfig = config.getLoggerConfig(loggerName);
-        loggerConfig.setLevel(newLevel);
-
-        ctx.updateLoggers(); // Apply changes
-    }
-
-    public static void main(String[] args) {
-        // Change log level at runtime
-        changeLogLevel("com.company.UserService", Level.DEBUG);
-    }
-}
-```
+For most applications, XML/properties configuration is sufficient. See the official Log4J 2 documentation for advanced plugin and programmatic configuration.
 
 ---
 
@@ -707,4 +543,4 @@ log4j2.enable.direct.encoders=true
 
 ## Next Topic
 
-Continue to [SLF4J (Simple Logging Facade for Java)](./06-slf4j.md) to learn about logging abstraction and framework independence.
+Continue to [Log4J Configuration](./04-log4j-configuration.md) to learn how to configure Log4J 2 for different environments.

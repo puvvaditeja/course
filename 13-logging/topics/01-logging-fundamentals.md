@@ -1,26 +1,21 @@
-# Log4J Framework
+# Logging Fundamentals
 
-## What is Log4J?
+## What is Application Logging?
 
-Log4J (Log for Java) is a popular Java-based logging framework developed by the Apache Software Foundation. It provides a flexible and efficient way to log application events, errors, and debugging information. Log4J is widely used in enterprise Java applications due to its configurability, performance, and extensive feature set.
+Application logging is the practice of recording events, errors, and diagnostic information during program execution. Logs provide visibility into what your application is doing, making them essential for debugging, monitoring, and maintaining software in production.
 
-### Key Features
+### The Logging Ecosystem
 
-- **Performance**: Optimized for high-performance logging with minimal overhead
-- **Flexibility**: Highly configurable through XML, JSON, YAML, or properties files
-- **Multiple Output Targets**: Can log to console, files, databases, email, etc.
-- **Thread-Safe**: Designed for multi-threaded applications
-- **Extensible**: Supports custom appenders, layouts, and filters
-- **Level-Based Logging**: Hierarchical logging levels for fine-grained control
+Java has several logging frameworks and APIs:
 
-### Log4J Evolution
+| Framework | Type | Description |
+|-----------|------|-------------|
+| **SLF4J** | API/Facade | Abstraction layer (recommended for application code) |
+| **Log4J 2** | Implementation | High-performance logging framework |
+| **Logback** | Implementation | Native SLF4J implementation |
+| **JUL** | Implementation | Java's built-in java.util.logging |
 
-| Version | Release Year | Key Features | Status |
-|---------|--------------|--------------|--------|
-| Log4J 1.x | 2001 | Original implementation, widely adopted | End of life (2015) |
-| Log4J 2.x | 2014 | Complete rewrite, better performance, async logging | Active development |
-
-**Important Note**: Log4J 1.x reached end of life in August 2015. All new projects should use Log4J 2.x, which offers significant improvements in performance, features, and security.
+**Recommended approach**: Use SLF4J API in your code with Log4J 2 as the implementation. This provides framework independence while leveraging Log4J 2's performance.
 
 ---
 
@@ -62,7 +57,7 @@ Logging is essential for application development and maintenance for several rea
 
 Many beginners use `System.out.println()` for debugging, but this approach has significant limitations:
 
-| Aspect | System.out.println() | Log4J |
+| Aspect | System.out.println() | Logging Frameworks |
 |--------|---------------------|-------|
 | Control | No control over output | Configurable levels and targets |
 | Performance | Always executes | Can be disabled by level |
@@ -416,12 +411,12 @@ public class UserController {
 
 | Concept | Key Points |
 |---------|------------|
-| What is Log4J | Java logging framework with flexible configuration and multiple output targets |
+| Application Logging | Recording events during execution for visibility and debugging |
 | Why Use Logging | Debugging, monitoring, performance analysis, production support |
 | Log Levels | FATAL > ERROR > WARN > INFO > DEBUG > TRACE (hierarchical) |
-| Basic Usage | Get logger via LogManager, use parameterized messages, log exceptions properly |
+| Basic Usage | Get logger, use parameterized messages, log exceptions properly |
 | Best Practices | Static logger per class, parameterized messages, guard expensive operations |
 
 ## Next Topic
 
-Continue to [Log4J Configuration](./02-log4j-configuration.md) to learn how to configure Log4J for different environments and use cases.
+Continue to [SLF4J](./02-slf4j.md) to learn about the logging facade that provides framework independence.

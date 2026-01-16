@@ -1,87 +1,70 @@
 # Logging Frameworks
 
 ## Overview
-Learn application logging using Log4J and SLF4J for debugging and monitoring.
+Learn application logging using SLF4J and Log4J 2 for debugging, monitoring, and maintaining production applications.
 
 ## Learning Objectives
-By the end of this module, you will understand and be able to apply the key concepts and practices of Logging Frameworks.
+By the end of this module, you will be able to:
+- Understand why logging frameworks are essential over System.out.println
+- Use SLF4J as a logging abstraction for framework independence
+- Configure Log4J 2 for different environments
+- Implement proper log levels, appenders, and layouts
+- Apply logging best practices in enterprise applications
 
 ## Topics Covered
 
-### 1. [Log4J Framework](./topics/01-log4j-framework.md)
-- What is Log4J and why use it
-- Log levels and their hierarchy
-- Getting started with Log4J 2
-- Basic usage and logger best practices
-- Performance considerations
+### 1. [Logging Fundamentals](./topics/01-logging-fundamentals.md)
+- Why logging matters (debugging, monitoring, auditing)
+- Logging vs System.out.println
+- Log levels and their hierarchy (TRACE → FATAL)
+- Basic usage patterns and logger best practices
 
-### 2. [Log4J Configuration](./topics/02-log4j-configuration.md)
-- Configuration file formats (XML, Properties, JSON, YAML)
-- Basic and complete configuration examples
-- Environment-specific configuration
-- Filters and programmatic configuration
-- Configuration best practices
-
-### 3. [Appenders (Console, File, Rolling File)](./topics/03-appenders.md)
-- Console Appender with colors
-- File Appender basics
-- Rolling File Appender with time and size-based rotation
-- Production configuration examples
-- Appender performance and best practices
-
-### 4. [Layouts (Pattern Layout)](./topics/04-layouts.md)
-- Pattern Layout syntax and conversion patterns
-- Date/time formatting
-- Pattern modifiers and logger abbreviation
-- Color and styling for console output
-- Advanced features: exceptions, MDC, markers
-- Performance considerations
-
-### 5. [Log4J 2 Architecture](./topics/05-log4j2-architecture.md)
-- Log4J 2 vs Log4J 1.x
-- Component layers and log event flow
-- Asynchronous logging (Async Appender vs Async Logger)
-- Garbage-free logging
-- Filters and plugin system
-- Configuration API and lookups
-
-### 6. [SLF4J (Simple Logging Facade for Java)](./topics/06-slf4j.md)
+### 2. [SLF4J - Simple Logging Facade](./topics/02-slf4j.md)
 - What is SLF4J and why use it
-- SLF4J architecture and bindings
-- Basic and advanced usage
-- Markers and MDC
-- Bridging legacy logging frameworks
-- Migration guides
+- Framework independence and library compatibility
+- Basic and advanced usage (parameterized messages)
+- MDC (Mapped Diagnostic Context) for request tracking
 
-### 7. [Best Practices for Logging](./topics/07-best-practices.md)
-- General logging principles
+### 3. [Log4J 2 Architecture](./topics/03-log4j2-architecture.md)
+- Log4J 2 vs Log4J 1.x improvements
+- Component layers: Logger → Appender → Layout
+- Log event flow and processing
+- Async logging and performance features
+
+### 4. [Log4J Configuration](./topics/04-log4j-configuration.md)
+- Configuration file formats (XML, Properties)
+- Basic and production configuration examples
+- Environment-specific settings
+- Filters and dynamic configuration
+
+### 5. [Appenders](./topics/05-appenders.md)
+- Console Appender for development
+- File Appender basics
+- Rolling File Appender for production
+- Time and size-based rotation strategies
+
+### 6. [Layouts and Patterns](./topics/06-layouts.md)
+- Pattern Layout syntax
+- Essential conversion patterns (%d, %p, %c, %m, %n)
+- Date/time formatting
+- Color output for console
+
+### 7. [Best Practices](./topics/07-best-practices.md)
 - Code-level best practices
-- Architectural patterns
-- Configuration best practices
+- Security considerations (sensitive data)
 - Performance optimization
 - Common pitfalls to avoid
-- Testing and monitoring
-
 
 ## Key Concepts
-Refer to the curriculum and lecture notes for detailed explanations of each topic.
+See [key-concepts.md](./key-concepts.md) for a quick reference card.
 
 ## Exercises
-See the [exercises](./exercises/) directory for hands-on practice problems and solutions.
+See the [exercises](../submissions/13-logging/) directory for hands-on practice.
 
-## Code Examples
-Check the module materials and exercises for practical code examples.
-
-## Additional Resources
-- Official documentation
-- Online tutorials and courses
-- Community forums and discussions
-
-## Assessment
-Make sure you are comfortable with all topics listed above before proceeding to the next module.
-
-## Next Steps
-Continue to the next module in the curriculum sequence.
+## Prerequisites
+- Core Java fundamentals
+- Maven dependency management
+- Basic understanding of exceptions
 
 ---
-**Time Estimate:** 2 days | **Difficulty:** Intermediate | **Prerequisites:** Previous modules
+**Time Estimate:** 2 days | **Difficulty:** Intermediate

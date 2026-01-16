@@ -413,9 +413,7 @@ logger.atError()
 
 ## Bridging Legacy Logging
 
-SLF4J provides bridges to route legacy logging to SLF4J.
-
-### Common Bridges
+SLF4J provides bridges to route legacy logging frameworks to SLF4J, useful when working with older libraries.
 
 | Legacy Framework | Bridge Dependency | Purpose |
 |-----------------|-------------------|---------|
@@ -423,88 +421,10 @@ SLF4J provides bridges to route legacy logging to SLF4J.
 | Log4J 1.x | `log4j-over-slf4j` | Log4J 1.x → SLF4J |
 | JUL | `jul-to-slf4j` | Java Util Logging → SLF4J |
 
-### Bridging Log4J 1.x to SLF4J to Log4J 2
+**Key principle**: Add the bridge dependency and exclude the legacy framework from transitive dependencies.
 
-```xml
-<!-- SLF4J API -->
-<dependency>
-    <groupId>org.slf4j</groupId>
-    <artifactId>slf4j-api</artifactId>
-    <version>2.0.9</version>
-</dependency>
-
-<!-- Bridge: Log4J 1.x calls → SLF4J -->
-<dependency>
-    <groupId>org.slf4j</groupId>
-    <artifactId>log4j-over-slf4j</artifactId>
-    <version>2.0.9</version>
-</dependency>
-
-<!-- Binding: SLF4J → Log4J 2 -->
-<dependency>
-    <groupId>org.apache.logging.log4j</groupId>
-    <artifactId>log4j-slf4j2-impl</artifactId>
-    <version>2.20.0</version>
-</dependency>
-
-<!-- Log4J 2 Implementation -->
-<dependency>
-    <groupId>org.apache.logging.log4j</groupId>
-    <artifactId>log4j-core</artifactId>
-    <version>2.20.0</version>
-</dependency>
-
-<!-- IMPORTANT: Exclude Log4J 1.x -->
-<dependency>
-    <groupId>some-library</groupId>
-    <artifactId>uses-log4j1</artifactId>
-    <exclusions>
-        <exclusion>
-            <groupId>log4j</groupId>
-            <artifactId>log4j</artifactId>
-        </exclusion>
-    </exclusions>
-</dependency>
 ```
-
-**Flow:**
-```
-Legacy Code (Log4J 1.x API)
-    ↓
-log4j-over-slf4j (bridge)
-    ↓
-SLF4J API
-    ↓
-log4j-slf4j2-impl (binding)
-    ↓
-Log4J 2 (implementation)
-```
-
-### Bridging Java Util Logging
-
-```xml
-<dependency>
-    <groupId>org.slf4j</groupId>
-    <artifactId>jul-to-slf4j</artifactId>
-    <version>2.0.9</version>
-</dependency>
-```
-
-**Activate in code:**
-```java
-import org.slf4j.bridge.SLF4JBridgeHandler;
-
-public class Application {
-    public static void main(String[] args) {
-        // Remove existing handlers
-        SLF4JBridgeHandler.removeHandlersForRootLogger();
-
-        // Add SLF4J bridge handler
-        SLF4JBridgeHandler.install();
-
-        // Now JUL logs go through SLF4J
-    }
-}
+Legacy Code → Bridge → SLF4J API → Binding → Implementation (Log4J 2)
 ```
 
 ---
@@ -794,4 +714,4 @@ public class UserService {
 
 ## Next Topic
 
-Continue to [Best Practices for Logging](./07-best-practices.md) to learn comprehensive logging strategies and patterns for production applications.
+Continue to [Log4J 2 Architecture](./03-log4j2-architecture.md) to understand the internal structure and components of Log4J 2.

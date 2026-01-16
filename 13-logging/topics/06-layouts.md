@@ -611,4 +611,4 @@ If logs will be parsed:
 
 ## Next Topic
 
-Continue to [Log4J 2 Architecture](./05-log4j2-architecture.md) to understand the internal structure and advanced features of Log4J 2.
+Continue to [Best Practices](./07-best-practices.md) to learn comprehensive logging strategies for production applications.

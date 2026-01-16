@@ -450,51 +450,6 @@ Combine multiple filters:
 
 ---
 
-## Programmatic Configuration
-
-While external configuration is preferred, you can configure Log4J programmatically:
-
-```java
-import org.apache.logging.log4j.Level;
-import org.apache.logging.log4j.core.appender.ConsoleAppender;
-import org.apache.logging.log4j.core.config.Configurator;
-import org.apache.logging.log4j.core.config.builder.api.*;
-import org.apache.logging.log4j.core.config.builder.impl.BuiltConfiguration;
-
-public class Log4jConfiguration {
-    public static void configure() {
-        ConfigurationBuilder<BuiltConfiguration> builder =
-            ConfigurationBuilderFactory.newConfigurationBuilder();
-
-        // Set configuration name
-        builder.setStatusLevel(Level.ERROR);
-        builder.setConfigurationName("ProgrammaticConfig");
-
-        // Create pattern layout
-        LayoutComponentBuilder layoutBuilder = builder.newLayout("PatternLayout")
-            .addAttribute("pattern", "%d [%t] %-5level: %msg%n%throwable");
-
-        // Create console appender
-        AppenderComponentBuilder appenderBuilder = builder.newAppender("Stdout", "CONSOLE")
-            .addAttribute("target", ConsoleAppender.Target.SYSTEM_OUT)
-            .add(layoutBuilder);
-        builder.add(appenderBuilder);
-
-        // Create root logger
-        RootLoggerComponentBuilder rootLogger = builder.newRootLogger(Level.DEBUG);
-        rootLogger.add(builder.newAppenderRef("Stdout"));
-        builder.add(rootLogger);
-
-        // Apply configuration
-        Configurator.initialize(builder.build());
-    }
-}
-```
-
-**Use Case**: Dynamic configuration based on runtime conditions, testing scenarios, or when config files are not available.
-
----
-
 ## Configuration Best Practices
 
 ### 1. Use Appropriate Log Levels
@@ -625,4 +580,4 @@ public class ConfigValidator {
 
 ## Next Topic
 
-Continue to [Appenders (Console, File, Rolling File)](./03-appenders.md) to learn about different output destinations for your logs.
+Continue to [Appenders](./05-appenders.md) to learn about different output destinations for your logs.

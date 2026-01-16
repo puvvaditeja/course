@@ -597,4 +597,4 @@ filePattern="logs/app-%d{yyyy-MM-dd}.log.gz"
 
 ## Next Topic
 
-Continue to [Layouts (Pattern Layout)](./04-layouts.md) to learn how to format log messages effectively.
+Continue to [Layouts](./06-layouts.md) to learn how to format log messages effectively.
